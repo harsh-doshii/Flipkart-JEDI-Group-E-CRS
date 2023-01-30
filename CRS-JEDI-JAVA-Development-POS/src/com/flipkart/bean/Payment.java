@@ -2,11 +2,11 @@ package com.flipkart.bean;
 
 public class Payment {
    
-    int id;
-    long transactionID;
-    double totalAmount;
-    boolean status;
-    String paymentMethod;
+    private int id;
+    private long transactionID;
+    private double totalAmount;
+    private boolean status;
+    private String paymentMethod;
 
     public int getId() {
         return id;
