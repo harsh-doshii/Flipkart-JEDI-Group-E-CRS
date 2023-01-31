@@ -24,8 +24,7 @@ public class StudentCRSMenu {
             System.out.println("5. Drop Course");
             System.out.println("6. View registered courses");
             System.out.println("7. Make Payment");
-            System.out.println("8. Show Notifications");
-            System.out.println("9. Logout");
+            System.out.println("8. Logout");
             System.out.println("\n==========================================================================\n");
             System.out.println("Enter Option : ");
             int input = sc.nextInt();
@@ -53,9 +52,6 @@ public class StudentCRSMenu {
                 payFee();
             }
             else if(input==8) {
-                showNotification();
-            }
-            else if(input==9) {
                 logout();
                 break;
             }

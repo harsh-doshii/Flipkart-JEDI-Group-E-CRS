@@ -18,7 +18,7 @@ public class ProfessorCRSMenu {
         while (true) {
             System.out.println("Welcome to Professor Menu! Enter option :");
             System.out.println("1. View Courses");
-            System.out.println("2. View Registered Students");
+            System.out.println("2. View Enrolled Students");
             System.out.println("3. Assign grade");
             System.out.println("4. Logout\n");
             System.out.println("Enter Option : ");
@@ -36,6 +36,7 @@ public class ProfessorCRSMenu {
 
             else if(input==4) {
                 logout();
+                break;
             }
             else
                 System.out.println("Invalid choice");

@@ -25,7 +25,7 @@ public class AdminCRSMenu {
 
             System.out.println(" 5. Remove Course");
             
-            System.out.println(" 6. Validate Student Registrations");
+            System.out.println(" 6. Approve Student Registrations");
 
             System.out.println(" 7. Generate report card");
 
@@ -61,7 +61,7 @@ public class AdminCRSMenu {
                     break;
 
                 case 6:
-                    validateStudentRegistration();
+                    approveStudentRegistration();
                     break;
 
                 case 7:
@@ -70,7 +70,7 @@ public class AdminCRSMenu {
 
                 case 8:
                     logout();
-                    break;
+                    return;
             }
         }
     }
@@ -84,7 +84,7 @@ public class AdminCRSMenu {
     private void generateReport() {
     }
 
-    private void validateStudentRegistration() {
+    private void approveStudentRegistration() {
     }
 
     private void addProf() {
