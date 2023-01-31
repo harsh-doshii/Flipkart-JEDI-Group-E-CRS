@@ -50,6 +50,27 @@ public class CRSApplication {
         String password = scanner.nextLine();
         System.out.println("Role: ");
         String role = scanner.nextLine();
+        switch(role) {
+            case "student" :
+            case "Student" :
+            case "STUDENT" :
+                System.out.println("Welcome to the Student menu!");
+                break;
+
+            case "Professor" :
+            case "professor" :
+            case "PROFESSOR" :
+                System.out.println("Welcome to the Professor menu!");
+                break;
+
+            case "Admin":
+            case "admin":
+            case "ADMIN":
+                System.out.println("Welcome to the Admin menu!");
+                break;
+            default:
+                System.err.println("Invalid Option.");
+        }
     }
 
     private static void register() {
