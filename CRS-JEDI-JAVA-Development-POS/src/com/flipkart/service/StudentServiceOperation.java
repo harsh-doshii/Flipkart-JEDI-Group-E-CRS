@@ -1,6 +1,6 @@
 package com.flipkart.service;
 
-public class StudentServiceOperation {
+public class StudentServiceOperation implements StudentService {
     private void showNotification(){
         System.out.printf("show notification");
     }
