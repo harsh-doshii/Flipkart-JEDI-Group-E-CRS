@@ -6,6 +6,10 @@ public class Student extends User{
     private Branch branch;
     private int semester;
     private List coursesEnrolled;
+
+
+
+    private String grade;
     private List preferenceList;
 
     public Branch getBranch() {
@@ -38,5 +42,13 @@ public class Student extends User{
 
     public void setPreferenceList(List preferenceList) {
         this.preferenceList = preferenceList;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }
