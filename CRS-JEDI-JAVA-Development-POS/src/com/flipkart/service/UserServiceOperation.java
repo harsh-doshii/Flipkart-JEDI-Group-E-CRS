@@ -17,4 +17,9 @@ public class UserServiceOperation implements UserService{
     public User getUser(String username) {
         return null;
     }
+
+    @Override
+    public void updatePassword(String userid, String newPassword) {
+
+    }
 }
