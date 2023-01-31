@@ -1,19 +1,24 @@
 package com.flipkart.service;
+import com.flipkart.bean.User;
 
-public class UserServiceOperation {
+public class UserServiceOperation implements UserService{
+    @Override
+    public void login(String username, String Password) {
 
-    public void login(){
-        System.out.printf("login");
     }
 
+    @Override
+    public void setPassword(String username, String newPassword) {
 
-    public boolean setPassword(){
-        System.out.printf("set password");
-        return true;
     }
 
-    public void getUserDetails(){
-        System.out.printf("get details");
+    @Override
+    public User getUser(String username) {
+        return null;
     }
 
+    @Override
+    public void updatePassword(String userid, String newPassword) {
+
+    }
 }

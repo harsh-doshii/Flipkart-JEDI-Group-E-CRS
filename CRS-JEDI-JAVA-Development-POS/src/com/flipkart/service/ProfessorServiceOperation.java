@@ -1,15 +1,23 @@
 package com.flipkart.service;
 
-public class ProfessorServiceOperation {
-    private  void viewCourse(){
-        System.out.printf("view course");
+import com.flipkart.bean.Grade;
+
+import java.util.List;
+
+public class ProfessorServiceOperation implements ProfessorService{
+
+    @Override
+    public List viewCourses(String profId) {
+        return null;
     }
 
-    private void viewStudents(){
-        System.out.printf("view student");
+    @Override
+    public List viewStudents(int courseId, String ProfId) {
+        return null;
     }
 
-    private  void assignGrades(){
-        System.out.printf("assign grades");
+    @Override
+    public void assignGrade(String studentId, int courseId, Grade grade) {
+
     }
 }
