@@ -1,15 +1,6 @@
-package com.flipkart.client;
+package com.flipkart.service;
 
-public class AdminCRS {
-    private String adminId;
-
-    public AdminCRS(String adminId){
-        this.adminId = adminId;
-    }
-
-    public void printAdminMenu() {
-    }
-
+public class AdminServiceOperation {
     private void generateReportCard() {
 
     }
@@ -33,5 +24,3 @@ public class AdminCRS {
 
     }
 }
-
-
