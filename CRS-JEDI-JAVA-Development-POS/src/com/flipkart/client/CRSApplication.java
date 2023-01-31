@@ -55,6 +55,9 @@ public class CRSApplication {
             case "Student" :
             case "STUDENT" :
                 System.out.println("Welcome to the Student menu!");
+                //assuming username to be the student id as we don't have the student id yet
+                StudentCRSMenu studentMenu = new StudentCRSMenu(username);
+                studentMenu.displayMenu();
                 break;
 
             case "Professor" :
