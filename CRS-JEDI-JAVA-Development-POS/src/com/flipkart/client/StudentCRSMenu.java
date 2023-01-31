@@ -61,9 +61,7 @@ public class StudentCRSMenu {
         }
     }
 
-    private void showNotification(){
-        System.out.printf("show notification");
-    }
+
     private void logout() {
         System.out.println("student" + studentID + " logged out");
     }
