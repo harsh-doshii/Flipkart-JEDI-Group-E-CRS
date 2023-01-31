@@ -1,11 +1,40 @@
 package com.flipkart.client;
 
+import java.util.Scanner;
 public class CRSApplication {
+    private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         mainMenu();
     }
 
     public static void mainMenu() {
+        while(true){
+            System.out.println("");
+            System.out.println("Welcome to CRS Application! Choose from the options given below!");
+            System.out.println("**************************************");
+            System.out.println("Main Menu :->");
+            System.out.println("1. Login");
+            System.out.println("2. Registration of the Student");
+            System.out.println("3. Update Password");
+            System.out.println("4. Exit");
+
+            String optionChosen = scanner.nextLine();
+
+
+            if(optionChosen.equals("1")){
+                login();
+            }
+            else if(optionChosen.equals("2")){
+                System.out.println(" Registration of the Student was chosen");
+            }
+            else if(optionChosen.equals("3")){
+                System.out.println("Update Password was chosen");
+            }
+            else if(optionChosen.equals("4")){
+                System.out.println("Thank you for using CRS, may the force be with you!");
+                return;
+            }
+        }
 
     }
 
@@ -14,7 +43,13 @@ public class CRSApplication {
     }
 
     private static void login() {
-
+        System.out.println("Login :-->");
+        System.out.println("Username: ");
+        String username = scanner.nextLine();
+        System.out.println("Password: ");
+        String password = scanner.nextLine();
+        System.out.println("Role: ");
+        String role = scanner.nextLine();
     }
 
     private static void register() {
