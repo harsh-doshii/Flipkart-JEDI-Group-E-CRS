@@ -64,12 +64,16 @@ public class CRSApplication {
             case "professor" :
             case "PROFESSOR" :
                 System.out.println("Welcome to the Professor menu!");
+                ProfessorCRSMenu professorMenu = new ProfessorCRSMenu(username);
+                professorMenu.displayMenu();
                 break;
 
             case "Admin":
             case "admin":
             case "ADMIN":
                 System.out.println("Welcome to the Admin menu!");
+                AdminCRSMenu adminCRSMenu = new AdminCRSMenu(username);
+                adminCRSMenu.displayAdminMenu();
                 break;
             default:
                 System.err.println("Invalid Option.");
