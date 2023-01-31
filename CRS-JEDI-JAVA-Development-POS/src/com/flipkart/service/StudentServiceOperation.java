@@ -1,35 +1,33 @@
 package com.flipkart.service;
 
+import com.flipkart.bean.Course;
+import com.flipkart.bean.RegisteredCourse;
+import com.flipkart.bean.Student;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentServiceOperation implements StudentService {
-    private void showNotification(){
-        System.out.printf("show notification");
+    public List<Course> viewCourseCatalouge()
+    {
+        List<Course> courses = new ArrayList<Course>();
+        return courses;
     }
 
-    private void viewCourseCatalogue(){
-        System.out.printf("view course");
+    public List<RegisteredCourse> viewGrades(String studentId)
+    {
+        List<RegisteredCourse> registeredCourses = new ArrayList<RegisteredCourse>();
+        return registeredCourses;
     }
 
-    private void viewGrades(){
-        System.out.printf("view Grades");
-    }
-    private void registerCourses(){
-        System.out.printf("Register course");
+    public void signUp(Student student)
+    {
+        System.out.println("Sign Up Successful");
     }
 
-    private void addCourse(){
-        System.out.printf("add course");
-    }
-
-    private void dropCourse() {
-        System.out.printf("Drop Course");
-    }
-
-    private void viewRegisterCourses(){
-        System.out.printf("view registered courses");
-    }
-
-    private  void payFee(){
-        System.out.printf("pay fees");
+    public boolean isApproved(String studentId)
+    {
+        return true;
     }
 
 }

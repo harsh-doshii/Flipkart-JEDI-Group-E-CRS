@@ -1,12 +1,18 @@
 package com.flipkart.service;
 
+import com.flipkart.bean.Course;
+import com.flipkart.bean.RegisteredCourse;
+import com.flipkart.bean.Student;
+
+import java.util.List;
+
 public interface StudentService {
-    private void showNotification(){}
-    private void viewCourseCatalogue(){}
-    private void viewGrades(){}
-    private void registerCourses(){}
-    private void addCourse(){}
-    private void dropCourse() {}
-    private void viewRegisterCourses(){}
-    private void payFee() {};
+    public List<Course> viewCourseCatalouge();
+
+    public List<RegisteredCourse> viewGrades(String studentId);
+
+    public void signUp(Student student);
+
+    public boolean isApproved(String studentId);
+
 }
