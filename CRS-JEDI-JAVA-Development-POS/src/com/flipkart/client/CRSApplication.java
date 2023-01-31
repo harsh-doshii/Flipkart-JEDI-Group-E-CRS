@@ -2,7 +2,7 @@ package com.flipkart.client;
 
 public class CRSApplication {
     public static void main(String[] args) {
-        MainMenu();
+        mainMenu();
     }
 
     public static void mainMenu() {
