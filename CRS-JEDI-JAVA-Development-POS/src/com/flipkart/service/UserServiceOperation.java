@@ -3,13 +3,15 @@ import com.flipkart.bean.User;
 
 public class UserServiceOperation implements UserService{
     @Override
-    public void login(String username, String Password) {
-
+    public boolean login(String username, String Password) {
+        System.out.println("login successful");
+        return true;
     }
 
     @Override
-    public void setPassword(String username, String newPassword) {
-
+    public boolean setPassword(String username, String newPassword) {
+        System.out.println("password set");
+        return true;
     }
 
     @Override
@@ -18,7 +20,8 @@ public class UserServiceOperation implements UserService{
     }
 
     @Override
-    public void updatePassword(String userid, String newPassword) {
-
+    public boolean updatePassword(String userid, String newPassword) {
+        System.out.println("password updated");
+        return true;
     }
 }
