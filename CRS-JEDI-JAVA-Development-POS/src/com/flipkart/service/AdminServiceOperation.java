@@ -1,26 +1,67 @@
 package com.flipkart.service;
 
-public class AdminServiceOperation {
-    private void generateReportCard() {
+import com.flipkart.bean.Course;
+import com.flipkart.bean.Professor;
+import com.flipkart.bean.Student;
+
+import javax.swing.*;
+import java.util.List;
+
+public class AdminServiceOperation implements AdminService {
+
+
+    @Override
+    public void addCourse(Course course) {
 
     }
-    private void addProfessor() {
 
-    }
-    private void validateStudentRegistration() {
-
-    }
-    private void removeProfessor() {
+    @Override
+    public void removeCourse(int courseID) {
 
     }
 
-    private void removeCourse() {
+    @Override
+    public void addProfessor(Professor professor) {
 
     }
-    private void addCourse() {
+
+    @Override
+    public void removeProfessor(String profID) {
 
     }
-    private void logout() {
 
+    @Override
+    public void assignProfessor(String profID, int courseID) {
+
+    }
+
+    @Override
+    public void generateGradeCard(String studentID) {
+
+    }
+
+    @Override
+    public List<Course> viewCourse() {
+        return null;
+    }
+
+    @Override
+    public void validateRegistration() {
+
+    }
+
+    @Override
+    public void approveStudent(String studentID) {
+
+    }
+
+    @Override
+    public List<Professor> viewProfessor() {
+        return null;
+    }
+
+    @Override
+    public List<Student> viewPending() {
+        return null;
     }
 }
