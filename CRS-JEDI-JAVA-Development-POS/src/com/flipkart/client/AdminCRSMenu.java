@@ -1,9 +1,9 @@
 package com.flipkart.client;
 
-public class AdminCRS {
+public class AdminCRSMenu {
     private String adminId;
 
-    public AdminCRS(String adminId){
+    public AdminCRSMenu(String adminId){
         this.adminId = adminId;
     }
 
