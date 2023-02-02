@@ -29,6 +29,8 @@ public class TempData {
 
     public static HashMap<String, Branch> idToBranch = new HashMap<>();
 
+    public static HashMap<Integer, Grade> integerToGrade = new HashMap<>();
+
 
     //public static HashMap<>
     static {
@@ -42,6 +44,10 @@ public class TempData {
         idToBranch.put("A1", new Branch("A1", "Chemical engineering"));
         idToBranch.put("A4", new Branch("A4", "Mechanical Engineering"));
 
+        integerToGrade.put(10, new Grade("A", 10));
+        integerToGrade.put(9, new Grade("B", 9));
+        integerToGrade.put(8, new Grade("C", 8));
+        integerToGrade.put(7, new Grade("D", 7));
     }
 
 

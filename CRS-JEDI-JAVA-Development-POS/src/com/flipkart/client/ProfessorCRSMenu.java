@@ -1,9 +1,12 @@
 package com.flipkart.client;
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Grade;
+import com.flipkart.data.TempData;
 import com.flipkart.service.AdminServiceOperation;
 import com.flipkart.service.ProfessorServiceOperation;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 public class ProfessorCRSMenu {
 
@@ -67,11 +70,54 @@ public class ProfessorCRSMenu {
     }
 
     private void viewStudents(){
-        System.out.printf("view student");
+        System.out.println("Enter course id");
+        int courseId = scanner.nextInt();
+        Course course = TempData.courseCatalogue.get(courseId);
+        System.out.println("##########################");
+
+        System.out.println("List of registered students:");
+
+        System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
+        int cur = 0;
+        for(var student : TempData.courseToEnrolledStudents.get(course)) {
+            cur++;
+            System.out.format("%15d %15d %32s\n",
+                    cur,
+                    TempData.idToStudent.get(student).getId(),
+                    TempData.idToStudent.get(student).getName()
+            );
+        }
+        System.out.println("##########################");
     }
 
     private  void assignGrades(){
-        System.out.printf("assign grades");
+        System.out.println("Enter course id");
+        int courseId = scanner.nextInt();
+        Course course = TempData.courseCatalogue.get(courseId);
+        System.out.println("##########################");
+
+        System.out.println("List of registered students:");
+
+        System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
+        int cur = 0;
+        for(var student : TempData.courseToEnrolledStudents.get(course)) {
+            cur++;
+            System.out.format("%15d %15d %32s\n",
+                    cur,
+                    TempData.idToStudent.get(student).getId(),
+                    TempData.idToStudent.get(student).getName()
+            );
+        }
+        System.out.println("##########################");
+        System.out.println("Enter student id");
+        int studentId = scanner.nextInt();
+
+        System.out.println("Enter grade in number");
+        int gradeValue = scanner.nextInt();
+        Grade grade = TempData.integerToGrade.get(gradeValue);
+
+        professorServiceOperation.assignGrade(studentId, courseId, grade);
+
     }
 
     private void signUpForCourse() {

@@ -3,6 +3,17 @@ package com.flipkart.bean;
 public class Grade {
 
     private String grade;
+    private int gradeValue;
+
+    public Grade() {
+    }
+
+
+
+    public Grade(String grade, int gradeValue) {
+        this.grade = grade;
+        this.gradeValue = gradeValue;
+    }
 
     public String getGrade() {
         return grade;
