@@ -6,6 +6,16 @@ public class RegisteredCourse {
     private Student student;
     private int semester;
 
+    private Grade grade;
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
     //    private Grade grade;
     public Course getCourse() {
         return course;
