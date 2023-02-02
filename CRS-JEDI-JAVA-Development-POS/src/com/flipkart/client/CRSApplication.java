@@ -44,27 +44,29 @@ public class CRSApplication {
 
     private static void login() {
         System.out.println("Login :-->");
-        System.out.println("Username: ");
-        String username = scanner.nextLine();
+        System.out.println("UserId: ");
+        int userId = scanner.nextInt();
+
         System.out.println("Password: ");
-        String password = scanner.nextLine();
+        String password = scanner.next();
         System.out.println("Role: ");
-        String role = scanner.nextLine();
+        String role = scanner.next();
         switch(role) {
             case "student" :
             case "Student" :
             case "STUDENT" :
                 System.out.println("Welcome to the Student menu!");
                 //assuming username to be the student id as we don't have the student id yet
-                StudentCRSMenu studentMenu = new StudentCRSMenu(username);
+                StudentCRSMenu studentMenu = new StudentCRSMenu(userId);
                 studentMenu.displayMenu();
                 break;
 
             case "Professor" :
             case "professor" :
             case "PROFESSOR" :
+            case "prof":
                 System.out.println("Welcome to the Professor menu!");
-                ProfessorCRSMenu professorMenu = new ProfessorCRSMenu(username);
+                ProfessorCRSMenu professorMenu = new ProfessorCRSMenu(userId);
                 professorMenu.displayMenu();
                 break;
 
@@ -72,7 +74,7 @@ public class CRSApplication {
             case "admin":
             case "ADMIN":
                 System.out.println("Welcome to the Admin menu!");
-                AdminCRSMenu adminCRSMenu = new AdminCRSMenu(username);
+                AdminCRSMenu adminCRSMenu = new AdminCRSMenu(userId);
                 adminCRSMenu.displayAdminMenu();
                 break;
             default:
