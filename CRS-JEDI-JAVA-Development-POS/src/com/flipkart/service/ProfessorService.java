@@ -7,9 +7,9 @@ import com.flipkart.bean.Student;
 import java.util.List;
 
 public interface ProfessorService {
-    public List<Course> viewCourses(String profId);
+    public List<Course> viewCourses(int profId);
 
-    public List<Student> viewStudents(int courseId, String ProfId);
+    public List<Student> viewStudents(int courseId, int ProfId);
 
-    public void assignGrade(String studentId, int courseId, Grade grade);
+    public void assignGrade(int studentId, int courseId, Grade grade);
 }
