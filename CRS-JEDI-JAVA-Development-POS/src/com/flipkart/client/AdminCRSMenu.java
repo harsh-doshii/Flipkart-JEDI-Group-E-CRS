@@ -72,6 +72,10 @@ public class AdminCRSMenu {
                     break;
 
                 case 6:
+                    System.out.println("Students to be approved : ");
+                    System.out.println("##########################");
+                    System.out.println();
+                    System.out.println("##########################");
                     System.out.println("Enter the id of student to approve");
                     int studentId = scanner.nextInt();
                     approveStudentRegistration(studentId);
