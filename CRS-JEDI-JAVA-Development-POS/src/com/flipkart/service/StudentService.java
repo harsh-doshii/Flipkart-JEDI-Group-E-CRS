@@ -3,16 +3,34 @@ package com.flipkart.service;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
+import com.flipkart.data.TempData;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface StudentService {
     public List<Course> viewCourseCatalouge();
 
-    public List<RegisteredCourse> viewGrades(String studentId);
+    public Boolean addCourse(int studentId, int courseId);
 
-    public void signUp(Student student);
 
-    public boolean isApproved(String studentId);
+    public Boolean dropCourse(int studentId, int courseId) ;
+
+    public List<RegisteredCourse> viewGrades(int studentId) ;
+
+    public boolean signUp(Student student) ;
+
+    public boolean isApproved(int studentId) ;
+
+    public List<RegisteredCourse> viewRegisteredCourse(int studentID);
+
+    public boolean isRegistrationDone(int studentID);
+
+    public boolean isPaymentDone(String studentID);
+
+    public float calculateFee(String studentID);
+
+    public void payFee(String studentID, float amount);
 
 }
