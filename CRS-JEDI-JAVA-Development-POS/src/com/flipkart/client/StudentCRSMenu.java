@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class StudentCRSMenu {
 
-    private String studentID;
+    private int studentID;
 
-    public StudentCRSMenu(String studentID){
+    public StudentCRSMenu(Integer studentID){
         this.studentID = studentID;
     }
 
