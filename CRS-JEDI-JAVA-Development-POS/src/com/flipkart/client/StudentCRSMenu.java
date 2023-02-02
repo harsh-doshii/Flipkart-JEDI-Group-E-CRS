@@ -2,6 +2,7 @@ package com.flipkart.client;
 
 import com.flipkart.service.StudentServiceOperation;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class StudentCRSMenu {
@@ -90,7 +91,15 @@ public class StudentCRSMenu {
     }
     private void registerCourses(){
 //        studentServiceOperation.
+
         System.out.printf("Register course");
+//      Register  viewCourseCatalogue();
+//        System.out.printf("Enter courseId to register");
+//        Scanner sc = new Scanner(System.in);
+//        int cId = sc.nextInt();
+//        studentServiceOperation.addCourse()
+
+
     }
 
     private void addCourse(){
