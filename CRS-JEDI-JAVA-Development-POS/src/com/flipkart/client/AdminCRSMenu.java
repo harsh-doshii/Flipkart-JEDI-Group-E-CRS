@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class AdminCRSMenu {
 
-    String adminId;
-    public AdminCRSMenu(String adminId) {
+    int adminId;
+    public AdminCRSMenu(Integer adminId) {
         this.adminId = adminId;
     }
     Scanner scanner = new Scanner(System.in);
@@ -136,12 +136,7 @@ public class AdminCRSMenu {
     private Boolean removeCourse(int courseId) {
         adminServiceOperation.removeCourse(courseId);
         System.out.println("List of the Courses after removing this course : ");
-        int cur = 0;
-        for (var crs : adminServiceOperation.viewCourse()) {
-            cur++;
-            System.out.print(cur + ".   -->       ");
-            System.out.println("id:- " + crs.getCourseId() + "     ||   name:-  " + crs.getCourseName());
-        }
+        this.viewCourseCatalogue();
         return true;
     }
 
@@ -156,12 +151,7 @@ public class AdminCRSMenu {
 //        course.setCourseName(courseName);
         adminServiceOperation.addCourse(course);
         System.out.println("List of the Courses after adding this course : ");
-        int cur = 0;
-        for (var crs : adminServiceOperation.viewCourse()) {
-            cur++;
-            System.out.print(cur + ".   -->       ");
-            System.out.println("id:- " + crs.getCourseId() + "     ||   name:-  " + crs.getCourseName());
-        }
+        this.viewCourseCatalogue();
         return true;
     }
 
