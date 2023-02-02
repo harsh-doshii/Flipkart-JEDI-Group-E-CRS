@@ -34,6 +34,7 @@ public class CRSApplication {
             }
             else if(optionChosen.equals("3")){
                 System.out.println("Update Password was chosen");
+                updatePassword();
             }
             else if(optionChosen.equals("4")){
                 System.out.println("Thank you for using CRS, may the force be with you!");
@@ -130,6 +131,20 @@ public class CRSApplication {
 
     }
 
+    private static void updatePassword(){
+        System.out.println("UserId: ");
+        int userId = scanner.nextInt();
+        System.out.println("Enter old Password: ");
+        String oldPassword = scanner.next();
+        if(TempData.userDatabase.containsKey(userId) && TempData.userDatabase.get(userId).getPassword().equals(oldPassword)){
+            System.out.println("Enter new Password: ");
+            String password = scanner.next();
+            TempData.userDatabase.get(userId).setPassword(password);
+        }
+        else{
+            System.out.println("sorry bro");
+        }
+    }
     private static void loginMain(String userId, String password) {
 
     }
