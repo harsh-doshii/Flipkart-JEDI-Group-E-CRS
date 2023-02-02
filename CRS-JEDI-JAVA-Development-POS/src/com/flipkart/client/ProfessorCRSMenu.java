@@ -1,15 +1,21 @@
 package com.flipkart.client;
+import com.flipkart.bean.Course;
+import com.flipkart.service.AdminServiceOperation;
+import com.flipkart.service.ProfessorServiceOperation;
+
+import java.util.List;
 import java.util.Scanner;
 public class ProfessorCRSMenu {
 
-    private String professorID;
+    private int professorID;
 
 
 
-    public ProfessorCRSMenu(String profId){
-
+    public ProfessorCRSMenu(Integer profId){
         this.professorID = profId;
     }
+    Scanner scanner = new Scanner(System.in);
+    ProfessorServiceOperation professorServiceOperation = new ProfessorServiceOperation();
 
     public void displayMenu() {
         // Display the options available for the Professor
@@ -17,8 +23,8 @@ public class ProfessorCRSMenu {
 
         while (true) {
             System.out.println("Welcome to Professor Menu! Enter option :");
-            System.out.println("1. View Courses");
-            System.out.println("2. View Enrolled Students");
+            System.out.println("1. View Courses"); //done
+            System.out.println("2. View Enrolled Students"); //done
             System.out.println("3. Assign grade");
             System.out.println("4. Signup for course");
             System.out.println("5. Logout\n");
@@ -27,8 +33,10 @@ public class ProfessorCRSMenu {
             int input = sc.nextInt();
             sc.nextLine();
 
-            if(input==1)
-                viewCourse();
+            if(input==1){
+                viewCourse(professorID);
+            }
+
             else if(input==2)
                 viewStudents();
 
@@ -50,8 +58,12 @@ public class ProfessorCRSMenu {
 
 
 
-    private  void viewCourse(){
-        System.out.printf("view course");
+    private void viewCourse(int professorID){
+        int cur = 0;
+        for (var crs : professorServiceOperation.viewCourses(professorID)) {
+            cur++;
+            System.out.println("" + cur + " " + crs.getCourseId() + " " + crs.getCourseName());
+        }
     }
 
     private void viewStudents(){
@@ -63,10 +75,16 @@ public class ProfessorCRSMenu {
     }
 
     private void signUpForCourse() {
-        System.out.println("sign up for course");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the id of the course you want to teach");
+        int courseId = sc.nextInt();
+        professorServiceOperation.signUpForCourse(courseId, professorID);
+        System.out.println("List of the Courses after adding this course : ");
+        this.viewCourse(professorID);
     }
 
     private void logout() {
-        System.out.println("Loging out");
+        System.out.println("Logged out successfully");
+        System.exit(0);
     }
 }
