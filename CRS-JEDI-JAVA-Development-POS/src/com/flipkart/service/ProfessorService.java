@@ -11,7 +11,7 @@ public interface ProfessorService {
 
     public List<Student> viewStudents(int courseId);
 
-    public void assignGrade(int studentId, int courseId, Grade grade);
+    public boolean assignGrade(int studentId, int courseId, Grade grade);
 
     public void signUpForCourse(int courseId, int profId);
 }
