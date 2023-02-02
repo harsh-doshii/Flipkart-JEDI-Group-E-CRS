@@ -74,7 +74,13 @@ public class StudentCRSMenu {
     }
 
     private void viewCourseCatalogue(){
-        studentServiceOperation.viewCourseCatalouge();
+        int cur = 0;
+        System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
+        for (var crs : studentServiceOperation.viewCourseCatalouge()) {
+            cur++;
+            System.out.format("%15d %15d %32s\n",cur, crs.getCourseId(), crs.getCourseName());
+//            System.out.println();
+        }
 //        System.out.printf("view course");
     }
 
