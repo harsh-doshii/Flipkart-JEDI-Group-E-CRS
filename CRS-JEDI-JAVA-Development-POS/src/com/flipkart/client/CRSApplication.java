@@ -54,37 +54,43 @@ public class CRSApplication {
 
         System.out.println("Password: ");
         String password = scanner.next();
-        System.out.println("Role: ");
-        String role = scanner.next();
-        switch(role) {
-            case "student" :
-            case "Student" :
-            case "STUDENT" :
-                System.out.println("Welcome to the Student menu!");
-                //assuming username to be the student id as we don't have the student id yet
-                StudentCRSMenu studentMenu = new StudentCRSMenu(userId);
-                studentMenu.displayMenu();
-                break;
+        if(TempData.userDatabase.containsKey(userId) && TempData.userDatabase.get(userId).getPassword().equals(password)){
+            String role = TempData.userDatabase.get(userId).getRole();
+            switch(role) {
+                case "student" :
+                case "Student" :
+                case "STUDENT" :
+                    System.out.println("Welcome to the Student menu!");
+                    //assuming username to be the student id as we don't have the student id yet
+                    StudentCRSMenu studentMenu = new StudentCRSMenu(userId);
+                    studentMenu.displayMenu();
+                    break;
 
-            case "Professor" :
-            case "professor" :
-            case "PROFESSOR" :
-            case "prof":
-                System.out.println("Welcome to the Professor menu!");
-                ProfessorCRSMenu professorMenu = new ProfessorCRSMenu(userId);
-                professorMenu.displayMenu();
-                break;
+                case "Professor" :
+                case "professor" :
+                case "PROFESSOR" :
+                case "prof":
+                    System.out.println("Welcome to the Professor menu!");
+                    ProfessorCRSMenu professorMenu = new ProfessorCRSMenu(userId);
+                    professorMenu.displayMenu();
+                    break;
 
-            case "Admin":
-            case "admin":
-            case "ADMIN":
-                System.out.println("Welcome to the Admin menu!");
-                AdminCRSMenu adminCRSMenu = new AdminCRSMenu(userId);
-                adminCRSMenu.displayAdminMenu();
-                break;
-            default:
-                System.err.println("Invalid Option.");
+                case "Admin":
+                case "admin":
+                case "ADMIN":
+                    System.out.println("Welcome to the Admin menu!");
+                    AdminCRSMenu adminCRSMenu = new AdminCRSMenu(userId);
+                    adminCRSMenu.displayAdminMenu();
+                    break;
+                default:
+                    System.err.println("Invalid Option.");
+            }
         }
+        else{
+            System.out.println("No user found!");
+            return;
+        }
+
     }
 
     private static void register() {
