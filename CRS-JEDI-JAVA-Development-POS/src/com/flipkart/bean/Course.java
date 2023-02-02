@@ -7,6 +7,15 @@ public class Course {
     private int courseId;
 //    private Professor
 
+
+    public Course() {
+    }
+
+    public Course(int courseId, String courseName) {
+        this.courseName = courseName;
+        this.courseId = courseId;
+    }
+
     public String getCourseName() {
         return courseName;
     }

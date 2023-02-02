@@ -9,6 +9,21 @@ public abstract class User {
     private int id;
     private String role;
     private String dob;
+
+    public User() {
+    }
+
+    public User(String name, String gender, String address, String username, String password, int id, String role, String dob) {
+        this.name = name;
+        this.gender = gender;
+        this.address = address;
+        this.username = username;
+        this.password = password;
+        this.id = id;
+        this.role = role;
+        this.dob = dob;
+    }
+
     public String getName() {
         return name;
     }
