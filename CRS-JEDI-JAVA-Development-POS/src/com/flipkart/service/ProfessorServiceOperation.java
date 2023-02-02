@@ -24,8 +24,25 @@ public class ProfessorServiceOperation implements ProfessorService{
         * Have to think if we need profID
         *
         */
-        List<Student> enrolledStudents = TempData.courseToEnrolledStudents.get(courseId);
-        return enrolledStudents;
+//        ArrayList<Student> enrolledStudents =new ArrayList<>();
+//        System.out.println("in here 1");
+////        List<Student> enrolledStudents = (ArrayList<Student>) TempData.courseToEnrolledStudents.get(TempData.courseCatalogue.get(courseId));
+//        System.out.println(TempData.courseToEnrolledStudents.size());
+//        System.out.println(TempData.courseToEnrolledStudents);
+        return  TempData.courseToEnrolledStudents.get(TempData.courseCatalogue.get(courseId));
+//        for(var cur : TempData.courseToEnrolledStudents.entrySet()) {
+//            System.out.println(cur.getKey().getCourseId());
+//            System.out.println(cur.getValue());
+//
+//            enrolledStudents = (ArrayList<Student>) cur.getValue();
+//        }
+////        enrolledStudents = (ArrayList<Student>) TempData.courseToEnrolledStudents.get(TempData.courseCatalogue.get(1));
+//        if(enrolledStudents!=null) {
+//            System.out.println("in here 2");
+//            return enrolledStudents;
+//        }
+//        else
+//            return new ArrayList<>();
     }
 
     @Override

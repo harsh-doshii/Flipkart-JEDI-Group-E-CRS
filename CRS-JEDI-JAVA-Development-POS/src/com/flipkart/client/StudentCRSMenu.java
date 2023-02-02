@@ -86,7 +86,16 @@ public class StudentCRSMenu {
     }
 
     private void viewGrades(){
-        System.out.println(studentServiceOperation.viewGrades(studentID));
+//        System.out.println();
+
+        int cur = 0;
+        System.out.format("%15s %15s %32s %15s\n", "Sr. No", "Course ID", "Course Name", "Grade");
+        for(var regCourse : studentServiceOperation.viewGrades(studentID)) {
+            cur++;
+            System.out.format("%15d %15d %32s %15s\n",cur, regCourse.getCourse().getCourseId(), regCourse.getCourse().getCourseName(), regCourse.getGrade().getGrade());
+
+//            System.out.println();
+        }
 //        System.out.printf("view Grades");
     }
     private void registerCourses(){
@@ -117,7 +126,14 @@ public class StudentCRSMenu {
     }
 
     private void viewRegisterCourses(){
-        System.out.println(studentServiceOperation.viewRegisteredCourse(studentID));
+        int cur = 0;
+        System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
+        for(var regCourse : studentServiceOperation.viewRegisteredCourse(studentID)) {
+            cur++;
+            System.out.format("%15d %15d %32s\n",cur, regCourse.getCourse().getCourseId(), regCourse.getCourse().getCourseName());
+
+//            System.out.println();
+        }
 //        System.out.printf("view registered courses");
     }
 

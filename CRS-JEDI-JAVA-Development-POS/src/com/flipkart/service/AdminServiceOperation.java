@@ -26,6 +26,7 @@ public class AdminServiceOperation implements AdminService {
     @Override
     public void addProfessor(Professor professor) {
         tempData.professorDatabase.put(professor.getId(), professor);
+        TempData.userDatabase.put(professor.getId(), professor);
     }
 
     @Override

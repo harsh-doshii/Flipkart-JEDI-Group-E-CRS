@@ -1,10 +1,12 @@
 package com.flipkart.client;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
+import com.flipkart.bean.Student;
 import com.flipkart.data.TempData;
 import com.flipkart.service.AdminServiceOperation;
 import com.flipkart.service.ProfessorServiceOperation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -78,12 +80,14 @@ public class ProfessorCRSMenu {
 
         System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
         int cur = 0;
-        for(var student : professorServiceOperation.viewStudents(courseId)) {
+        List<Student> students = professorServiceOperation.viewStudents(courseId);
+//        System.out.println("student.size = " + students.size());
+        for(var student : students) {
             cur++;
             System.out.format("%15d %15d %32s\n",
                     cur,
-                    TempData.idToStudent.get(student).getId(),
-                    TempData.idToStudent.get(student).getName()
+                    student.getId(),
+                    student.getName()
             );
         }
         System.out.println("##########################");
@@ -102,8 +106,8 @@ public class ProfessorCRSMenu {
             cur++;
             System.out.format("%15d %15d %32s\n",
                     cur,
-                    TempData.idToStudent.get(student).getId(),
-                    TempData.idToStudent.get(student).getName()
+                    student.getId(),
+                    student.getName()
             );
         }
         System.out.println("##########################");

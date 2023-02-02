@@ -55,6 +55,20 @@ public class TempData {
         integerToGrade.put(9, new Grade("B", 9));
         integerToGrade.put(8, new Grade("C", 8));
         integerToGrade.put(7, new Grade("D", 7));
+
+        List<Student> enrolledStudents = new ArrayList<>();
+        enrolledStudents.add((Student) userDatabase.get(555));
+        courseToEnrolledStudents.put(courseCatalogue.get(1), enrolledStudents);
+
+        List<Course> profCourseList = new ArrayList<>();
+        profCourseList.add(courseCatalogue.get(1));
+        profToCourses.put(55, profCourseList);
+
+        courseToProfMapping.put(1, 55);
+
+        Set<RegisteredCourse> regCourseList = new HashSet<>();
+        regCourseList.add(new RegisteredCourse(courseCatalogue.get(1), idToStudent.get(555), 1, null));
+        studentToRegisteredCourseList.put(555, regCourseList);
     }
 
 
