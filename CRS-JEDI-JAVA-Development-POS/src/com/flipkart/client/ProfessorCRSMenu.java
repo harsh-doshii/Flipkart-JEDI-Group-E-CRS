@@ -72,14 +72,13 @@ public class ProfessorCRSMenu {
     private void viewStudents(){
         System.out.println("Enter course id");
         int courseId = scanner.nextInt();
-        Course course = TempData.courseCatalogue.get(courseId);
         System.out.println("##########################");
 
         System.out.println("List of registered students:");
 
         System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
         int cur = 0;
-        for(var student : TempData.courseToEnrolledStudents.get(course)) {
+        for(var student : professorServiceOperation.viewStudents(courseId)) {
             cur++;
             System.out.format("%15d %15d %32s\n",
                     cur,
@@ -93,14 +92,13 @@ public class ProfessorCRSMenu {
     private  void assignGrades(){
         System.out.println("Enter course id");
         int courseId = scanner.nextInt();
-        Course course = TempData.courseCatalogue.get(courseId);
         System.out.println("##########################");
 
         System.out.println("List of registered students:");
 
         System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
         int cur = 0;
-        for(var student : TempData.courseToEnrolledStudents.get(course)) {
+        for(var student : professorServiceOperation.viewStudents(courseId)) {
             cur++;
             System.out.format("%15d %15d %32s\n",
                     cur,
