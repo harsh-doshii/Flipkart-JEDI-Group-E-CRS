@@ -1,6 +1,7 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.GradeCard;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 
@@ -14,24 +15,21 @@ public interface AdminService {
 
     public void addProfessor(Professor professor);
 
-    public void removeProfessor(String profID);
+    public Boolean removeProfessor(int profID);
 
-    public void assignProfessor(String profID, int courseID);
+    public void assignProfessor(int profID, int courseID);
 
-    public void generateGradeCard(String studentID);
+    public GradeCard generateGradeCard(int studentID);
 
     public List<Course> viewCourse();
 
     public void validateRegistration();
 
-    public void approveStudent(String studentID);
+    public void approveStudent(int studentID);
 
 
     public List<Professor> viewProfessor();
 
     public List<Student> viewPending();
-
-
-
 
 }
