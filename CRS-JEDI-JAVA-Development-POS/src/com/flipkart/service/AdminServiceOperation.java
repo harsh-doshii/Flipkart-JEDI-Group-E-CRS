@@ -64,6 +64,7 @@ public class AdminServiceOperation implements AdminService {
     @Override
     public void approveStudent(int studentID) {
         tempData.isStudentApproved.put(studentID, true);
+        TempData.userDatabase.put(studentID, TempData.idToStudent.get(studentID));
     }
 
     @Override
