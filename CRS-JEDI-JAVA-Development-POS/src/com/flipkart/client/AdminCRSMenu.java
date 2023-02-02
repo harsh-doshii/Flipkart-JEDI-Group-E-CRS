@@ -135,6 +135,13 @@ public class AdminCRSMenu {
 
     private Boolean removeCourse(int courseId) {
         adminServiceOperation.removeCourse(courseId);
+        System.out.println("List of the Courses after removing this course : ");
+        int cur = 0;
+        for (var crs : adminServiceOperation.viewCourse()) {
+            cur++;
+            System.out.print(cur + ".   -->       ");
+            System.out.println("id:- " + crs.getCourseId() + "     ||   name:-  " + crs.getCourseName());
+        }
         return true;
     }
 
