@@ -151,9 +151,9 @@ public class AdminCRSMenu {
         int courseId = sc.nextInt();
         System.out.println("Enter the name of the course");
         String courseName = sc.next();
-        Course course = new Course();
-        course.setCourseId(courseId);
-        course.setCourseName(courseName);
+        Course course = new Course(courseId,courseName);
+//        course.setCourseId(courseId);
+//        course.setCourseName(courseName);
         adminServiceOperation.addCourse(course);
         System.out.println("List of the Courses after adding this course : ");
         int cur = 0;

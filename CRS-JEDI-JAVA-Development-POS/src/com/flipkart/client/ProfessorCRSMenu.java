@@ -20,7 +20,8 @@ public class ProfessorCRSMenu {
             System.out.println("1. View Courses");
             System.out.println("2. View Enrolled Students");
             System.out.println("3. Assign grade");
-            System.out.println("4. Logout\n");
+            System.out.println("4. Signup for course");
+            System.out.println("5. Logout\n");
             System.out.println("Enter Option : ");
 
             int input = sc.nextInt();
@@ -34,7 +35,10 @@ public class ProfessorCRSMenu {
             else if(input==3)
                 assignGrades();
 
-            else if(input==4) {
+            else if (input==4) {
+                signUpForCourse();
+            }
+            else if(input==5) {
                 logout();
                 break;
             }
@@ -56,6 +60,10 @@ public class ProfessorCRSMenu {
 
     private  void assignGrades(){
         System.out.printf("assign grades");
+    }
+
+    private void signUpForCourse() {
+        System.out.println("sign up for course");
     }
 
     private void logout() {
