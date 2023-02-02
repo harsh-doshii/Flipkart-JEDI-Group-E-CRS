@@ -5,6 +5,7 @@ import com.flipkart.bean.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class TempData {
     public static HashMap<Integer, Course> courseCatalogue = new HashMap<>();
@@ -22,7 +23,9 @@ public class TempData {
 
     public static HashMap<Course, List<Student>> courseToEnrolledStudents = new HashMap<>();
 
-    public static HashMap<Integer, Grade> profGivingGrade = new HashMap<>();
+    public static HashMap<Integer, Set<RegisteredCourse>> studentToRegisteredCourseList = new HashMap<>();
+
+    public static HashMap<Integer, Set<Integer>> studentToCoursePreferenceList = new HashMap<>();
 
 
     //public static HashMap<>
