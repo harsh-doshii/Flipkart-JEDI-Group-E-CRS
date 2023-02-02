@@ -116,6 +116,8 @@ public class CRSApplication {
         StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
         studentServiceOperation.signUp(student);
 
+        System.out.println("Your user id is " + id);
+        System.out.println("Please use this id to login");
 
     }
 
