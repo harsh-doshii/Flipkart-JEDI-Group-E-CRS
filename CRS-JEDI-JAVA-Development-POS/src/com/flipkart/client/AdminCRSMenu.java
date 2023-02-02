@@ -121,7 +121,6 @@ public class AdminCRSMenu {
 
     private void logout() {
         System.out.println("Logged out successfully");
-        System.exit(0);
     }
 
     private GradeCard generateReport(int studentId) {

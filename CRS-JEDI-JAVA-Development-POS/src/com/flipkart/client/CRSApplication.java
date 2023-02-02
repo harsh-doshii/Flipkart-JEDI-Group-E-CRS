@@ -23,7 +23,7 @@ public class CRSApplication {
             System.out.println("3. Update Password");
             System.out.println("4. Exit");
 
-            String optionChosen = scanner.nextLine();
+            String optionChosen = scanner.next();
 
 
             if(optionChosen.equals("1")){
