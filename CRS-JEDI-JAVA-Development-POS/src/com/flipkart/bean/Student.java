@@ -7,10 +7,17 @@ public class Student extends User{
     private int semester;
     private List coursesEnrolled;
 
-
-
-    private String grade;
     private List preferenceList;
+
+    public Student(String name, String gender, String address, String username, String password, int id, String role, String dob, Branch branch, int semester, List coursesEnrolled, List preferenceList) {
+        super(name, gender, address, username, password, id, role, dob);
+        this.branch = branch;
+        this.semester = semester;
+        this.coursesEnrolled = coursesEnrolled;
+        this.preferenceList = preferenceList;
+    }
+
+
 
     public Branch getBranch() {
         return branch;
@@ -44,11 +51,4 @@ public class Student extends User{
         this.preferenceList = preferenceList;
     }
 
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
 }

@@ -1,5 +1,10 @@
 package com.flipkart.client;
 
+import com.flipkart.bean.Branch;
+import com.flipkart.bean.Student;
+import com.flipkart.data.TempData;
+import com.flipkart.service.StudentServiceOperation;
+
 import java.util.Scanner;
 public class CRSApplication {
     private static Scanner scanner = new Scanner(System.in);
@@ -25,7 +30,7 @@ public class CRSApplication {
                 login();
             }
             else if(optionChosen.equals("2")){
-                System.out.println(" Registration of the Student was chosen");
+                register();
             }
             else if(optionChosen.equals("3")){
                 System.out.println("Update Password was chosen");
@@ -83,6 +88,34 @@ public class CRSApplication {
     }
 
     private static void register() {
+        System.out.println("Enter student name");
+        String name = scanner.next();
+        System.out.println("Enter student gender");
+        String gender = scanner.next();
+        System.out.println("Enter student address");
+        String address = scanner.next();
+        System.out.println("Enter student username");
+        String username = scanner.next();
+        System.out.println("Enter new password");
+        String password = scanner.next();
+        int id = 10000 + TempData.isStudentApproved.size()+1;
+        String role = "student";
+        System.out.println("Enter dob");
+        String dob = scanner.next();
+        System.out.println("Enter student branch id");
+        String branchId = scanner.next();
+        Branch branch = TempData.idToBranch.get(branchId);
+        if(branch==null) {
+            System.out.println("Please enter valid branch id");
+        }
+        int semester = 1;
+        Student student = new Student(name,gender,address,username,password,id,role,dob,branch,semester,null,null);
+//        TempData.idToStudent.put(id, student);
+//        TempData.isStudentApproved.put(id, false);
+
+        StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
+        studentServiceOperation.signUp(student);
+
 
     }
 

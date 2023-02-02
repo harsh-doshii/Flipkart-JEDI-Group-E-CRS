@@ -1,18 +1,25 @@
 package com.flipkart.client;
 
+import com.flipkart.service.StudentServiceOperation;
+
 import java.util.Scanner;
 
 public class StudentCRSMenu {
 
     private int studentID;
 
+    StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
+    Scanner sc = new Scanner(System.in);
+
     public StudentCRSMenu(Integer studentID){
         this.studentID = studentID;
     }
 
+
+
     public void displayMenu() {
         // Display the options available for the Student
-        Scanner sc = new Scanner(System.in);
+
         while (true) {
 
             System.out.println("\n==========================================================================\n");
@@ -67,26 +74,36 @@ public class StudentCRSMenu {
     }
 
     private void viewCourseCatalogue(){
-        System.out.printf("view course");
+        studentServiceOperation.viewCourseCatalouge();
+//        System.out.printf("view course");
     }
 
     private void viewGrades(){
-        System.out.printf("view Grades");
+        System.out.println(studentServiceOperation.viewGrades(studentID));
+//        System.out.printf("view Grades");
     }
     private void registerCourses(){
+//        studentServiceOperation.
         System.out.printf("Register course");
     }
 
     private void addCourse(){
-        System.out.printf("add course");
+        System.out.println("Enter course id to register");
+        int courseid = sc.nextInt();
+        studentServiceOperation.addCourse(studentID, courseid);
+//        System.out.printf("add course");
     }
 
     private void dropCourse() {
-        System.out.printf("Drop Course");
+        System.out.println("Enter course id to drop");
+        int courseid = sc.nextInt();
+        studentServiceOperation.dropCourse(studentID,courseid);
+//        System.out.printf("Drop Course");
     }
 
     private void viewRegisterCourses(){
-        System.out.printf("view registered courses");
+        System.out.println(studentServiceOperation.viewRegisteredCourse(studentID));
+//        System.out.printf("view registered courses");
     }
 
     private  void payFee(){

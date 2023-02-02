@@ -41,6 +41,7 @@ public class StudentServiceOperation implements StudentService {
     }
 
     public boolean signUp(Student student) {
+        TempData.idToStudent.put(student.getId(), student);
         TempData.isStudentApproved.put(student.getId(), false);
         return true;
     }

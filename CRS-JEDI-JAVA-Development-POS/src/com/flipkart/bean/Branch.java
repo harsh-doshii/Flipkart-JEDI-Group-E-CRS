@@ -5,6 +5,20 @@ public class Branch {
     private String name;
     private Professor hod;
 
+    public Branch(String id, String name, Professor hod) {
+        this.id = id;
+        this.name = name;
+        this.hod = hod;
+    }
+
+    public Branch() {
+    }
+
+    public Branch(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

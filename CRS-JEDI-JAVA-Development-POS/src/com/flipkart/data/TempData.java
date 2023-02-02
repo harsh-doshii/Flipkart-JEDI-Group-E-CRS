@@ -27,6 +27,8 @@ public class TempData {
 
     public static HashMap<Integer, Set<Integer>> studentToCoursePreferenceList = new HashMap<>();
 
+    public static HashMap<String, Branch> idToBranch = new HashMap<>();
+
 
     //public static HashMap<>
     static {
@@ -34,6 +36,11 @@ public class TempData {
         courseCatalogue.put(1, new Course(1, "DSA"));
         courseCatalogue.put(2, new Course(2, "DBMS"));
         courseCatalogue.put(3, new Course(3, "DAA"));
+
+        //populating branches
+        idToBranch.put("A7", new Branch("A7", "Computer Science"));
+        idToBranch.put("A1", new Branch("A1", "Chemical engineering"));
+        idToBranch.put("A4", new Branch("A4", "Mechanical Engineering"));
 
     }
 
