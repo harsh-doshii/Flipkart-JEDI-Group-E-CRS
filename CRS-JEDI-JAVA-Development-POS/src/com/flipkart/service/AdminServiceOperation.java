@@ -33,6 +33,7 @@ public class AdminServiceOperation implements AdminService {
     public Boolean removeProfessor(int profID) {
         if (tempData.professorDatabase.get(profID) != null) {
             tempData.professorDatabase.remove(profID);
+            TempData.userDatabase.remove(profID);
             return true;
         }
         return false;

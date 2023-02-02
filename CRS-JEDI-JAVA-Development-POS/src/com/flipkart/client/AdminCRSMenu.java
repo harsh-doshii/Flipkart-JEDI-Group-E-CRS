@@ -141,6 +141,7 @@ public class AdminCRSMenu {
         Professor prof = new Professor();
         prof.setId(profId);
         prof.setName(profName);
+        prof.setPassword("default");
         adminServiceOperation.addProfessor(prof);
         System.out.println("List of the Professors after adding this prof : ");
         int cur = 0;
