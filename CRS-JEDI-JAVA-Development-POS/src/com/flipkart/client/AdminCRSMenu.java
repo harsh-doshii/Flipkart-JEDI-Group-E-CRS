@@ -167,10 +167,11 @@ public class AdminCRSMenu {
 
     private void viewCourseCatalogue() {
         int cur = 0;
+        System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
         for (var crs : adminServiceOperation.viewCourse()) {
             cur++;
-            System.out.print(cur + ".   -->       ");
-            System.out.println("id:- " + crs.getCourseId() + "     ||   name:-  " + crs.getCourseName());
+            System.out.format("%15d %15d %32s\n",cur, crs.getCourseId(), crs.getCourseName());
+//            System.out.println();
         }
     }
 }
