@@ -22,6 +22,9 @@ public class TempData {
 
     public static HashMap<Course, List<Student>> courseToEnrolledStudents = new HashMap<>();
 
+    public static HashMap<Integer, Grade> profGivingGrade = new HashMap<>();
+
+
     //public static HashMap<>
     static {
         //populating course catalog
