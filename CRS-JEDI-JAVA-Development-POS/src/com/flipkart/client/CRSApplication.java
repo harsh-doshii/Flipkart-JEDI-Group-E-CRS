@@ -111,19 +111,22 @@ public class CRSApplication {
         System.out.println("Enter student branch id");
         String branchId = scanner.next();
         Branch branch = TempData.idToBranch.get(branchId);
+
+
+
         if(branch==null) {
             System.out.println("Please enter valid branch id");
         }
-        int semester = 1;
-        Student student = new Student(name,gender,address,username,password,id,role,dob,branch,semester,null,null);
-//        TempData.idToStudent.put(id, student);
-//        TempData.isStudentApproved.put(id, false);
+        else
+        {
+            int semester = 1;
+            Student student = new Student(name,gender,address,username,password,id,role,dob,branch,semester,null,null);
 
-        StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
-        studentServiceOperation.signUp(student);
-
-        System.out.println("Your user id is " + id);
-        System.out.println("Please use this id to login");
+            StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
+            studentServiceOperation.signUp(student);
+            System.out.println("Your user id is " + id);
+            System.out.println("Please use this id to login");
+        }
 
     }
 
