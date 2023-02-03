@@ -93,7 +93,7 @@ public class ProfessorCRSMenu {
         System.out.println("##########################");
     }
 
-    private  void assignGrades(){
+    private void assignGrades(){
         System.out.println("Enter course id");
         int courseId = scanner.nextInt();
         System.out.println("##########################");
@@ -104,6 +104,7 @@ public class ProfessorCRSMenu {
         int cur = 0;
         for(var student : professorServiceOperation.viewStudents(courseId)) {
             cur++;
+            System.out.println("works till here");
             System.out.format("%15d %15d %32s\n",
                     cur,
                     student.getId(),

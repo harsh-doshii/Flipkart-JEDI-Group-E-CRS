@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AdminServiceOperation implements AdminService {
 
@@ -15,7 +16,8 @@ public class AdminServiceOperation implements AdminService {
     TempData tempData = new TempData();
     @Override
     public void addCourse(Course course) {
-        tempData.courseCatalogue.put(course.getCourseId(), course);
+        TempData.courseCatalogue.put(course.getCourseId(), course);
+        TempData.courseToEnrolledStudents.put(course, new ArrayList<>());
     }
 
     @Override
@@ -45,8 +47,19 @@ public class AdminServiceOperation implements AdminService {
     }
 
     @Override
-    public GradeCard generateGradeCard(int studentID) {
-        return tempData.reportCards.get(studentID);
+    public void generateGradeCard() {
+        boolean check = true;
+        for (Map.Entry<Integer, Set<RegisteredCourse>> cur : TempData.studentToRegisteredCourseList.entrySet()) {
+            if (cur.getValue() == null) continue;
+            for (RegisteredCourse regCourse: cur.getValue()) {
+                check = check & (regCourse.getGrade() != null);
+            }
+        }
+        if (check) {
+            tempData.releaseReportCards = true;
+        } else {
+            System.out.println("Can't release grades now, as all grades are not available");
+        }
     }
 
     @Override
@@ -67,6 +80,7 @@ public class AdminServiceOperation implements AdminService {
     public void approveStudent(int studentID) {
         tempData.isStudentApproved.put(studentID, true);
         TempData.userDatabase.put(studentID, TempData.idToStudent.get(studentID));
+        TempData.remainingPayment.put(studentID, 0.0f);
     }
 
     @Override

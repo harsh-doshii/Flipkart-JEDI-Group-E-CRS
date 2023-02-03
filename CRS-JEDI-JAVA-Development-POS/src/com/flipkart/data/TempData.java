@@ -29,13 +29,19 @@ public class TempData {
 
     public static HashMap<Integer, Grade> integerToGrade = new HashMap<>();
 
+    public static HashMap<Integer, Float> remainingPayment = new HashMap<>();
 
+    public static boolean releaseReportCards;
     //public static HashMap<>
     static {
+        releaseReportCards = false;
         //populating course catalog
         courseCatalogue.put(1, new Course(1, "DSA"));
         courseCatalogue.put(2, new Course(2, "DBMS"));
         courseCatalogue.put(3, new Course(3, "DAA"));
+
+        courseToEnrolledStudents.put(courseCatalogue.get(2), new ArrayList<>());
+        courseToEnrolledStudents.put(courseCatalogue.get(3), new ArrayList<>());
 
         userDatabase.put(555, new Student("Aman", "M", "Delhi", "aman.jham", "weak", 555, "Student", "10101111", new Branch("A7", "CS"), 2, new ArrayList<Course>(),  new ArrayList<Course>()));
         userDatabase.put(556, new Student("Bhavya", "F", "Delhi", "bhavya.verma", "weak", 556, "Student", "10101111", new Branch("A7", "CS"), 2, new ArrayList<Course>(),  new ArrayList<Course>()));

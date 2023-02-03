@@ -103,9 +103,7 @@ public class AdminCRSMenu {
                     break;
 
                 case 7:
-                    System.out.println("Enter the id of student for which we have to generate report card");
-                    int studenId = scanner.nextInt();
-                    generateReport(studenId);
+                    generateReport();
                     break;
 
                 case 8:
@@ -123,8 +121,8 @@ public class AdminCRSMenu {
         System.out.println("Logged out successfully");
     }
 
-    private GradeCard generateReport(int studentId) {
-        return adminServiceOperation.generateGradeCard(studentId);
+    private void generateReport() {
+        adminServiceOperation.generateGradeCard();
     }
 
     private void approveStudentRegistration(int studentId) {

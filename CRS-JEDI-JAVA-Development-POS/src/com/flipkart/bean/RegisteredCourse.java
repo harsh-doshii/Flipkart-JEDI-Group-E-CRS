@@ -10,8 +10,14 @@ public class RegisteredCourse {
     private Grade grade;
 
     public RegisteredCourse() {
+
     }
 
+    public RegisteredCourse(Course course, Student student, int semester) {
+        this.course = course;
+        this.student = student;
+        this.semester = semester;
+    }
     public RegisteredCourse(Course course, Student student, int semester, Grade grade) {
         this.course = course;
         this.student = student;

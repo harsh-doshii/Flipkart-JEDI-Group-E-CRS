@@ -29,6 +29,11 @@ public class ProfessorServiceOperation implements ProfessorService{
 ////        List<Student> enrolledStudents = (ArrayList<Student>) TempData.courseToEnrolledStudents.get(TempData.courseCatalogue.get(courseId));
 //        System.out.println(TempData.courseToEnrolledStudents.size());
 //        System.out.println(TempData.courseToEnrolledStudents);
+//        if (TempData.courseToEnrolledStudents.get(TempData.courseCatalogue.get(courseId)) == null) {
+//            //TempData.courseToEnrolledStudents.put()
+//            //System.out.println("");
+//            return ;
+//        }
         return  TempData.courseToEnrolledStudents.get(TempData.courseCatalogue.get(courseId));
 //        for(var cur : TempData.courseToEnrolledStudents.entrySet()) {
 //            System.out.println(cur.getKey().getCourseId());

@@ -19,7 +19,7 @@ public interface AdminService {
 
     public void assignProfessor(int profID, int courseID);
 
-    public GradeCard generateGradeCard(int studentID);
+    public void generateGradeCard();
 
     public List<Course> viewCourse();
 
