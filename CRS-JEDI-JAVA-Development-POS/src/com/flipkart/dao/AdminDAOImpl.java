@@ -10,13 +10,5 @@ import java.util.*;
 
 
 public class AdminDAOImpl {
-    Connection conn = null;
-    PreparedStatement statement = null;
 
-
-
-    public void addProfessor(Professor professor){
-        statement = null;
-        Connection conn = DBUtil.getConnection();
-    }
 }
