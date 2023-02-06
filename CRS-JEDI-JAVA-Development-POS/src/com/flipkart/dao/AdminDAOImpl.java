@@ -133,12 +133,12 @@ public class AdminDAOImpl implements AdminDAO {
             int row = statement.executeUpdate();
 
             if(row == 0) {
-                System.out.println("Professor with professorId: " + professor.getId() + " not added.");
+                System.out.println("Professor with professorId: " + id + " not added.");
 
                 return;
             }
 
-            System.out.println("Professor with professorId: " + professor.getId() + " added.");
+            System.out.println("Professor with professorId: " + id + " added.");
 
         }catch(Exception se) {
 
@@ -185,18 +185,16 @@ public class AdminDAOImpl implements AdminDAO {
             statement.setInt(1, id);
             statement.setInt(2, student.getSemester());
             statement.setString(3,student.getBranch().getName());
-            statement.setString(4, student.getIsApproved());
-            statement.setFloat(5,student.getRemainingPayment());
 
             int row = statement.executeUpdate();
 
             if(row == 0) {
-                System.out.println("Student with StudentID: " + student.getId() + " not added.");
+                System.out.println("Student with StudentID: " + id + " not added.");
 //                System.out.println("Professor not added.");
                 return;
             }
 
-            System.out.println("Student with StudentID: " + student.getId() + " added.");
+            System.out.println("Student with StudentID: " + id + " added.");
 
         }catch(Exception se) {
 
@@ -223,7 +221,8 @@ public class AdminDAOImpl implements AdminDAO {
     public int addUser(User user) throws SQLException {
         statement = null;
         Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
-        int id = getNewUserID();
+        int id = this.getNewUserID();
+//        System.out.println("add user id: "+ id);
         try {
             Class.forName(JDBC_DRIVER);
             String sql = SQLQueries.ADD_USER_QUERY;
@@ -254,6 +253,7 @@ public class AdminDAOImpl implements AdminDAO {
         }
         finally {
             try {
+
                 conn.close();
             }
             catch(SQLException ex){
@@ -576,6 +576,9 @@ public class AdminDAOImpl implements AdminDAO {
             String sql = SQLQueries.GET_CURRENT_ID_VALUE;
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            System.out.println(resultSet.getString("variableValue"));
+
             int currentID = Integer.parseInt(resultSet.getString("variableValue")) +1;
             sql = SQLQueries.UPDATE_CURRENT_ID_VALUE;
 
@@ -586,6 +589,7 @@ public class AdminDAOImpl implements AdminDAO {
                 return -1;
             }
             else{
+
                 return  currentID;
             }
         }
