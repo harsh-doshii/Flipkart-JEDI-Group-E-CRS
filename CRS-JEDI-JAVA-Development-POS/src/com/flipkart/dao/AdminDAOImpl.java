@@ -40,6 +40,10 @@ public class AdminDAOImpl implements AdminDAO {
         return instance;
     }
 
+    /**
+     * @param course
+     * @throws SQLException
+     */
     @Override
     public void addCourse(Course course) throws SQLException {
         statement = null;
@@ -76,6 +80,10 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
 
+    /**
+     * @param courseID
+     * @throws SQLException
+     */
     @Override
     public void removeCourse(int courseID) throws SQLException {
         statement = null;
@@ -108,6 +116,10 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    /**
+     * @param professor
+     * @throws SQLException
+     */
     @Override
     public void addProf(Professor professor) throws SQLException {
         int id =-1;
@@ -162,6 +174,10 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
 
+    /**
+     * @param student
+     * @throws SQLException
+     */
     @Override
     public void addStudent(Student student) throws SQLException {
         int id =-1;
@@ -217,6 +233,11 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    /**
+     * @param user
+     * @return
+     * @throws SQLException
+     */
     @Override
     public int addUser(User user) throws SQLException {
         statement = null;
@@ -268,6 +289,10 @@ public class AdminDAOImpl implements AdminDAO {
         return -1;
     }
 
+    /**
+     * @param profID
+     * @throws SQLException
+     */
     @Override
     public void removeProf(int profID) throws SQLException {
         statement = null;
@@ -331,6 +356,11 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    /**
+     * @param profID
+     * @param courseID
+     * @throws SQLException
+     */
     @Override
     public void assignProf(int profID, int courseID) throws SQLException {
         statement = null;
@@ -376,6 +406,9 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    /**
+     * @throws SQLException
+     */
     @Override
     public void generateReportCard() throws SQLException{
         statement = null;
@@ -414,7 +447,11 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
-  
+
+    /**
+     * @return
+     * @throws SQLException
+     */
     @Override
     public List<Course> viewCourses() throws SQLException {
         statement = null;
@@ -455,6 +492,10 @@ public class AdminDAOImpl implements AdminDAO {
         return coursesList;
     }
 
+    /**
+     * @param studentId
+     * @throws SQLException
+     */
     @Override
     public void approveStudent(int studentId) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -482,6 +523,10 @@ public class AdminDAOImpl implements AdminDAO {
 
     }
 
+    /**
+     * @return
+     * @throws SQLException
+     */
     @Override
     public List<Professor> viewProfessors() throws SQLException {
         Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -524,8 +569,10 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
 
-
-
+    /**
+     * @return
+     * @throws SQLException
+     */
     @Override
     public List<Student> viewUnapprovedStudents() throws SQLException {
         Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -569,6 +616,10 @@ public class AdminDAOImpl implements AdminDAO {
         return studentList;
     }
 
+    /**
+     * @return
+     * @throws SQLException
+     */
     public int getNewUserID() throws SQLException {
         Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
         statement = null;
