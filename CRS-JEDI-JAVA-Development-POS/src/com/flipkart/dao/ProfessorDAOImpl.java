@@ -32,44 +32,57 @@ public class ProfessorDAOImpl implements ProfessorDAO{
         }
         return instance;
     }
-        public List<Student> viewStudents(int courseId) throws Exception {
-            List<Integer> sidlist = new ArrayList<>();
-            List<Student> listofStudents = new ArrayList<>();
 
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-                statement = null;
-                Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
-                String sql = SQLQueries.GET_ENROLLED_STUDENTS;
-                //GET_ENROLLED_STUDENTS = "select * from RegisteredCourse where idCourse=?";
-                statement = conn.prepareStatement(sql);
-                statement.setInt(1, courseId);
-                ResultSet rs = statement.executeQuery(sql);
-                while(rs.next()){
-                    int studentId = rs.getInt("idStudent");
-                    sidlist.add(studentId);
-                }
-                //add code to convert li<t<Integer> to list<Student>
+    public List<Student> viewStudents(int courseId) throws Exception {
+        List<Integer> sidlist = new ArrayList<>();
+        List<Student> listofStudents = new ArrayList<>();
 
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            statement = null;
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            String sql = SQLQueries.GET_ENROLLED_STUDENTS;
+            //GET_ENROLLED_STUDENTS = "select * from RegisteredCourse where idCourse=?";
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, courseId);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int studentId = rs.getInt("idStudent");
+                sidlist.add(studentId);
             }
-            catch(Exception e) {
+            //add code to convert li<t<Integer> to list<Student>
+            for (var cur: sidlist) {
+                statement = conn.prepareStatement(SQLQueries.GET_STUDENT_FROM_ID);
+                statement.setInt(1, cur);
+                rs = statement.executeQuery();
 
-            } finally {
+                statement = conn.prepareStatement(SQLQueries.GET_USER_FROM_USER_ID);
+                statement.setInt(1, cur);
+                ResultSet rs2 = statement.executeQuery();
+
+                // see this if needed.
+                rs.next();
+                rs2.next();
+                Student student = new Student(rs.getInt("idStudent"), rs2.getString("name"));
+                listofStudents.add(student);
+            }
+        } catch (Exception e) {
+
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
                 try {
-                    conn.close();
-                }
-                catch(SQLException ex){
-                    System.out.println(ex.getMessage());
-                    try {
-                        throw new SQLException
-                                ();
-                    } catch (SQLException
-                            e) {
-                        System.out.println(e.getMessage());
-                    }
+                    throw new SQLException
+                            ();
+                } catch (SQLException
+                        e) {
+                    System.out.println(e.getMessage());
                 }
             }
-            return listofStudents;
+        }
+        return listofStudents;
     }
 
     public boolean assignGrade(int studentId, int courseId, Grade grade, int sem) throws Exception{
