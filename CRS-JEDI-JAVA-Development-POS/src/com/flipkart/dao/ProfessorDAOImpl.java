@@ -85,6 +85,9 @@ public class ProfessorDAOImpl implements ProfessorDAO{
                 statement.setInt(2, courseId);
                 statement.setInt(3, studentId);
                 int r = statement.executeUpdate();
+                if(r!=1){
+                    throw new Exception();
+                }
             } catch (Exception e){
 
             }finally {
@@ -117,6 +120,9 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             statement.setObject(1, profId);
             statement.setInt(2, courseId);
             int r = statement.executeUpdate();
+            if(r!=1){
+                throw new Exception();
+            }
         } catch (Exception e){
 
         }finally {
@@ -149,7 +155,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             statement.setObject(1, profId);
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                courseList.add(new Course(resultSet.getInt("idCourse"),resultSet.getString("coursename")));
+                courseList.add(new Course(resultSet.getInt("idCourse"),resultSet.getString("courseName")));
             }
         } catch (Exception e){
 
