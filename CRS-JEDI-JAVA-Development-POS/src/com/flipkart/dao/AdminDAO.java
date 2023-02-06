@@ -7,43 +7,29 @@ import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import java.util.HashMap;
 import java.util.List;
+import java.sql.SQLException;
 
 
 public interface AdminDAO {
 
-    public void addCourse(Course course);
+    public void addCourse(Course course) throws SQLException;
 
-    public void removeCourse(int courseID);
-
-
-    public void addProf(Professor professor);
-
-    public void addUser(User user);
-
-    public void removeProf(String profID);
-
-    public void removeStudent(String studentID);
-
-    public void assignProf(String profID, int courseID);
-
-    public HashMap<String,List<Integer>> getAlternateCourses();
-
-    public HashMap<String,List<Integer>> getPreferredCourses();
-
-    public void generateReportCard(String studentID);
+    public void removeCourse(int courseID)throws SQLException;
 
 
-    public List<Course> viewCourses();
+    public void addProf(Professor professor)throws SQLException;
 
-    public void setRegistrationStatus(String studentID);
+    public void addUser(User user)throws SQLException;
 
-    public void deleteChosenCourses();
+    public void removeProf(int profID)throws SQLException;
 
-    public void validateRegistration();
+    public void assignProf(int profID, int courseID) throws SQLException;
 
-    public void approveStudent(String studentId);
+    public void generateReportCard()throws SQLException;
 
-    public List<Professor> viewProfessors();
+    public List<Course> viewCourses() throws SQLException;
 
-    public List<Student> viewPending();
+    public void approveStudent(int studentId) throws SQLException;
+
+    public List<Student> viewUnapprovedStudents() throws SQLException;
 }

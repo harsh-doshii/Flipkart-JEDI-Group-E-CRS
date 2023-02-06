@@ -36,9 +36,9 @@ public class TempData {
     static {
         releaseReportCards = false;
         //populating course catalog
-        courseCatalogue.put(1, new Course(1, "DSA"));
-        courseCatalogue.put(2, new Course(2, "DBMS"));
-        courseCatalogue.put(3, new Course(3, "DAA"));
+        courseCatalogue.put(1, new Course(1, "DSA","kuchbhi"));
+        courseCatalogue.put(2, new Course(2, "DBMS", "kuchbhi"));
+        courseCatalogue.put(3, new Course(3, "DAA", "kuchbhi"));
 
         courseToEnrolledStudents.put(courseCatalogue.get(2), new ArrayList<>());
         courseToEnrolledStudents.put(courseCatalogue.get(3), new ArrayList<>());
