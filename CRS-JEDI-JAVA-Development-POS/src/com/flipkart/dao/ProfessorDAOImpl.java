@@ -19,6 +19,19 @@ public class ProfessorDAOImpl implements ProfessorDAO{
     static final String USER = "root";
     static final String PASS = "root";
     PreparedStatement statement = null;
+
+    private static volatile ProfessorDAOImpl instance = null;
+
+    private ProfessorDAOImpl(){}
+
+    public static ProfessorDAOImpl getInstance() {
+        if (instance == null) {
+            synchronized (ProfessorDAOImpl.class) {
+                instance = new ProfessorDAOImpl();
+            }
+        }
+        return instance;
+    }
         public List<Student> viewStudents(int courseId) throws Exception {
             List<Integer> sidlist = new ArrayList<>();
             List<Student> listofStudents = new ArrayList<>();
