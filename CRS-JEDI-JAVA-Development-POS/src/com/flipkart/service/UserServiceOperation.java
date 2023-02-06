@@ -1,17 +1,43 @@
 package com.flipkart.service;
 import com.flipkart.bean.User;
+import com.flipkart.dao.UserDAOImpl;
 
 public class UserServiceOperation implements UserService{
+
+
+    private static UserServiceOperation instance=null;
+
+    private UserServiceOperation(){
+
+    }
+
+    public static UserServiceOperation getInstance() {
+        if(instance ==null){
+            instance = new UserServiceOperation();
+        }
+        return  instance;
+    }
     @Override
-    public boolean login(String username, String Password) {
-        System.out.println("login successful");
-        return true;
+    public String login(int userId, String Password)  {
+        try {
+           return UserDAOImpl.getInstance().login(userId, Password);
+
+        }
+        catch (Exception e){
+            return "INVALID USER";
+        }
+//       return
     }
 
     @Override
-    public boolean setPassword(String username, String newPassword) {
-        System.out.println("password set");
-        return true;
+    public boolean setPassword(int userId, String oldPass, String newPass) {
+        try {
+            UserDAOImpl.getInstance().updatePassword(userId, oldPass, newPass);
+            return true;
+        }
+        catch (Exception e){
+            return  false;
+        }
     }
 
     @Override
@@ -20,8 +46,13 @@ public class UserServiceOperation implements UserService{
     }
 
     @Override
-    public boolean updatePassword(String userid, String newPassword) {
-        System.out.println("password updated");
-        return true;
+    public boolean updatePassword(int userId, String oldPass, String newPass) {
+        try {
+            UserDAOImpl.getInstance().updatePassword(userId, oldPass, newPass);
+            return true;
+        }
+        catch (Exception e){
+            return  false;
+        }
     }
 }

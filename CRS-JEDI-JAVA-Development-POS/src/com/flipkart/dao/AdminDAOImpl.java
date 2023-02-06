@@ -110,13 +110,16 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void addProf(Professor professor) throws SQLException {
+        int id =-1;
         try {
-            this.addUser(professor);
+            id = this.addUser(professor);
         }catch(Exception e) {
             System.out.println(e.getMessage());
             System.out.println("professor not added: "+ professor.getId());
         }
-
+        if(id==-1){
+            System.out.println("Professor Can't be added.");
+        }
 
         statement = null;
         Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -125,14 +128,13 @@ public class AdminDAOImpl implements AdminDAO {
             String sql = SQLQueries.ADD_PROFESSOR_QUERY;
             statement = conn.prepareStatement(sql);
 
-            statement.setInt(1, professor.getId());
+            statement.setInt(1, id);
             statement.setString(2, professor.getDepartment());
             int row = statement.executeUpdate();
 
-            System.out.println(row + " professor added.");
             if(row == 0) {
                 System.out.println("Professor with professorId: " + professor.getId() + " not added.");
-//                System.out.println("Professor not added.");
+
                 return;
             }
 
@@ -159,16 +161,75 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+
     @Override
-    public void addUser(User user) throws SQLException {
+    public void addStudent(Student student) throws SQLException {
+        int id =-1;
+        try {
+            id = this.addUser(student);
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        if(id==-1){
+            System.out.println("Student Can't be added");
+            return;
+        }
+
         statement = null;
         Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
+        try {
+            Class.forName(JDBC_DRIVER);
+            String sql = SQLQueries.ADD_STUDENT;
+            statement = conn.prepareStatement(sql);
+
+            statement.setInt(1, id);
+            statement.setInt(2, student.getSemester());
+            statement.setString(3,student.getBranch().getName());
+            statement.setString(4, student.getIsApproved());
+            statement.setFloat(5,student.getRemainingPayment());
+
+            int row = statement.executeUpdate();
+
+            if(row == 0) {
+                System.out.println("Student with StudentID: " + student.getId() + " not added.");
+//                System.out.println("Professor not added.");
+                return;
+            }
+
+            System.out.println("Student with StudentID: " + student.getId() + " added.");
+
+        }catch(Exception se) {
+
+            System.out.println(se.getMessage());
+            System.out.println("Student not found");
+
+        }
+        finally {
+            try {
+                conn.close();
+            }
+            catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
+    @Override
+    public int addUser(User user) throws SQLException {
+        statement = null;
+        Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
+        int id = getNewUserID();
         try {
             Class.forName(JDBC_DRIVER);
             String sql = SQLQueries.ADD_USER_QUERY;
             statement = conn.prepareStatement(sql);
 
-            statement.setInt(1, user.getId());
+            statement.setInt(1, id);
             statement.setInt(2, user.getRoleId());
             statement.setString(3, user.getName());
             statement.setString(4, user.getUsername());
@@ -178,13 +239,13 @@ public class AdminDAOImpl implements AdminDAO {
             statement.setString(8, user.getAddress());
             int row = statement.executeUpdate();
 
-            System.out.println(row + " user added.");
             if(row == 0) {
                 System.out.println("User with userId: " + user.getId() + " not added.");
-                return;
+                return -1;
             }
 
             System.out.println("User with userId: " + user.getUsername() + " added.");
+            return id;
 
         }catch(Exception se) {
 
@@ -204,6 +265,7 @@ public class AdminDAOImpl implements AdminDAO {
                 }
             }
         }
+        return -1;
     }
 
     @Override
@@ -505,4 +567,49 @@ public class AdminDAOImpl implements AdminDAO {
         }
         return studentList;
     }
+
+    public int getNewUserID() throws SQLException {
+        Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+        statement = null;
+        try {
+            Class.forName(JDBC_DRIVER);
+            String sql = SQLQueries.GET_CURRENT_ID_VALUE;
+            statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            int currentID = Integer.parseInt(resultSet.getString("variableValue")) +1;
+            sql = SQLQueries.UPDATE_CURRENT_ID_VALUE;
+
+            statement = connection.prepareStatement(sql);
+            statement.setString(1,Integer.toString(currentID));
+            int row = statement.executeUpdate();
+            if(row==0){
+                return -1;
+            }
+            else{
+                return  currentID;
+            }
+        }
+        catch (SQLException se){
+            System.out.println(se.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                connection.close();
+            }
+            catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                try {
+                    throw new SQLException
+                            ();
+                } catch (SQLException
+                        e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        return 0;
+    }
+
+
 }

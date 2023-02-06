@@ -12,6 +12,20 @@ import java.util.List;
 public class ProfessorServiceOperation implements ProfessorService{
 
     ProfessorDAOImpl professorDaoImpl = ProfessorDAOImpl.getInstance();
+
+
+    private static ProfessorServiceOperation instance=null;
+
+    private ProfessorServiceOperation(){
+
+    }
+
+    public static ProfessorServiceOperation getInstance() {
+        if(instance ==null){
+            instance = new ProfessorServiceOperation();
+        }
+        return  instance;
+    }
     @Override
     public List<Course> viewCourses(int profId) {
         List<Course> courses = new ArrayList<>();

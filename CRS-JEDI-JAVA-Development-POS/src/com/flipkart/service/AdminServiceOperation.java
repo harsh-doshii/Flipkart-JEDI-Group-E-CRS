@@ -6,6 +6,9 @@ import com.flipkart.data.TempData;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.dao.AdminDAOImpl;
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,9 +17,21 @@ import java.util.Set;
 public class AdminServiceOperation implements AdminService {
 
 
-    TempData tempData = new TempData();
 
     AdminDAOImpl adminDAOImpl = AdminDAOImpl.getInstance();
+
+    private static AdminServiceOperation instance=null;
+
+    private AdminServiceOperation(){
+
+    }
+
+    public static AdminServiceOperation getInstance() {
+        if(instance ==null){
+            instance = new AdminServiceOperation();
+        }
+        return  instance;
+    }
     @Override
     public void addCourse(Course course) {
 //        TempData.courseCatalogue.put(course.getCourseId(), course);
@@ -27,6 +42,17 @@ public class AdminServiceOperation implements AdminService {
 //            throw e;
         }
     }
+
+    @Override
+    public void addStudent(Student student) {
+       try {
+           adminDAOImpl.addStudent(student);
+       }
+       catch (Exception e) {
+
+       }
+    }
+
 
     @Override
     public void removeCourse(int courseID) {

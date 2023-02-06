@@ -34,6 +34,16 @@ public abstract class User {
         this.dob = dob;
     }
 
+    public User(String name,String gender, String address,String username,String  password,String  dob){
+        this.name = name;
+        this.gender = gender;
+        this.address = address;
+        this.username = username;
+        this.password = password;
+        this.dob = dob;
+
+    }
+
     public String getName() {
         return name;
     }

@@ -1,9 +1,6 @@
 package com.flipkart.service;
 
-import com.flipkart.bean.Course;
-import com.flipkart.bean.GradeCard;
-import com.flipkart.bean.Professor;
-import com.flipkart.bean.Student;
+import com.flipkart.bean.*;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ public interface AdminService {
 
     public void approveStudent(int studentID);
 
-
+    public void addStudent(Student student);
     public List<Professor> viewProfessor();
 
     public List<Student> viewPending();

@@ -17,7 +17,6 @@ public class AdminCRSMenu {
     }
     Scanner scanner = new Scanner(System.in);
 
-    AdminServiceOperation adminServiceOperation = new AdminServiceOperation();
 
     public void displayAdminMenu() {
         while (true) {
@@ -114,7 +113,7 @@ public class AdminCRSMenu {
     }
 
     private Boolean removeProf(int profId) {
-        return adminServiceOperation.removeProfessor(profId);
+        return AdminServiceOperation.getInstance().removeProfessor(profId);
     }
 
     private void logout() {
@@ -122,12 +121,12 @@ public class AdminCRSMenu {
     }
 
     private void generateReport() {
-        adminServiceOperation.generateGradeCard();
+        AdminServiceOperation.getInstance().generateGradeCard();
     }
 
     private void approveStudentRegistration(int studentId) {
-        adminServiceOperation.approveStudent(studentId);
-        //adminServiceOperation.approveStudent();
+        AdminServiceOperation.getInstance().approveStudent(studentId);
+        //AdminServiceOperation.getInstance().approveStudent();
     }
 
     private boolean addProf() {
@@ -140,20 +139,20 @@ public class AdminCRSMenu {
         prof.setId(profId);
         prof.setName(profName);
         prof.setPassword("default");
-        adminServiceOperation.addProfessor(prof);
+        AdminServiceOperation.getInstance().addProfessor(prof);
         System.out.println("List of the Professors after adding this prof : ");
         int cur = 0;
-        for (var pro : adminServiceOperation.viewProfessor()) {
+        for (var pro : AdminServiceOperation.getInstance().viewProfessor()) {
             cur++;
             System.out.print(cur + ".   -->       ");
             System.out.println("id:- " + pro.getId() + "     ||   name:-  " + pro.getName());
         }
         return true;
-        //adminServiceOperation.addProfessor();
+        //AdminServiceOperation.getInstance().addProfessor();
     }
 
     private Boolean removeCourse(int courseId) {
-        adminServiceOperation.removeCourse(courseId);
+        AdminServiceOperation.getInstance().removeCourse(courseId);
         System.out.println("List of the Courses after removing this course : ");
         this.viewCourseCatalogue();
         return true;
@@ -170,7 +169,7 @@ public class AdminCRSMenu {
         Course course = new Course(courseId,courseName, courseDesc);
 //        course.setCourseId(courseId);
 //        course.setCourseName(courseName);
-        adminServiceOperation.addCourse(course);
+        AdminServiceOperation.getInstance().addCourse(course);
         System.out.println("List of the Courses after adding this course : ");
         this.viewCourseCatalogue();
         return true;
@@ -179,7 +178,7 @@ public class AdminCRSMenu {
     private void viewCourseCatalogue() {
         int cur = 0;
         System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
-        for (var crs : adminServiceOperation.viewCourse()) {
+        for (var crs : AdminServiceOperation.getInstance().viewCourse()) {
             cur++;
             System.out.format("%15d %15d %32s\n",cur, crs.getCourseId(), crs.getCourseName());
 //            System.out.println();

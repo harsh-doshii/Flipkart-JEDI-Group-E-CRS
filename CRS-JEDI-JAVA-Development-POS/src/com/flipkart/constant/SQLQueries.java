@@ -23,7 +23,7 @@ public class SQLQueries {
     public static final String ADD_PROFESSOR_QUERY = "insert into Professor(idProfessor, department) values (?, ?)";
     public static final String DELETE_PROFESSOR_QUERY = "delete from Professor where idProfessor = ?";
     public static final String ASSIGN_COURSE_QUERY = "update Course set idProfessor = ? where idCourse = ?";
-    public static final String ADD_STUDENT="insert into Student (id,branch,batchYear,paymentIsDone) values (?,?,?,?)";
+    public static final String ADD_STUDENT="insert into Student (idStudent,semester,branch,isApproved, remainingPayment) values (?,?,?,?, ?)";
     public static final String DELETE_STUDENT_QUERY = "delete from Student where id = ?";
     public static final String DELETE_USER_QUERY = "delete from User where userId = ?";
     public static final String DELETE_REGISTERED_COURSE_QUERY = "delete from RegisteredCourse where idCourse = ?";
@@ -68,6 +68,11 @@ public class SQLQueries {
     public static final String SELECT_ALL_NOTIFICATIONS = "select * from Notification";
 
     public static final String RELEASE_GRADE_CARD = "UPDATE SystemVariable set variableValue = 'true' where variableName='releaseReportCard'";
+
+
+    public static final String GET_CURRENT_ID_VALUE = "select variableValue from SystemVariable where variableName = 'count'";
+    public static final String UPDATE_CURRENT_ID_VALUE = "UPDATE SystemVariable set variableValue = ? where variableName = 'count'";
+
     /*
     * Started writing my commands from here -- aman.
     * */

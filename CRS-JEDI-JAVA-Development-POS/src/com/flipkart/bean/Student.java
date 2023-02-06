@@ -9,6 +9,15 @@ public class Student extends User{
     private int semester;
     private List coursesEnrolled;
 
+    public String getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(String isApproved) {
+        this.isApproved = isApproved;
+    }
+
+    private String isApproved;
     private String name;
 
     private List preferenceList;
@@ -33,6 +42,12 @@ public class Student extends User{
         this.semester = semester;
         this.coursesEnrolled = coursesEnrolled;
         this.preferenceList = preferenceList;
+    }
+
+    public Student(String name, String gender, String address, String username, String password, String dob, String branch) {
+        super(name, gender, address, username, password, dob);
+        this.branch = new Branch(branch);
+        this.name = name;
     }
 
     public int getStudentId() {

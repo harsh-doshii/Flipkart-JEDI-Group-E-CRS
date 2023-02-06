@@ -19,7 +19,7 @@ public interface AdminDAO {
 
     public void addProf(Professor professor)throws SQLException;
 
-    public void addUser(User user)throws SQLException;
+    public int addUser(User user)throws SQLException;
 
     public void removeProf(int profID)throws SQLException;
 
@@ -28,9 +28,14 @@ public interface AdminDAO {
     public void generateReportCard()throws SQLException;
     public List<Professor> viewProfessors() throws  SQLException;
 
+    public void addStudent(Student student) throws SQLException;
+
     public List<Course> viewCourses() throws SQLException;
 
     public void approveStudent(int studentId) throws SQLException;
 
     public List<Student> viewUnapprovedStudents() throws SQLException;
+
+
+    public int getNewUserID() throws SQLException;
 }

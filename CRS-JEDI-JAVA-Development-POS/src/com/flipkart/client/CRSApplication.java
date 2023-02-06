@@ -2,8 +2,12 @@ package com.flipkart.client;
 
 import com.flipkart.bean.Branch;
 import com.flipkart.bean.Student;
+import com.flipkart.dao.UserDAOImpl;
 import com.flipkart.data.TempData;
+import com.flipkart.service.AdminServiceOperation;
 import com.flipkart.service.StudentServiceOperation;
+import com.flipkart.service.UserService;
+import com.flipkart.service.UserServiceOperation;
 
 import java.util.Scanner;
 public class CRSApplication {
@@ -55,8 +59,8 @@ public class CRSApplication {
 
         System.out.println("Password: ");
         String password = scanner.next();
-        if(TempData.userDatabase.containsKey(userId) && TempData.userDatabase.get(userId).getPassword().equals(password)){
-            String role = TempData.userDatabase.get(userId).getRole();
+        String role = UserServiceOperation.getInstance().login(userId, password);
+        if(!role.equals("INVALID USER")){
             switch(role) {
                 case "student" :
                 case "Student" :
@@ -89,7 +93,7 @@ public class CRSApplication {
         }
         else{
             System.out.println("No user found!");
-            return;
+
         }
 
     }
@@ -105,29 +109,29 @@ public class CRSApplication {
         String username = scanner.next();
         System.out.println("Enter new password");
         String password = scanner.next();
-        int id = 10000 + TempData.isStudentApproved.size()+1;
         String role = "student";
         System.out.println("Enter dob");
         String dob = scanner.next();
-        System.out.println("Enter student branch id");
-        String branchId = scanner.next();
-        Branch branch = TempData.idToBranch.get(branchId);
+        System.out.println("Enter student branch Name");
+        String branchName = scanner.next();
 
+        Student student = new Student(name, gender, address,username,password,dob, branchName);
 
-
-        if(branch==null) {
-            System.out.println("Please enter valid branch id");
-        }
-        else
-        {
-//            int semester = 1;
-//            Student student = new Student(name,gender,address,username,password,id,role,dob,branch,semester,null,null);
+        AdminServiceOperation.getInstance().addStudent(student);
 //
-//            StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
-//            studentServiceOperation.signUp(student);
-//            System.out.println("Your user id is " + id);
-//            System.out.println("Please use this id to login");
-        }
+//        if(branch==null) {
+//            System.out.println("Please enter valid branch id");
+//        }
+//        else
+//        {
+////            int semester = 1;
+////            Student student = new Student(name,gender,address,username,password,id,role,dob,branch,semester,null,null);
+////
+////            StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
+////            studentServiceOperation.signUp(student);
+////            System.out.println("Your user id is " + id);
+////            System.out.println("Please use this id to login");
+//        }
 
     }
 
@@ -136,13 +140,13 @@ public class CRSApplication {
         int userId = scanner.nextInt();
         System.out.println("Enter old Password: ");
         String oldPassword = scanner.next();
-        if(TempData.userDatabase.containsKey(userId) && TempData.userDatabase.get(userId).getPassword().equals(oldPassword)){
-            System.out.println("Enter new Password: ");
-            String password = scanner.next();
-            TempData.userDatabase.get(userId).setPassword(password);
+        System.out.println("Enter new Password: ");
+        String newPassword = scanner.next();
+        if(UserServiceOperation.getInstance().updatePassword(userId, oldPassword,newPassword)){
+            System.out.println("Password Updated Successfully");
         }
         else{
-            System.out.println("sorry bro");
+            System.out.println("Invalid Old Password");
         }
     }
     private static void loginMain(String userId, String password) {

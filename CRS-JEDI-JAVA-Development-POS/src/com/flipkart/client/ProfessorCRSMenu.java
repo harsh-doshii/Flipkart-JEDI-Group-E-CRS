@@ -20,7 +20,7 @@ public class ProfessorCRSMenu {
         this.professorID = profId;
     }
     Scanner scanner = new Scanner(System.in);
-    ProfessorServiceOperation professorServiceOperation = new ProfessorServiceOperation();
+    ProfessorServiceOperation professorServiceOperation = ProfessorServiceOperation.getInstance();
 
     public void displayMenu() {
         // Display the options available for the Professor
