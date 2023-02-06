@@ -18,6 +18,17 @@ public class Student extends User{
     }
 
     private String isApproved;
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private String name;
 
     private List preferenceList;

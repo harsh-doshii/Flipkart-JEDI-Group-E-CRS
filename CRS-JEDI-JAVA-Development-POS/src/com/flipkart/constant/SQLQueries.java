@@ -33,7 +33,7 @@ public class SQLQueries {
     public static final String VIEW_PROFESSOR_QUERY = "select idProfessor from Professor";
 
 
-    public static final String VIEW_PENDING_STUDENTS = "select idStudent from Student where isApproved = 0";
+    public static final String VIEW_PENDING_STUDENTS = "select idStudent from Student where isApproved = false";
 
     public static final String GET_STUDENT_NAME = "select name from User where userId = ?";
     // StudentDao Queries

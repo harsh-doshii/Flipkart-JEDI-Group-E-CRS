@@ -3,9 +3,11 @@ package com.flipkart.client;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.GradeCard;
 import com.flipkart.bean.Professor;
+import com.flipkart.bean.Student;
 import com.flipkart.data.TempData;
 import com.flipkart.service.AdminServiceOperation;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -76,29 +78,33 @@ public class AdminCRSMenu {
                     System.out.println("Students to be approved : ");
                     System.out.println("##########################");
                     System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
-                    int count = 0;
-                    int cur = 0;
-                    for(Map.Entry<Integer, Boolean> entry : TempData.isStudentApproved.entrySet()) {
-                        cur++;
-                        if(!entry.getValue()) {
-                            count++;
-                            System.out.format("%15d %15d %32s\n",
-                                    cur,
-                                    TempData.idToStudent.get(entry.getKey()).getId(),
-                                    TempData.idToStudent.get(entry.getKey()).getName()
-                            );
-                        }
-
+                    List<Student> student = AdminServiceOperation.getInstance().viewPending();
+                    for(var data : student){
+                        System.out.println(data.getName());
                     }
-                    System.out.println("##########################");
-                    if(count!=0) {
-                        System.out.println("Enter the id of student to approve");
-                        int studentId = scanner.nextInt();
-                        approveStudentRegistration(studentId);
-                    }
-                    else {
-                        System.out.println("No students to approve");
-                    }
+//                    int count = 0;
+//                    int cur = 0;
+//                    for(Map.Entry<Integer, Boolean> entry : TempData.isStudentApproved.entrySet()) {
+//                        cur++;
+//                        if(!entry.getValue()) {
+//                            count++;
+//                            System.out.format("%15d %15d %32s\n",
+//                                    cur,
+//                                    TempData.idToStudent.get(entry.getKey()).getId(),
+//                                    TempData.idToStudent.get(entry.getKey()).getName()
+//                            );
+//                        }
+//
+//                    }
+//                    System.out.println("##########################");
+//                    if(count!=0) {
+//                        System.out.println("Enter the id of student to approve");
+//                        int studentId = scanner.nextInt();
+//                        approveStudentRegistration(studentId);
+//                    }
+//                    else {
+//                        System.out.println("No students to approve");
+//                    }
                     break;
 
                 case 7:

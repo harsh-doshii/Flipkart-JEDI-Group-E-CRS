@@ -536,13 +536,14 @@ public class AdminDAOImpl implements AdminDAO {
             String sql = SQLQueries.VIEW_PENDING_STUDENTS;
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-
             while (resultSet.next()) {
                 int idStudent = resultSet.getInt("idStudent");
                 String sql2 = SQLQueries.GET_STUDENT_NAME;
                 statement = connection.prepareStatement(sql2);
                 statement.setInt(1,idStudent);
                 ResultSet resultSet2 = statement.executeQuery();
+                resultSet2.next();
+//                System.out.println(resultSet2.getString("name"));
                 Student student = new Student(idStudent,resultSet2.getString("name"));
                 studentList.add(student);
             }

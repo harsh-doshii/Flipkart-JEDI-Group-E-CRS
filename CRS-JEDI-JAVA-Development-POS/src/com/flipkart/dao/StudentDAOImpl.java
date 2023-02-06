@@ -28,7 +28,7 @@ public class StudentDAOImpl implements StudentDAO {
     static final String USER = "root";
 
     // Enter your passwords here.
-    static final String PASS = "root";
+    static final String PASS = "Root@123";
     public static StudentDAOImpl getInstance() {
         if (instance == null) {
             instance = new StudentDAOImpl();
@@ -152,9 +152,9 @@ public class StudentDAOImpl implements StudentDAO {
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet totalCourses = statement.executeQuery();
-            Set<Course> addedCourses = new HashSet<>();
+            Set<Integer> addedCourses = new HashSet<>();
             while (totalCourses.next()) {
-                addedCourses.add(new Course(totalCourses.getInt("idCourse")));
+                addedCourses.add(totalCourses.getInt("idCourse"));
             }
             if (addedCourses != null && addedCourses.size() > 0) {
                 if (!addedCourses.contains(courseId)) {
