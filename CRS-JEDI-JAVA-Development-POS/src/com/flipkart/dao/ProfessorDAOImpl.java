@@ -54,6 +54,20 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             }
             catch(Exception e) {
 
+            } finally {
+                try {
+                    conn.close();
+                }
+                catch(SQLException ex){
+                    System.out.println(ex.getMessage());
+                    try {
+                        throw new SQLException
+                                ();
+                    } catch (SQLException
+                            e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
             }
             return listofStudents;
     }
@@ -73,6 +87,20 @@ public class ProfessorDAOImpl implements ProfessorDAO{
                 int r = statement.executeUpdate();
             } catch (Exception e){
 
+            }finally {
+                try {
+                    conn.close();
+                }
+                catch(SQLException ex){
+                    System.out.println(ex.getMessage());
+                    try {
+                        throw new SQLException
+                                ();
+                    } catch (SQLException
+                            e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
             }
             return false;
     }
@@ -91,6 +119,20 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             int r = statement.executeUpdate();
         } catch (Exception e){
 
+        }finally {
+            try {
+                conn.close();
+            }
+            catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                try {
+                    throw new SQLException
+                            ();
+                } catch (SQLException
+                        e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         }
     }
 
@@ -111,7 +153,21 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             }
         } catch (Exception e){
 
-        }
+        }finally {
+                try {
+                    conn.close();
+                }
+                catch(SQLException ex){
+                    System.out.println(ex.getMessage());
+                    try {
+                        throw new SQLException
+                                ();
+                    } catch (SQLException
+                            e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
         return courseList;
     }
 
