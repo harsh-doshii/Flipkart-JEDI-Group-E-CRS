@@ -10,12 +10,10 @@ public class SQLQueries {
 
 
     //ProfessorDao queries
-    public static final String GET_PROFESSOR_DETAILS_QUERY = "select * from Professors where id = ?";
-    public static final String GET_PROFESSOR_NAME = "select name from User where id = ?";
     public static final String ADD_GRADE = "update RegisteredCourse set grade=? where idCourse=? and idStudent=?";
     public static final String GET_ENROLLED_STUDENTS = "select * from RegisteredCourse where idCourse=?";
-    //	public static final String GET_ENROLLED_STUDENTS = "select users.id, users.name from ((registeredcourse inner join users on users.id=registeredcourse.idStudent) inner join Course on registeredcourse.idCourse=Course.idCourse) where idProfessor=?, idCourse=?";
     public static final String GET_COURSES = "select * from Course where idProfessor=?";
+    public static final String SIGN_UP_PROF = "update Course set idProfessor=? where idCourse=?";
 
     //AdminDao Queries
     public static final String GET_ADMIN_DETAILS_QUERY = "select * from admins where id = ?";
