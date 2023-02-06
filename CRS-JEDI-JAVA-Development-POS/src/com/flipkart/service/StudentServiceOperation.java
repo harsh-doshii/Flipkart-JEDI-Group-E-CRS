@@ -33,108 +33,151 @@ public class StudentServiceOperation implements StudentService {
     }
 
     public Boolean addCourse(int studentId, int courseId) {
-        if (TempData.studentToCoursePreferenceList.get(studentId) == null) {
-            TempData.studentToCoursePreferenceList.put(studentId, new HashSet<>());
+//        if (TempData.studentToCoursePreferenceList.get(studentId) == null) {
+//            TempData.studentToCoursePreferenceList.put(studentId, new HashSet<>());
+//        }
+//        TempData.studentToCoursePreferenceList.get(studentId).add(courseId);
+//        return true;
+        try {
+            return StudentDAOImpl.getInstance().addCourse(studentId, courseId);
         }
-        TempData.studentToCoursePreferenceList.get(studentId).add(courseId);
-        return true;
+        catch (Exception e){
+            return false;
+        }
     }
 
     public Boolean dropCourse(int studentId, int courseId) {
-        if(TempData.studentToRegisteredCourseList.get(studentId).contains(courseId)) {
-            TempData.studentToRegisteredCourseList.get(studentId).remove(courseId);
-            return true;
+//        if(TempData.studentToRegisteredCourseList.get(studentId).contains(courseId)) {
+//            TempData.studentToRegisteredCourseList.get(studentId).remove(courseId);
+//            return true;
+//        }
+//        return false;
+        try {
+            return StudentDAOImpl.getInstance().dropCourse(studentId, courseId);
         }
-        return false;
+        catch (Exception e){
+            return false;
+        }
     }
 
     public List<RegisteredCourse> viewGrades(int studentId) {
         List<RegisteredCourse> registeredCourses = new ArrayList<>();
-        if (TempData.releaseReportCards == false) {
-            System.out.println("Grade not released yet;)");
+//        if (TempData.releaseReportCards == false) {
+//            System.out.println("Grade not released yet;)");
+//            return registeredCourses;
+//        }
+//        if (TempData.studentToRegisteredCourseList.get(studentId) == null) return registeredCourses;
+//        for(var cur : TempData.studentToRegisteredCourseList.get(studentId)) {
+//            registeredCourses.add(cur);
+//        }
+        try {
+            return StudentDAOImpl.getInstance().viewGrades(studentId);
+        }
+        catch (Exception e){
             return registeredCourses;
+
         }
-        if (TempData.studentToRegisteredCourseList.get(studentId) == null) return registeredCourses;
-        for(var cur : TempData.studentToRegisteredCourseList.get(studentId)) {
-            registeredCourses.add(cur);
-        }
-        return registeredCourses;
     }
 
     public void registerCourses(int studentID) {
-        int semester = 1;
-        Student student = TempData.idToStudent.get(studentID);
-        if (TempData.studentToCoursePreferenceList.get(studentID) == null) {
-            System.out.println("Your preference list is empty, add courses first and then register");
-            return;
+//        int semester = 1;
+//        Student student = TempData.idToStudent.get(studentID);
+//        if (TempData.studentToCoursePreferenceList.get(studentID) == null) {
+//            System.out.println("Your preference list is empty, add courses first and then register");
+//            return;
+//        }
+//        if (TempData.studentToRegisteredCourseList.get(studentID) == null) {
+//            TempData.studentToRegisteredCourseList.put(studentID, new HashSet<RegisteredCourse>());
+//        }
+//        for (int courseId : TempData.studentToCoursePreferenceList.get(studentID)) {
+//            Course course = TempData.courseCatalogue.get(courseId);
+//            if (TempData.courseToEnrolledStudents.get(courseId) == null) {
+//                TempData.courseToEnrolledStudents.put(course, new ArrayList<>());
+//            }
+//            if (TempData.studentToRegisteredCourseList.get(studentID).size() == 4) continue;
+//            if (TempData.courseToEnrolledStudents.get(course).size() < 10) {
+//                TempData.courseToEnrolledStudents.get(course).add(student);
+//                RegisteredCourse registeredCourse = new RegisteredCourse(course, student, semester);
+//                TempData.studentToRegisteredCourseList.get(studentID).add(registeredCourse);
+//            }
+//        }
+//        System.out.println("According to your preferences and availability of the courses, you are enrolled in the following courses");
+//        int count = 0;
+//        for (RegisteredCourse course : TempData.studentToRegisteredCourseList.get(studentID)) {
+//            count++;
+//            System.out.println(count + ".     " + course.getCourse().getCourseName());
+//        }
+//        float totalFee = (float) 10000 * count;
+//        TempData.remainingPayment.put(studentID, totalFee);
+        try {
+             StudentDAOImpl.getInstance().registerCourses(studentID);
         }
-        if (TempData.studentToRegisteredCourseList.get(studentID) == null) {
-            TempData.studentToRegisteredCourseList.put(studentID, new HashSet<RegisteredCourse>());
+        catch (Exception e){
+
         }
-        for (int courseId : TempData.studentToCoursePreferenceList.get(studentID)) {
-            Course course = TempData.courseCatalogue.get(courseId);
-            if (TempData.courseToEnrolledStudents.get(courseId) == null) {
-                TempData.courseToEnrolledStudents.put(course, new ArrayList<>());
-            }
-            if (TempData.studentToRegisteredCourseList.get(studentID).size() == 4) continue;
-            if (TempData.courseToEnrolledStudents.get(course).size() < 10) {
-                TempData.courseToEnrolledStudents.get(course).add(student);
-                RegisteredCourse registeredCourse = new RegisteredCourse(course, student, semester);
-                TempData.studentToRegisteredCourseList.get(studentID).add(registeredCourse);
-            }
-        }
-        System.out.println("According to your preferences and availability of the courses, you are enrolled in the following courses");
-        int count = 0;
-        for (RegisteredCourse course : TempData.studentToRegisteredCourseList.get(studentID)) {
-            count++;
-            System.out.println(count + ".     " + course.getCourse().getCourseName());
-        }
-        float totalFee = (float) 10000 * count;
-        TempData.remainingPayment.put(studentID, totalFee);
     }
-    public boolean signUp(Student student) {
-        TempData.idToStudent.put(student.getId(), student);
-        TempData.isStudentApproved.put(student.getId(), false);
-        return true;
-    }
+//    public boolean signUp(Student student) {
+//        TempData.idToStudent.put(student.getId(), student);
+//        TempData.isStudentApproved.put(student.getId(), false);
+//        return true;
+//    }
 
     public boolean isApproved(int studentId) {
         return TempData.isStudentApproved.get(studentId);
     }
 
-    public List<RegisteredCourse> viewRegisteredCourse(int studentID) {
-        List<RegisteredCourse> registeredCourseList = new ArrayList<>();
-        for (var cur : TempData.studentToRegisteredCourseList.get(studentID)) {
-            registeredCourseList.add(cur);
+    public List<Integer> viewRegisteredCourse(int studentId) {
+        List<Integer> registeredCourseList = new ArrayList<>();
+//        for (var cur : TempData.studentToRegisteredCourseList.get(studentID)) {
+//            registeredCourseList.add(cur);
+//        }
+//        return registeredCourseList;
+        try {
+            return StudentDAOImpl.getInstance().viewRegisteredCourses(studentId);
         }
-        return registeredCourseList;
+        catch (Exception e){
+            return registeredCourseList;
+
+        }
     }
 
-    public boolean isRegistrationDone(int studentID) {
-        return TempData.isStudentApproved.containsKey(studentID);
-    }
+//    public boolean isRegistrationDone(int studentID) {
+//        return TempData.isStudentApproved.containsKey(studentID);
+//
+//    }
 
-    @Override
-    public boolean isPaymentDone(int studentID) {
-        return false;
-    }
+//    @Override
+//    public boolean isPaymentDone(int studentID) {
+//        return false;
+//    }
 
     @Override
     public float calculateFee(int studentID) {
-        return TempData.remainingPayment.get(studentID);
+        try {
+            return StudentDAOImpl.getInstance().calculateRemainingFee(studentID);
+        }
+        catch (Exception e){
+            return -1;
+        }
     }
 
     @Override
     public void payFee(int studentID, float amount) {
-        float amountRemaining = TempData.remainingPayment.get(studentID);
-        if (amountRemaining < amount) {
-            System.out.println("You reaming pay is :" + amountRemaining);
-            return;
+//        float amountRemaining = TempData.remainingPayment.get(studentID);
+//        if (amountRemaining < amount) {
+//            System.out.println("You reaming pay is :" + amountRemaining);
+//            return;
+//        }
+//        TempData.remainingPayment.put(studentID, amountRemaining - amount);
+//        System.out.println("You have successfully paid " + amount);
+//        float remainingFee = TempData.remainingPayment.get(studentID);
+//        System.out.println("Remaining Fee " + remainingFee);
+        try {
+            StudentDAOImpl.getInstance().makePayment(studentID, amount);
         }
-        TempData.remainingPayment.put(studentID, amountRemaining - amount);
-        System.out.println("You have successfully paid " + amount);
-        float remainingFee = TempData.remainingPayment.get(studentID);
-        System.out.println("Remaining Fee " + remainingFee);
+        catch (Exception e){
+
+        }
     }
 
 }

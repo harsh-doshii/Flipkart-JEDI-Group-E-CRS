@@ -16,17 +16,17 @@ public interface StudentService {
 
     public List<RegisteredCourse> viewGrades(int studentId);
 
-    public boolean signUp(Student student) ;
+//    public boolean signUp(Student student) ;
 
     public void registerCourses(int studentId);
 
-    public boolean isApproved(int studentId) ;
+//    public boolean isApproved(int studentId) ;
 
-    public List<RegisteredCourse> viewRegisteredCourse(int studentID);
+    public List<Integer> viewRegisteredCourse(int studentID);
 
-    public boolean isRegistrationDone(int studentID);
-
-    public boolean isPaymentDone(int studentID);
+//    public boolean isRegistrationDone(int studentID);
+//
+//    public boolean isPaymentDone(int studentID);
 
     public float calculateFee(int studentID);
 
