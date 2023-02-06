@@ -119,7 +119,10 @@ public class ProfessorCRSMenu {
         int gradeValue = scanner.nextInt();
         Grade grade = TempData.integerToGrade.get(gradeValue);
 
-        professorServiceOperation.assignGrade(studentId, courseId, grade);
+        System.out.println("Enter Semester");
+        int sem = scanner.nextInt();
+
+        professorServiceOperation.assignGrade(studentId, courseId, grade,sem);
 
     }
 

@@ -47,9 +47,9 @@ public class ProfessorServiceOperation implements ProfessorService{
     }
 
     @Override
-    public boolean assignGrade(int studentId, int courseId, Grade grade) {
+    public boolean assignGrade(int studentId, int courseId, Grade grade, int sem) {
         try{
-            professorDaoImpl.assignGrade(studentId, courseId, grade);
+            professorDaoImpl.assignGrade(studentId, courseId, grade, sem);
             return true;
         } catch(Exception e){}
         return false;

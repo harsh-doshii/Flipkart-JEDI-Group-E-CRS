@@ -72,18 +72,19 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             return listofStudents;
     }
 
-    public boolean assignGrade(int studentId, int courseId, Grade grade) throws Exception{
+    public boolean assignGrade(int studentId, int courseId, Grade grade, int sem) throws Exception{
             try{
                 //Changing ResgistereCourse table
                 Class.forName("com.mysql.jdbc.Driver");
                 statement = null;
                 Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
                 String sql = SQLQueries.ADD_GRADE;
-                //ADD_GRADE = "update RegisteredCourse set grade=? where idCourse=? and idStudent=?";
+                //ADD_GRADE = "update RegisteredCourse set grade=? where idCourse=? and idStudent=? and sem=?";
                 statement = conn.prepareStatement(sql);
                 statement.setObject(1, grade);
                 statement.setInt(2, courseId);
                 statement.setInt(3, studentId);
+                statement.setInt(3, sem);
                 int r = statement.executeUpdate();
                 if(r!=1){
                     throw new Exception();
