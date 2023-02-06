@@ -4,6 +4,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
 import com.flipkart.data.TempData;
+import com.flipkart.service.StudentService;
 import com.flipkart.service.StudentServiceOperation;
 
 import java.awt.*;
@@ -13,7 +14,7 @@ public class StudentCRSMenu {
 
     private int studentID;
 
-    StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
+    StudentService studentServiceOperation = StudentServiceOperation.getInstance();
     Scanner sc = new Scanner(System.in);
 
     public StudentCRSMenu(Integer studentID){
@@ -86,14 +87,17 @@ public class StudentCRSMenu {
     }
 
     private void viewCourseCatalogue(){
-        int cur = 0;
-        System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
-        for (var crs : studentServiceOperation.viewCourseCatalouge()) {
-            cur++;
-            System.out.format("%15d %15d %32s\n",cur, crs.getCourseId(), crs.getCourseName());
-//            System.out.println();
+        // have to add here number of available seats.
+        try {
+            int cur = 0;
+            System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
+            for (var crs : studentServiceOperation.viewCourseCatalouge()) {
+                cur++;
+                System.out.format("%15d %15d %32s\n",cur, crs.getCourseId(), crs.getCourseName());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-//        System.out.printf("view course");
     }
 
     private void viewGrades(){

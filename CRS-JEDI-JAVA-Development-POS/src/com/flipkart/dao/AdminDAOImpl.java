@@ -17,6 +17,6 @@ public class AdminDAOImpl {
 
     public void addProfessor(Professor professor){
         statement = null;
-        Connection conn = DBUtil.getConnection();
+        //Connection conn = DBUtil.getConnection();
     }
 }
