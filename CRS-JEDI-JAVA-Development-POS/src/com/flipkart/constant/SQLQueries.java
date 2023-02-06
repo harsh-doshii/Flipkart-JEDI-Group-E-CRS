@@ -32,8 +32,12 @@ public class SQLQueries {
     public static final String GET_STUDENT_GRADES = "select * from RegisteredCourse where idStudent = ?";
     public static final String APPROVE_STUDENT_QUERY = "update Student set isApproved = 1 where idStudent = ?";
     public static final String IS_APPROVED_STUDENT_QUERY = "select isApproved from Student where idStudent = ?";
-    public static final String VIEW_PROFESSOR_QUERY = "select idProfessor from Professors";
+    public static final String VIEW_PROFESSOR_QUERY = "select idProfessor from Professor";
+
+
     public static final String VIEW_PENDING_STUDENTS = "select idStudent from Student where isApproved = 0";
+
+    public static final String GET_STUDENT_NAME = "select name from User where userId = ?";
     // StudentDao Queries
     public static final String GET_STUDENT_DETAILS_QUERY = "select * from Student where idStudent = ?";
 
@@ -43,7 +47,7 @@ public class SQLQueries {
     public static final String SET_FILLED_SEATS="update Course set filledSeats=? where idCourse=?";
 
     //RegisteredCourse Queries
-    public static final String GET_REGISTERED_COURSE_DETAILS="select * from RegistedCourse where idStudent = ?";
+    public static final String GET_REGISTERED_COURSE_DETAILS="select * from RegisteredCourse where idStudent = ?";
     public static final String CLEAR_CHOSEN_COURSES = "delete from PreferenceList";
     public static final String CHOOSE_COURSE = "insert into PreferenceList (idStudent,idCourse,isPrimary) values (?,?,?)";
     public static final String VIEW_PREFERRED_COURSES = "select * from PreferenceList where isPrimary=true";
@@ -53,7 +57,6 @@ public class SQLQueries {
     public static final String DROP_COURSE = "delete from RegisteredCourse where idCourse = ? AND idStudent = ?;";
     public static final String INCREMENT_COURSE_SEATS  = "update Course set filledSeats = filledSeats+1 where  idCourse = ?;";
     public static final String VIEW_REGISTERED_COURSES=" select * from Course inner join RegisteredCourse on Course.idCourse = RegisteredCourse.idCourse where RegisteredCourse.idStudent = ?";
-//    public static final String SET_REGISTRATION_STATUS="update Student set isApproved = true  where id = ?";
     public static final String GET_REGISTRATION_STATUS="select isRegistered from Student where id = ?";
     public static final String GET_PAYMENT_STATUS = "select paymentIsDone from Student where id = ?";
     public static final String SET_PAYMENT_STATUS = "update Student set paymentIsDone = true  where id = ?";
@@ -67,4 +70,37 @@ public class SQLQueries {
     public static final String SELECT_ALL_NOTIFICATIONS = "select * from Notification";
 
     public static final String RELEASE_GRADE_CARD = "UPDATE SystemVariable set variableValue = 'true' where variableName='releaseReportCard'";
+    /*
+    * Started writing my commands from here -- aman.
+    * */
+
+    public static final String SELECT_ALL_COURSES_FOR_A_STUDENT = "select * from PreferenceList where idStudent = ?";
+
+    public static final String ADD_COURSE_FOR_A_STUDENT = "insert into PreferenceList (idStudent, idCourse) values (?, ?)";
+
+    public static final String DROP_COURSE_FOR_A_STUDENT = "delete from PreferenceList where idStudent = ? AND idCourse = ?";
+
+    public static final String GET_REMAINING_PAY_FOR_A_STUDENT = "select remainingPayment from Student where idStudent = ?";
+
+    public static final String SELECT_ALL_REG_STUDENTS_FOR_A_COURSE = "select * from RegisteredCourse where idCourse = ?";
+
+    public static final String SELECT_ALL_REG_COURSES_FOR_A_STUDENT = "select * from RegisteredCourse where idStudent = ?";
+
+    public static final String REG_COURSE_FOR_A_STUDENT = "insert into RegisteredCourse (idStudent, idCourse, grade, semester) values (?, ?, ?, ?)";
+
+    public static final String GET_STUDENT_FROM_ID = "select * from Student where isStudent = ?";
+
+    public static final String GET_COURSE_FROM_ID = "select * from Course where isCourse = ?";
+
+    //public static final String GET_REMAINING_PAY_FOR_A_STUDENT = "select * fro Student where idStudent = ?";
+
+    public static final String UPDATE_AMOUNT_FOR_A_STUDENT = "update Student set remainingPayment = ? where idStudent = ?";
+
+    public static final String GET_USER_FROM_USER_ID = "select * from User where userId = ?";
+
+    public static final String GET_ROLE_FROM_ROLE_ID = "select roleName from Role where idRole = ?";
+
+    public static final String UPDATE_USER_PASSWORD = "update User set password = ? where userId = ? ";
 }
+
+

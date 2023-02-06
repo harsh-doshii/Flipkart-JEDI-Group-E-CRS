@@ -7,6 +7,9 @@ public class Professor extends User{
     private String department;
     private List courseList;
 
+    private String name;
+    private int id;
+
     public Professor() {
     }
 
@@ -14,6 +17,11 @@ public class Professor extends User{
         super(name, gender, address, username, password, id, role, dob);
         this.department = department;
         this.courseList = courseList;
+    }
+
+    public Professor(int id, String name){
+        this.id = id;
+        this.name = name;
     }
 
     public String getDepartment() {

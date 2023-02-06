@@ -15,6 +15,10 @@ public class Grade {
         this.gradeValue = gradeValue;
     }
 
+    public Grade(int gradeValue) {
+        this.gradeValue = gradeValue;
+    }
+
     public String getGrade() {
         return grade;
     }

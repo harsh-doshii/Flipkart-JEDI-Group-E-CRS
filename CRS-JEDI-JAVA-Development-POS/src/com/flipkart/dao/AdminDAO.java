@@ -26,6 +26,7 @@ public interface AdminDAO {
     public void assignProf(int profID, int courseID) throws SQLException;
 
     public void generateReportCard()throws SQLException;
+    public List<Professor> viewProfessors() throws  SQLException;
 
     public List<Course> viewCourses() throws SQLException;
 

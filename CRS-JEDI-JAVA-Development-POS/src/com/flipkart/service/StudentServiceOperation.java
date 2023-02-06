@@ -3,18 +3,33 @@ package com.flipkart.service;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
+import com.flipkart.dao.StudentDAO;
+import com.flipkart.dao.StudentDAOImpl;
 import com.flipkart.data.TempData;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class StudentServiceOperation implements StudentService {
-    public List<Course> viewCourseCatalouge()
-    {
-        List<Course> coursesList = new ArrayList<Course>();
-        for (Map.Entry<Integer, Course> cur : TempData.courseCatalogue.entrySet()) {
-            coursesList.add(cur.getValue());
+
+    private static StudentServiceOperation instance = null;
+
+    private StudentServiceOperation (){}
+    public static StudentServiceOperation getInstance() {
+        if (instance == null) {
+                instance = new StudentServiceOperation();
         }
-        return coursesList;
+        return instance;
+    }
+    public List<Course> viewCourseCatalouge() throws SQLException
+    {
+//        List<Course> coursesList = new ArrayList<Course>();
+//        for (Map.Entry<Integer, Course> cur : TempData.courseCatalogue.entrySet()) {
+//            coursesList.add(cur.getValue());
+//        }
+//        return coursesList;
+        StudentDAO studentDAOInterface = StudentDAOImpl.getInstance();
+        return studentDAOInterface.getCourseCatalogue();
     }
 
     public Boolean addCourse(int studentId, int courseId) {

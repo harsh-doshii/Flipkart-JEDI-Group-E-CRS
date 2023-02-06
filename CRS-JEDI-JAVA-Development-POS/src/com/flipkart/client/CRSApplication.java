@@ -120,13 +120,13 @@ public class CRSApplication {
         }
         else
         {
-            int semester = 1;
-            Student student = new Student(name,gender,address,username,password,id,role,dob,branch,semester,null,null);
-
-            StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
-            studentServiceOperation.signUp(student);
-            System.out.println("Your user id is " + id);
-            System.out.println("Please use this id to login");
+//            int semester = 1;
+//            Student student = new Student(name,gender,address,username,password,id,role,dob,branch,semester,null,null);
+//
+//            StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
+//            studentServiceOperation.signUp(student);
+//            System.out.println("Your user id is " + id);
+//            System.out.println("Please use this id to login");
         }
 
     }

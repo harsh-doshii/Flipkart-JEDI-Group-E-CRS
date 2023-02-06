@@ -3,11 +3,29 @@ package com.flipkart.bean;
 import java.util.List;
 
 public class Student extends User{
+
+    private int studentId;
     private Branch branch;
     private int semester;
     private List coursesEnrolled;
 
+    private String name;
+
     private List preferenceList;
+
+    private float remainingPayment;
+
+    public Student(int studentId, String name){
+        this.studentId = studentId;
+        this.name = name;
+    }
+
+    public Student(int studentId, int semester, float remainingPayment) {
+        this.studentId = studentId;
+        this.setId(studentId);
+        this.semester = semester;
+        this.remainingPayment = remainingPayment;
+    }
 
     public Student(String name, String gender, String address, String username, String password, int id, String role, String dob, Branch branch, int semester, List coursesEnrolled, List preferenceList) {
         super(name, gender, address, username, password, id, role, dob);
@@ -17,7 +35,13 @@ public class Student extends User{
         this.preferenceList = preferenceList;
     }
 
+    public int getStudentId() {
+        return studentId;
+    }
 
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
 
     public Branch getBranch() {
         return branch;
@@ -49,6 +73,14 @@ public class Student extends User{
 
     public void setPreferenceList(List preferenceList) {
         this.preferenceList = preferenceList;
+    }
+
+    public float getRemainingPayment() {
+        return remainingPayment;
+    }
+
+    public void setRemainingPayment(float remainingPayment) {
+        this.remainingPayment = remainingPayment;
     }
 
 }

@@ -133,7 +133,7 @@ public class AdminServiceOperation implements AdminService {
 
     @Override
     public List<Professor> viewProfessor() {
-//        List<Professor> professorList = new ArrayList<Professor>();
+        List<Professor> professorList = new ArrayList<Professor>();
 //        for (Map.Entry<Integer, Professor> cur : tempData.professorDatabase.entrySet()) {
 //            professorList.add(cur.getValue());
 //        }
@@ -141,13 +141,14 @@ public class AdminServiceOperation implements AdminService {
         try {
             return adminDAOImpl.viewProfessors();
         } catch (Exception e) {
-            throw e;
+            return professorList;
+//            throw e;
         }
     }
 
     @Override
     public List<Student> viewPending() {
-//        List<Student> unapprovedStudents = new ArrayList<Student>();
+        List<Student> unapprovedStudents = new ArrayList<Student>();
 //        for (Map.Entry<Integer, Boolean> cur : tempData.isStudentApproved.entrySet()) {
 //            if (cur.getValue() == false) {
 //                unapprovedStudents.add(tempData.idToStudent.get(cur.getKey()));
@@ -157,7 +158,9 @@ public class AdminServiceOperation implements AdminService {
         try {
             return adminDAOImpl.viewUnapprovedStudents();
         } catch (Exception e) {
+
 //            throw e;
+            return  unapprovedStudents;
         }
     }
 }

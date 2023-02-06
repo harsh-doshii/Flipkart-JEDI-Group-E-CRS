@@ -421,6 +421,50 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
+    public List<Professor> viewProfessors() throws SQLException {
+        Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+        statement = null;
+        List<Professor> professorList = new ArrayList<Professor>();
+        try {
+            Class.forName(JDBC_DRIVER);
+            String sql = SQLQueries.VIEW_PROFESSOR_QUERY;
+            statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()) {
+                int idProfessor = resultSet.getInt("idProfessor");
+                String sql2 = SQLQueries.GET_STUDENT_NAME;
+                statement = connection.prepareStatement(sql2);
+                statement.setInt(1,idProfessor);
+                ResultSet resultSet2 = statement.executeQuery();
+                Professor professor = new Professor(idProfessor,resultSet2.getString("name") );
+                professorList.add(professor);
+            }
+
+            System.out.println("Professor list generated");
+
+        }catch(Exception se) {
+            System.out.println(se.getMessage());
+        } finally {
+            try {
+                connection.close();
+            }
+            catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        return professorList;
+    }
+
+
+
+
+    @Override
     public List<Student> viewUnapprovedStudents() throws SQLException {
         Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
         statement = null;
@@ -432,8 +476,12 @@ public class AdminDAOImpl implements AdminDAO {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                String idStudent = resultSet.getString("idStudent");
-                Student student = (Student) UserDAO.getInstance().getDetails(idStudent);
+                int idStudent = resultSet.getInt("idStudent");
+                String sql2 = SQLQueries.GET_STUDENT_NAME;
+                statement = connection.prepareStatement(sql2);
+                statement.setInt(1,idStudent);
+                ResultSet resultSet2 = statement.executeQuery();
+                Student student = new Student(idStudent,resultSet2.getString("name"));
                 studentList.add(student);
             }
         }catch (SQLException se){
