@@ -148,8 +148,7 @@ public class AdminCRSMenu {
     private boolean addProf() {
         try {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Enter the id of the professor");
-            int profId = sc.nextInt();
+
             System.out.println("Enter the name of the professor");
             String profName = sc.next();
             System.out.println("Enter the gender of the professor");
@@ -160,9 +159,10 @@ public class AdminCRSMenu {
             String profUsername = sc.next();
             System.out.println("Enter the pw of the professor");
             String profPassword = sc.next();
-
+            System.out.println("Enter the Department of the professor");
+            String department = sc.next();
             List courseList = new ArrayList<>();
-            Professor prof = new Professor(profName, profGender, profAddress, profUsername, profPassword, profId, 1, "161100", "CS", courseList);
+            Professor prof = new Professor(profName, profGender, profAddress, profUsername, profPassword, 1, 1, "161100", department, courseList);
             AdminServiceOperation.getInstance().addProfessor(prof);
             return true;
         }
