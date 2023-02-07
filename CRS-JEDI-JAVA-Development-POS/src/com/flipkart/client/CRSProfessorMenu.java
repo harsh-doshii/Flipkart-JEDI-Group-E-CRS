@@ -2,21 +2,17 @@ package com.flipkart.client;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.bean.Student;
-import com.flipkart.data.TempData;
-import com.flipkart.service.AdminServiceOperation;
 import com.flipkart.service.ProfessorServiceOperation;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-public class ProfessorCRSMenu {
+public class CRSProfessorMenu {
 
     private int professorID;
 
 
 
-    public ProfessorCRSMenu(Integer profId){
+    public CRSProfessorMenu(Integer profId){
         this.professorID = profId;
     }
     Scanner scanner = new Scanner(System.in);

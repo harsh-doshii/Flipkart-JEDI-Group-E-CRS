@@ -19,14 +19,14 @@ public class StudentDAOImpl implements StudentDAO {
     private PreparedStatement statement = null;
     private StudentDAOImpl(){}
 
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
 
     //  Database credentials
     static final String USER = "root";
 
     // Enter your passwords here.
-    static final String PASS = "Root@123";
+    static final String PASS = "Fk!_186836";
     public static StudentDAOImpl getInstance() {
         if (instance == null) {
             instance = new StudentDAOImpl();
@@ -41,7 +41,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -79,7 +79,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection connection = null;
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -142,7 +142,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection connection = null;
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -193,7 +193,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection connection = null;
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -232,7 +232,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection connection = null;
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -300,7 +300,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection connection = null;
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -340,7 +340,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection connection = null;
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -399,7 +399,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection connection = null;
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -459,7 +459,7 @@ public class StudentDAOImpl implements StudentDAO {
         List <PaymentNotification> notifications = new ArrayList<>();
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }

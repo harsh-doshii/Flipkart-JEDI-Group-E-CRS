@@ -7,10 +7,10 @@ import java.sql.*;
 public class PaymentDAOImpl implements PaymentDAO{
 
     Connection conn = null;
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     static final String USER = "root";
-    static final String PASS = "Root@123";
+    static final String PASS = "Fk!_186836";
     PreparedStatement statement = null;
 
     private static volatile PaymentDAOImpl instance = null;
@@ -30,7 +30,7 @@ public class PaymentDAOImpl implements PaymentDAO{
     public float calculateRemainingFee(int studentID) throws SQLException {
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -68,7 +68,7 @@ public class PaymentDAOImpl implements PaymentDAO{
 
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }

@@ -1,26 +1,22 @@
 package com.flipkart.client;
 
-import com.flipkart.bean.Course;
 import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.RegisteredCourse;
-import com.flipkart.bean.Student;
-import com.flipkart.data.TempData;
 import com.flipkart.service.PaymentServiceOperation;
 import com.flipkart.service.StudentService;
 import com.flipkart.service.StudentServiceOperation;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Scanner;
 
-public class StudentCRSMenu {
+public class CRSStudentMenu {
 
     private int studentID;
 
     StudentService studentServiceOperation = StudentServiceOperation.getInstance();
     Scanner sc = new Scanner(System.in);
 
-    public StudentCRSMenu(Integer studentID){
+    public CRSStudentMenu(Integer studentID){
         this.studentID = studentID;
     }
 

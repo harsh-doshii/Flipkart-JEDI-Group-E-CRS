@@ -14,10 +14,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 public class ProfessorDAOImpl implements ProfessorDAO{
     Connection conn = null;
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     static final String USER = "root";
-    static final String PASS = "Root@123";
+    static final String PASS = "Fk!_186836";
     PreparedStatement statement = null;
 
     private static volatile ProfessorDAOImpl instance = null;
@@ -38,7 +38,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
         List<Student> listofStudents = new ArrayList<>();
         Connection conn = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             statement = null;
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             String sql = SQLQueries.GET_ENROLLED_STUDENTS;
@@ -92,7 +92,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
         Connection conn = null;
         try{
                 //Changing ResgisteredCourse table
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 statement = null;
                 conn = DriverManager.getConnection(DB_URL,USER,PASS);
                 String sql = SQLQueries.ADD_GRADE;
@@ -131,7 +131,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
         Connection conn = null;
         try{
             //Changing Course table
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             statement = null;
              conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = SQLQueries.SIGN_UP_PROF;
@@ -169,7 +169,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
         List<Course> courseList= new ArrayList<>();
             try{
             //Changing Course table
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             statement = null;
              conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = SQLQueries.GET_COURSES;

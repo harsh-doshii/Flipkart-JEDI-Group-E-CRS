@@ -61,7 +61,7 @@ public class CRSApplication {
                 case "STUDENT" :
                     System.out.println("Welcome to the Student menu!");
                     //assuming username to be the student id as we don't have the student id yet
-                    StudentCRSMenu studentMenu = new StudentCRSMenu(userId);
+                    CRSStudentMenu studentMenu = new CRSStudentMenu(userId);
                     studentMenu.displayMenu();
                     break;
 
@@ -69,7 +69,7 @@ public class CRSApplication {
                 case "professor" :
                 case "PROFESSOR" :
                 case "prof":
-                    ProfessorCRSMenu professorMenu = new ProfessorCRSMenu(userId);
+                    CRSProfessorMenu professorMenu = new CRSProfessorMenu(userId);
                     professorMenu.displayMenu();
                     break;
 
@@ -77,8 +77,8 @@ public class CRSApplication {
                 case "admin":
                 case "ADMIN":
                     System.out.println("Welcome to the Admin menu!");
-                    AdminCRSMenu adminCRSMenu = new AdminCRSMenu(userId);
-                    adminCRSMenu.displayAdminMenu();
+                    CRSAdminMenu cRSAdminMenu = new CRSAdminMenu(userId);
+                    cRSAdminMenu.displayAdminMenu();
                     break;
                 default:
                     System.err.println("Invalid Option.");

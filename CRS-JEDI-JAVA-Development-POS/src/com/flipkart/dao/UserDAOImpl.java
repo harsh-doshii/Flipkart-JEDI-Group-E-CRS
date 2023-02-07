@@ -18,7 +18,7 @@ public class UserDAOImpl implements UserDAO {
     private PreparedStatement statement = null;
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Root@123";
+    static final String PASS = "Fk!_186836";
 
     private UserDAOImpl() {
 
@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }
@@ -107,7 +107,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }

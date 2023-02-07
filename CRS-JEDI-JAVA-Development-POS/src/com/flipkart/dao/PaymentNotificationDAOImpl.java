@@ -8,10 +8,10 @@ import java.text.SimpleDateFormat;
 public class PaymentNotificationDAOImpl implements PaymentNotificationDAO {
 
     Connection conn = null;
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     static final String USER = "root";
-    static final String PASS = "Root@123";
+    static final String PASS = "Fk!_186836";
     PreparedStatement statement = null;
 
     private static volatile PaymentNotificationDAOImpl instance = null;
@@ -32,7 +32,7 @@ public class PaymentNotificationDAOImpl implements PaymentNotificationDAO {
 
         try {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
                 throw new SQLException();
             }

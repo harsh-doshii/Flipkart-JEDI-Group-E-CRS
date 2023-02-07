@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class AdminCRSMenu {
+public class CRSAdminMenu {
 
     int adminId;
-    public AdminCRSMenu(Integer adminId) {
+    public CRSAdminMenu(Integer adminId) {
         this.adminId = adminId;
     }
     Scanner scanner = new Scanner(System.in);

@@ -22,12 +22,12 @@ import java.util.*;
 
 public class AdminDAOImpl implements AdminDAO {
 
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Root@123";
+    static final String PASS = "Fk!_186836";
 
 
     private static volatile AdminDAOImpl instance = null;
