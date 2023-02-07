@@ -17,7 +17,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     static final String USER = "root";
-    static final String PASS = "Fk!_186841";
+    static final String PASS = "Root@123";
     PreparedStatement statement = null;
 
     private static volatile ProfessorDAOImpl instance = null;

@@ -4,6 +4,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
 import com.flipkart.data.TempData;
+import com.flipkart.service.PaymentServiceOperation;
 import com.flipkart.service.StudentService;
 import com.flipkart.service.StudentServiceOperation;
 
@@ -173,14 +174,14 @@ public class StudentCRSMenu {
     }
 
     private float getTotalFeeToPay() {
-        float totalFee = studentServiceOperation.calculateFee(studentID);
+        float totalFee = PaymentServiceOperation.getInstance().calculateFee(studentID);
         System.out.println("Total Fee remaining to be paid " + totalFee);
         return totalFee;
     }
 
     private void payFee(float amount) {
         System.out.printf("Initiating Fee payment");
-        studentServiceOperation.payFee(studentID, amount);
+        PaymentServiceOperation.getInstance().payFee(studentID, amount);
     }
 
 }

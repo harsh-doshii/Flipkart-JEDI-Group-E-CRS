@@ -28,7 +28,7 @@ public class StudentDAOImpl implements StudentDAO {
     static final String USER = "root";
 
     // Enter your passwords here.
-    static final String PASS = "Fk!_186841";
+    static final String PASS = "Root@123";
     public static StudentDAOImpl getInstance() {
         if (instance == null) {
             instance = new StudentDAOImpl();

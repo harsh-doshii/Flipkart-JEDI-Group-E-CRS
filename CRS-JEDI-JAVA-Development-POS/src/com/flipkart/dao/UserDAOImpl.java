@@ -18,7 +18,7 @@ public class UserDAOImpl implements UserDAO {
     private PreparedStatement statement = null;
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Fk!_186841";
+    static final String PASS = "Root@123";
 
     private UserDAOImpl() {
 

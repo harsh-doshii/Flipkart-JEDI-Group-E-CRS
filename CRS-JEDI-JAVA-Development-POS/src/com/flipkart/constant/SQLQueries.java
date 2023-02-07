@@ -73,6 +73,8 @@ public class SQLQueries {
     public static final String GET_CURRENT_ID_VALUE = "select * from SystemVariable where variableName = 'count'";
     public static final String UPDATE_CURRENT_ID_VALUE = "UPDATE SystemVariable set variableValue = ? where variableName = 'count'";
 
+    public static final String GET_CURRENT_TRANSACTION_ID_VALUE = "select * from SystemVariable where variableName = 'transactionCount'";
+    public static final String UPDATE_CURRENT_TRANSACTION_ID_VALUE = "UPDATE SystemVariable set variableValue = ? where variableName = 'transactionCount'";
     /*
     * Started writing my commands from here -- aman.
     * */
@@ -104,6 +106,10 @@ public class SQLQueries {
     public static final String GET_ROLE_FROM_ROLE_ID = "select roleName from Role where idRole = ?";
 
     public static final String UPDATE_USER_PASSWORD = "update User set password = ? where userId = ? ";
+
+    public static final String ADD_PAYMENT_TRANSACTION = "insert into Payment(transactionId, amount, studentId) values(?, ?, ?)";
+
+    public static final String ADD_NOTIFICATION = "insert into Notification values(?, ?, ?)";
 }
 
 

@@ -2,9 +2,9 @@ package com.flipkart.service;
 
 public interface NotificationService {
     /**
-     * @param type
+     * @param studentId
      * @param message
-     * @param nid
+     *
      */
-    public void sendNotification(String type, String message, String nid);
+    public void addNotification(int studentId, String message);
 }
