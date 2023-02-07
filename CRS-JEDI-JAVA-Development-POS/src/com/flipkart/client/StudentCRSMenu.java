@@ -102,24 +102,28 @@ public class StudentCRSMenu {
 
     private void viewGrades(){
 //        System.out.println();
-        System.out.println("Your grades for the registered courses : ");
+        try {
+            System.out.println("Your grades for the registered courses : ");
 
-        int cur = 0;
-        System.out.format("%15s %15s %32s %15s\n", "Sr. No", "Course ID", "Course Name", "Grade");
-        if (studentServiceOperation.viewGrades(studentID) == null) {
-            return ;
-        }
-        if (studentServiceOperation.viewGrades(studentID).size() == 0) {
-            return ;
-        }
-        for (RegisteredCourse regCourse : studentServiceOperation.viewGrades(studentID)) {
-            cur++;
-            String grade;
-            if (regCourse.getGrade() == null) grade = null;
-            else grade = regCourse.getGrade().getGrade();
-            System.out.format("%15d %15d %32s %15s\n",cur, regCourse.getCourse().getCourseId(), regCourse.getCourse().getCourseName(), grade);
+            int cur = 0;
+            System.out.format("%15s %15s %32s %15s\n", "Sr. No", "Course ID", "Course Name", "Grade");
+            if (studentServiceOperation.viewGrades(studentID) == null) {
+                return ;
+            }
+            if (studentServiceOperation.viewGrades(studentID).size() == 0) {
+                return ;
+            }
+            for (RegisteredCourse regCourse : studentServiceOperation.viewGrades(studentID)) {
+                cur++;
+                String grade;
+                if (regCourse.getGrade() == null) grade = null;
+                else grade = regCourse.getGrade().getGrade();
+                System.out.format("%15d %15d %32s %15s\n",cur, regCourse.getCourse().getCourseId(), regCourse.getCourse().getCourseName(), grade);
 //            System.out.println();
-            //System.out.println("suck");
+                //System.out.println("suck");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 //        System.out.printf("view Grades");
     }
@@ -135,16 +139,24 @@ public class StudentCRSMenu {
     }
 
     private void addCourse(){
-        System.out.println("Enter course id to register");
-        int courseId = sc.nextInt();
-        studentServiceOperation.addCourse(studentID, courseId);
+        try {
+            System.out.println("Enter course id to register");
+            int courseId = sc.nextInt();
+            studentServiceOperation.addCourse(studentID, courseId);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 //        System.out.printf("add course");
     }
 
     private void dropCourse() {
-        System.out.println("Enter course id to drop");
-        int courseId = sc.nextInt();
-        studentServiceOperation.dropCourse(studentID,courseId);
+        try {
+            System.out.println("Enter course id to drop");
+            int courseId = sc.nextInt();
+            studentServiceOperation.dropCourse(studentID,courseId);
+        }  catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 //        System.out.printf("Drop Course");
     }
 

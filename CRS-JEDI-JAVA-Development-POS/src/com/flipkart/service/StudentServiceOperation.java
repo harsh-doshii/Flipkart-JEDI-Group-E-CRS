@@ -6,6 +6,9 @@ import com.flipkart.bean.Student;
 import com.flipkart.dao.StudentDAO;
 import com.flipkart.dao.StudentDAOImpl;
 import com.flipkart.data.TempData;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeNotAssignedException;
+import com.flipkart.exception.StudentNotFoundException;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -32,7 +35,7 @@ public class StudentServiceOperation implements StudentService {
         return studentDAOInterface.getCourseCatalogue();
     }
 
-    public Boolean addCourse(int studentId, int courseId) {
+    public Boolean addCourse(int studentId, int courseId) throws StudentNotFoundException {
 //        if (TempData.studentToCoursePreferenceList.get(studentId) == null) {
 //            TempData.studentToCoursePreferenceList.put(studentId, new HashSet<>());
 //        }
@@ -46,7 +49,7 @@ public class StudentServiceOperation implements StudentService {
         }
     }
 
-    public Boolean dropCourse(int studentId, int courseId) {
+    public Boolean dropCourse(int studentId, int courseId) throws StudentNotFoundException, CourseNotFoundException{
 //        if(TempData.studentToRegisteredCourseList.get(studentId).contains(courseId)) {
 //            TempData.studentToRegisteredCourseList.get(studentId).remove(courseId);
 //            return true;
@@ -60,7 +63,7 @@ public class StudentServiceOperation implements StudentService {
         }
     }
 
-    public List<RegisteredCourse> viewGrades(int studentId) {
+    public List<RegisteredCourse> viewGrades(int studentId) throws StudentNotFoundException, GradeNotAssignedException {
         List<RegisteredCourse> registeredCourses = new ArrayList<>();
 //        if (TempData.releaseReportCards == false) {
 //            System.out.println("Grade not released yet;)");
