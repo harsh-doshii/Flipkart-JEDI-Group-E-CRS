@@ -36,11 +36,11 @@ public class ProfessorDAOImpl implements ProfessorDAO{
     public List<Student> viewStudents(int courseId) throws Exception {
         List<Integer> sidlist = new ArrayList<>();
         List<Student> listofStudents = new ArrayList<>();
-
+        Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             statement = null;
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
             String sql = SQLQueries.GET_ENROLLED_STUDENTS;
             //GET_ENROLLED_STUDENTS = "select * from RegisteredCourse where idCourse=?";
             statement = conn.prepareStatement(sql);
@@ -67,34 +67,38 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             }
             return listofStudents;
         } catch (Exception e) {
+        }finally {
+            //finally block used to close resources
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException se2) {
+                throw new SQLException();
+            }// nothing we can do
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
-//        } finally {
-//            try {
-//                conn.close();
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//                try {
-//                    throw new SQLException
-//                            ();
-//                } catch (SQLException
-//                        e) {
-//                    System.out.println(e.getMessage());
-//                }
-//            }
-//        }
+//
         return listofStudents;
     }
 
     public boolean assignGrade(int studentId, int courseId, Grade grade, int sem) throws Exception{
-            try{
-                //Changing ResgistereCourse table
+        Connection conn = null;
+        try{
+                //Changing ResgisteredCourse table
                 Class.forName("com.mysql.jdbc.Driver");
                 statement = null;
-                Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
+                conn = DriverManager.getConnection(DB_URL,USER,PASS);
                 String sql = SQLQueries.ADD_GRADE;
                 //ADD_GRADE = "update RegisteredCourse set grade=? where idCourse=? and idStudent=? and sem=?";
                 statement = conn.prepareStatement(sql);
-                statement.setInt(1, 8);
+                statement.setInt(1, grade.getGradeValue());
                 statement.setInt(2, courseId);
                 statement.setInt(3, studentId);
                 statement.setInt(4, sem);
@@ -103,31 +107,33 @@ public class ProfessorDAOImpl implements ProfessorDAO{
                     throw new Exception();
                 }
             } catch (Exception e) {
+            }finally {
+            //finally block used to close resources
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException se2) {
+                throw new SQLException();
+            }// nothing we can do
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
             }
-//            }finally {
-//                try {
-//                    conn.close();
-//                }
-//                catch(SQLException ex){
-//                    System.out.println(ex.getMessage());
-//                    try {
-//                        throw new SQLException
-//                                ();
-//                    } catch (SQLException
-//                            e) {
-//                        System.out.println(e.getMessage());
-//                    }
-//                }
-//            }
+        }
             return false;
     }
 
     public void signUpForCourse(int courseId,  int profId) throws Exception{
+        Connection conn = null;
         try{
             //Changing Course table
             Class.forName("com.mysql.jdbc.Driver");
             statement = null;
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
+             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = SQLQueries.SIGN_UP_PROF;
             //SIGN_UP_PROF = "update Course set idProfessor=? where idCourse=?";
             statement = conn.prepareStatement(sql);
@@ -140,29 +146,32 @@ public class ProfessorDAOImpl implements ProfessorDAO{
         } catch (Exception e){
 
         }finally {
+            //finally block used to close resources
             try {
-                conn.close();
-            }
-            catch(SQLException ex){
-                System.out.println(ex.getMessage());
-                try {
-                    throw new SQLException
-                            ();
-                } catch (SQLException
-                        e) {
-                    System.out.println(e.getMessage());
+                if (statement != null) {
+                    statement.close();
                 }
+            } catch (SQLException se2) {
+                throw new SQLException();
+            }// nothing we can do
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
             }
         }
     }
 
     public List<Course> viewCourses(int profId) throws Exception{
-            List<Course> courseList= new ArrayList<>();
+        Connection conn = null;
+        List<Course> courseList= new ArrayList<>();
             try{
             //Changing Course table
             Class.forName("com.mysql.jdbc.Driver");
             statement = null;
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
+             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = SQLQueries.GET_COURSES;
             //GET_COURSES = "select * from Course where idProfessor=?";
             statement = conn.prepareStatement(sql);
@@ -174,21 +183,23 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             return courseList;
         } catch (Exception e) {
             }
-//        }finally {
-//                try {
-//                    conn.close();
-//                }
-//                catch(SQLException ex){
-//                    System.out.println(ex.getMessage());
-//                    try {
-//                        throw new SQLException
-//                                ();
-//                    } catch (SQLException
-//                            e) {
-//                        System.out.println(e.getMessage());
-//                    }
-//                }
-//            }
+        finally {
+            //finally block used to close resources
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException se2) {
+                throw new SQLException();
+            }// nothing we can do
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
         return courseList;
     }
 
