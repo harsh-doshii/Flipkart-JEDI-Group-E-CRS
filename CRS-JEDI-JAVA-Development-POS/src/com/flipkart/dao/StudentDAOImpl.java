@@ -3,10 +3,8 @@ package com.flipkart.dao;
 import java.sql.*;
 import java.util.*;
 
-import com.flipkart.bean.Course;
-import com.flipkart.bean.Grade;
-import com.flipkart.bean.RegisteredCourse;
-import com.flipkart.bean.Student;
+import com.flipkart.bean.*;
+
 import java.sql.SQLException;
 import com.flipkart.client.CRSApplication;
 import com.flipkart.constant.SQLQueries;
@@ -454,6 +452,50 @@ public class StudentDAOImpl implements StudentDAO {
             }
         }
     }
+
+
+    public List<PaymentNotification> viewNotifications(int studentId) throws SQLException {
+        Connection connection = null;
+        List <PaymentNotification> notifications = new ArrayList<>();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (Exception e) {
+                throw new SQLException();
+            }
+
+            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            statement = connection.prepareStatement(SQLQueries.VIEW_NOTIFICATIONS);
+
+            statement.setInt(1, studentId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                notifications.add(new PaymentNotification(rs.getString("timestamp"), rs.getString("message")));
+                //registeredCourses.add(new RegisteredCourse(regCourses.getInt("idStudent"), regCourses.getInt("idCourse"), regCourses.getInt("grade"), regCourses.getInt("semester")));
+            }
+            return notifications;
+        } catch (SQLException se) {
+            se.printStackTrace();
+            throw new SQLException();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException se2) {
+                throw new SQLException();
+            }// nothing we can do
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
 
 
 

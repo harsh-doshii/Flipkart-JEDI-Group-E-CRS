@@ -1,6 +1,7 @@
 package com.flipkart.client;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
 import com.flipkart.data.TempData;
@@ -9,6 +10,7 @@ import com.flipkart.service.StudentService;
 import com.flipkart.service.StudentServiceOperation;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentCRSMenu {
@@ -39,7 +41,8 @@ public class StudentCRSMenu {
             System.out.println("6. View registered courses");
             System.out.println("7. Make Payment");
             System.out.println("8. Get Total Amount to Pay for the courses");
-            System.out.println("9. Logout");
+            System.out.println("9. View Notifications");
+            System.out.println("10. Logout");
             System.out.println("\n==========================================================================\n");
             System.out.println("Enter Option : ");
             int input = sc.nextInt();
@@ -69,10 +72,13 @@ public class StudentCRSMenu {
                 float amount = sc.nextFloat();
                 payFee(amount);
             }
-            else if(input==8) {
+            else if (input==8) {
                 getTotalFeeToPay();
             }
-            else if(input==9) {
+            else if (input == 9) {
+                viewNotifications();
+            }
+            else if(input==10) {
                 logout();
                 break;
             }
@@ -180,8 +186,15 @@ public class StudentCRSMenu {
     }
 
     private void payFee(float amount) {
-        System.out.printf("Initiating Fee payment");
+        System.out.printf("Initiating Fee payment : ------>>\n");
         PaymentServiceOperation.getInstance().payFee(studentID, amount);
+    }
+
+    public void viewNotifications() {
+        List <PaymentNotification> notifications = StudentServiceOperation.getInstance().viewNotifications(studentID);
+        for (PaymentNotification notification : notifications) {
+            System.out.println("Timestamp :-" + notification.getTimestamp() + " ---------------- " + notification.getNotification());
+        }
     }
 
 }
