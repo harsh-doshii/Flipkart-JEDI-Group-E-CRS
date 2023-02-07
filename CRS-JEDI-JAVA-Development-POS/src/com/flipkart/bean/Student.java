@@ -47,8 +47,8 @@ public class Student extends User{
         this.remainingPayment = remainingPayment;
     }
 
-    public Student(String name, String gender, String address, String username, String password, int id, String role, String dob, Branch branch, int semester, List coursesEnrolled, List preferenceList) {
-        super(name, gender, address, username, password, id, role, dob);
+    public Student(String name, String gender, String address, String username, String password, int id, int roleId, String dob, Branch branch, int semester, List coursesEnrolled, List preferenceList) {
+        super(name, gender, address, username, password, id, roleId, dob);
         this.branch = branch;
         this.semester = semester;
         this.coursesEnrolled = coursesEnrolled;

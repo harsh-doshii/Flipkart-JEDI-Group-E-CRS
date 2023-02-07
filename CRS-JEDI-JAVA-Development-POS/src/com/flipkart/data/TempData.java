@@ -42,15 +42,15 @@ public class TempData {
 
         courseToEnrolledStudents.put(courseCatalogue.get(2), new ArrayList<>());
         courseToEnrolledStudents.put(courseCatalogue.get(3), new ArrayList<>());
-
-        userDatabase.put(555, new Student("Aman", "M", "Delhi", "aman.jham", "weak", 555, "Student", "10101111", new Branch("A7", "CS"), 2, new ArrayList<Course>(),  new ArrayList<Course>()));
-        userDatabase.put(556, new Student("Bhavya", "F", "Delhi", "bhavya.verma", "weak", 556, "Student", "10101111", new Branch("A7", "CS"), 2, new ArrayList<Course>(),  new ArrayList<Course>()));
-        userDatabase.put(557, new Student("Manav", "M", "Delhi", "manav.b", "weak", 557, "Student", "10101111", new Branch("A7", "CS"), 2, new ArrayList<Course>(),  new ArrayList<Course>()));
-        userDatabase.put(55, new Professor("Gaurav", "M", "Delhi", "gaurav.p", "weak", 55, "Professor", "10101111", "CS", new ArrayList<Course>()));
-        userDatabase.put(56, new Professor("Harsh", "M", "Delhi", "harsh.d", "weak", 56, "Professor", "10101111", "CS", new ArrayList<Course>()));
-        userDatabase.put(57, new Professor("Divya", "M", "Delhi", "divya", "weak", 57, "Professor", "10101111", "CS", new ArrayList<Course>()));
-
-        userDatabase.put(5, new Admin("Prakhar", "M", "Delhi", "prakhar.d", "strong", 5, "Admin", "10101111"));
+//
+//        userDatabase.put(555, new Student("Aman", "M", "Delhi", "aman.jham", "weak", 555, "Student", "10101111", new Branch("A7", "CS"), 2, new ArrayList<Course>(),  new ArrayList<Course>()));
+//        userDatabase.put(556, new Student("Bhavya", "F", "Delhi", "bhavya.verma", "weak", 556, "Student", "10101111", new Branch("A7", "CS"), 2, new ArrayList<Course>(),  new ArrayList<Course>()));
+//        userDatabase.put(557, new Student("Manav", "M", "Delhi", "manav.b", "weak", 557, "Student", "10101111", new Branch("A7", "CS"), 2, new ArrayList<Course>(),  new ArrayList<Course>()));
+//        userDatabase.put(55, new Professor("Gaurav", "M", "Delhi", "gaurav.p", "weak", 55, "Professor", "10101111", "CS", new ArrayList<Course>()));
+//        userDatabase.put(56, new Professor("Harsh", "M", "Delhi", "harsh.d", "weak", 56, "Professor", "10101111", "CS", new ArrayList<Course>()));
+//        userDatabase.put(57, new Professor("Divya", "M", "Delhi", "divya", "weak", 57, "Professor", "10101111", "CS", new ArrayList<Course>()));
+//
+//        userDatabase.put(5, new Admin("Prakhar", "M", "Delhi", "prakhar.d", "strong", 5, "Admin", "10101111"));
 
         //populating branches
         idToBranch.put("A7", new Branch("A7", "Computer Science"));

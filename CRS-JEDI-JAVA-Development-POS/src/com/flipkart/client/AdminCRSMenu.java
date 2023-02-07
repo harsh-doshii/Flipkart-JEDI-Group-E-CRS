@@ -152,7 +152,7 @@ public class AdminCRSMenu {
         String profPassword = sc.next();
 
         List courseList = new ArrayList<>();
-        Professor prof = new Professor(profName, profGender, profAddress, profUsername, profPassword, profId, "Professor", "161100", "CS",courseList );
+        Professor prof = new Professor(profName, profGender, profAddress, profUsername, profPassword, profId, 1, "161100", "CS",courseList );
         AdminServiceOperation.getInstance().addProfessor(prof);
 //        System.out.println("List of the Professors after adding this prof : ");
 //        int cur = 0;

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class ProfessorDAOImpl implements ProfessorDAO{
     Connection conn = null;
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/crs_database";
+    static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     static final String USER = "root";
     static final String PASS = "Fk!_186841";
     PreparedStatement statement = null;

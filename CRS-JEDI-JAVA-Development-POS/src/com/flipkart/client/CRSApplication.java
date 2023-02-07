@@ -75,7 +75,6 @@ public class CRSApplication {
                 case "professor" :
                 case "PROFESSOR" :
                 case "prof":
-                    System.out.println("Welcome to the Professor menu!");
                     ProfessorCRSMenu professorMenu = new ProfessorCRSMenu(userId);
                     professorMenu.displayMenu();
                     break;
