@@ -8,13 +8,13 @@ package com.flipkart.exception;
  *
  */
 public class ProfNotDeletedException extends Exception {
-	private String ProfID;
+	private int ProfID;
 
     /**
      * Constructor for ProfNotAddedException
      * @param ProfID --> This is the ID of the prof being added
      */
-    public ProfNotDeletedException(String ProfID) {
+    public ProfNotDeletedException(int ProfID) {
         this.ProfID = ProfID;
     }
 
@@ -22,7 +22,7 @@ public class ProfNotDeletedException extends Exception {
      * getter method for ProfID
      * @return
      */
-    public String getProfID() {
+    public int getProfID() {
         return ProfID;
     }
 

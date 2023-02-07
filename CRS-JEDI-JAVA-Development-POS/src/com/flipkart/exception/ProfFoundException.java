@@ -4,13 +4,13 @@ package com.flipkart.exception;
  * Exception class for when adding a prof that already exists in the database
  */
 public class ProfFoundException extends Exception {
-    private String ProfID;
+    private int ProfID;
 
     /**
      * Constructor for ProfFoundExceptionClass
      * @param ProfID --> This is the ID of the prof being added
      */
-    public ProfFoundException (String ProfID) {
+    public ProfFoundException (int ProfID) {
         this.ProfID = ProfID;
     }
 
@@ -18,7 +18,7 @@ public class ProfFoundException extends Exception {
      * getter method for ProfID
      * @return
      */
-    public String getProfID() {
+    public int getProfID() {
         return ProfID;
     }
 

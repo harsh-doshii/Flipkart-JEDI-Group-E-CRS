@@ -9,28 +9,28 @@ package com.flipkart.exception;
  */
 public class StudentNotAddedException extends Exception {
 
-	private String studentId;
+	private String studentName;
 
 	/**
-	 * @param id -> ID of student
+	 * @param name -> ID of student
 	 */
-	public StudentNotAddedException(String id) {
-		setUserId(id);
+	public StudentNotAddedException(String name) {
+		setUserName(name);
 	}
 	
-	public String getUserId() {
-		return this.studentId;
+	public String getUserName() {
+		return this.studentName;
 	}
 
-	public void setUserId(String userId) {
-		this.studentId = userId;
+	public void setUserName(String userName) {
+		this.studentName = studentName;
 	}
 
 	/**
 	 * @return -> Message to be displayed
 	 */
 	public String getMessage() {
-		return "User with id: "+ this.studentId +" cannot be added";
+		return "User with name: "+ getUserName() +" cannot be added";
 	}
 	
 }

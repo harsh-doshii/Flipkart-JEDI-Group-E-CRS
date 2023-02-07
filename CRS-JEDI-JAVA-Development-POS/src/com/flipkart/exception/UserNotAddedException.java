@@ -9,20 +9,20 @@ package com.flipkart.exception;
  */
 public class UserNotAddedException extends Exception {
 
-	private String userId;
+	private int userId;
 
 	/**
 	 * @param id -> ID of user
 	 */
-	public UserNotAddedException (String id) {
+	public UserNotAddedException (int id) {
 		setUserId(id);
 	}
 	
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

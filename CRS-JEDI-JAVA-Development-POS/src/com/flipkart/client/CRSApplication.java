@@ -1,12 +1,6 @@
 package com.flipkart.client;
-
-import com.flipkart.bean.Branch;
 import com.flipkart.bean.Student;
-import com.flipkart.dao.UserDAOImpl;
-import com.flipkart.data.TempData;
 import com.flipkart.service.AdminServiceOperation;
-import com.flipkart.service.StudentServiceOperation;
-import com.flipkart.service.UserService;
 import com.flipkart.service.UserServiceOperation;
 
 import java.util.Scanner;
@@ -99,39 +93,30 @@ public class CRSApplication {
     }
 
     private static void register() {
-        System.out.println("Enter student name");
-        String name = scanner.next();
-        System.out.println("Enter student gender");
-        String gender = scanner.next();
-        System.out.println("Enter student address");
-        String address = scanner.next();
-        System.out.println("Enter student username");
-        String username = scanner.next();
-        System.out.println("Enter new password");
-        String password = scanner.next();
-        String role = "student";
-        System.out.println("Enter dob");
-        String dob = scanner.next();
-        System.out.println("Enter student branch Name");
-        String branchName = scanner.next();
+        try {
+            System.out.println("Enter student name");
+            String name = scanner.next();
+            System.out.println("Enter student gender");
+            String gender = scanner.next();
+            System.out.println("Enter student address");
+            String address = scanner.next();
+            System.out.println("Enter student username");
+            String username = scanner.next();
+            System.out.println("Enter new password");
+            String password = scanner.next();
+            String role = "student";
+            System.out.println("Enter dob");
+            String dob = scanner.next();
+            System.out.println("Enter student branch Name");
+            String branchName = scanner.next();
 
-        Student student = new Student(name, gender, address,username,password,dob, branchName);
+            Student student = new Student(name, gender, address, username, password, dob, branchName);
 
-        AdminServiceOperation.getInstance().addStudent(student);
-//
-//        if(branch==null) {
-//            System.out.println("Please enter valid branch id");
-//        }
-//        else
-//        {
-////            int semester = 1;
-////            Student student = new Student(name,gender,address,username,password,id,role,dob,branch,semester,null,null);
-////
-////            StudentServiceOperation studentServiceOperation = new StudentServiceOperation();
-////            studentServiceOperation.signUp(student);
-////            System.out.println("Your user id is " + id);
-////            System.out.println("Please use this id to login");
-//        }
+            AdminServiceOperation.getInstance().addStudent(student);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -149,7 +134,5 @@ public class CRSApplication {
             System.out.println("Invalid Old Password");
         }
     }
-    private static void loginMain(String userId, String password) {
 
-    }
 }

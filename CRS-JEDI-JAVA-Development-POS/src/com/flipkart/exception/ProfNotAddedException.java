@@ -4,22 +4,21 @@ package com.flipkart.exception;
  * Exception Class for when a prof cannot be added to the database
  */
 public class ProfNotAddedException extends Exception {
-    private String ProfID;
+    private String profName;
 
     /**
      * Constructor for ProfNotAddedException
-     * @param ProfID --> This is the ID of the prof being added
      */
-    public ProfNotAddedException(String ProfID) {
-        this.ProfID = ProfID;
+    public ProfNotAddedException(String name) {
+        this.profName = name;
     }
 
     /**
      * getter method for ProfID
      * @return
      */
-    public String getProfID() {
-        return ProfID;
+    public String getProfName() {
+        return profName;
     }
 
     /**
@@ -28,6 +27,6 @@ public class ProfNotAddedException extends Exception {
      */
     @Override
     public String getMessage() {
-        return "Prof : " + ProfID + " cannot be added to the database";
+        return "Prof : " + profName + " cannot be added to the database";
     }
 }

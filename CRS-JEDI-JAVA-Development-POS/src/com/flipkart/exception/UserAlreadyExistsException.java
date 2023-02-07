@@ -9,20 +9,20 @@ package com.flipkart.exception;
  */
 public class UserAlreadyExistsException extends Exception {
 
-	private String userId;
+	private int userId;
 
 	/**
 	 * @param id -> ID of user
 	 */
-	public UserAlreadyExistsException (String id) {
+	public UserAlreadyExistsException (int id) {
 		setUserId(id);
 	}
 	
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

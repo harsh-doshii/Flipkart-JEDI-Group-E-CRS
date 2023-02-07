@@ -4,13 +4,13 @@ package com.flipkart.exception;
  * Exception class for when removing a prof that does not exist in the database
  */
 public class ProfNotFoundException extends Exception {
-    private String ProfID;
+    private int ProfID;
 
     /**
      * Constructor for ProfFoundExceptionClass
      * @param ProfID --> This is the ID of the prof being removed
      */
-    public ProfNotFoundException (String ProfID) {
+    public ProfNotFoundException (int ProfID) {
         this.ProfID = ProfID;
     }
 
@@ -18,7 +18,7 @@ public class ProfNotFoundException extends Exception {
      * getter method for ProfID
      * @return
      */
-    public String getProfID() {
+    public int getProfID() {
         return ProfID;
     }
 

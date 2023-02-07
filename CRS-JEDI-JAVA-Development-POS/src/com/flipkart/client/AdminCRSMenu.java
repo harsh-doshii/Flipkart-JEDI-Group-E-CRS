@@ -7,6 +7,7 @@ import com.flipkart.bean.Student;
 import com.flipkart.data.TempData;
 import com.flipkart.service.AdminServiceOperation;
 
+import java.security.spec.ECField;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -119,7 +120,15 @@ public class AdminCRSMenu {
     }
 
     private Boolean removeProf(int profId) {
-        return AdminServiceOperation.getInstance().removeProfessor(profId);
+        try {
+            return AdminServiceOperation.getInstance().removeProfessor(profId);
+
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+
+        }
+        return false;
     }
 
     private void logout() {
@@ -131,54 +140,76 @@ public class AdminCRSMenu {
     }
 
     private void approveStudentRegistration(int studentId) {
-        AdminServiceOperation.getInstance().approveStudent(studentId);
-        //AdminServiceOperation.getInstance().approveStudent();
+        try {
+            AdminServiceOperation.getInstance().approveStudent(studentId);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+
+        }
     }
 
     private boolean addProf() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the id of the professor");
-        int profId = sc.nextInt();
-        System.out.println("Enter the name of the professor");
-        String profName = sc.next();
-        Professor prof = new Professor();
-        prof.setId(profId);
-        prof.setName(profName);
-        prof.setPassword("default");
-        AdminServiceOperation.getInstance().addProfessor(prof);
-        System.out.println("List of the Professors after adding this prof : ");
-        int cur = 0;
-        for (var pro : AdminServiceOperation.getInstance().viewProfessor()) {
-            cur++;
-            System.out.print(cur + ".   -->       ");
-            System.out.println("id:- " + pro.getId() + "     ||   name:-  " + pro.getName());
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter the id of the professor");
+            int profId = sc.nextInt();
+            System.out.println("Enter the name of the professor");
+            String profName = sc.next();
+            Professor prof = new Professor();
+            prof.setId(profId);
+            prof.setName(profName);
+            prof.setPassword("default");
+            AdminServiceOperation.getInstance().addProfessor(prof);
+            System.out.println("List of the Professors after adding this prof : ");
+            int cur = 0;
+            for (var pro : AdminServiceOperation.getInstance().viewProfessor()) {
+                cur++;
+                System.out.print(cur + ".   -->       ");
+                System.out.println("id:- " + pro.getId() + "     ||   name:-  " + pro.getName());
+            }
+            return true;
         }
-        return true;
-        //AdminServiceOperation.getInstance().addProfessor();
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     private Boolean removeCourse(int courseId) {
-        AdminServiceOperation.getInstance().removeCourse(courseId);
-        System.out.println("List of the Courses after removing this course : ");
-        this.viewCourseCatalogue();
-        return true;
+        try {
+            AdminServiceOperation.getInstance().removeCourse(courseId);
+            System.out.println("List of the Courses after removing this course : ");
+            this.viewCourseCatalogue();
+            return true;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+
+        }
+        return false;
     }
 
     private Boolean addCourse() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the id of the course");
-        int courseId = sc.nextInt();
-        System.out.println("Enter the name of the course");
-        String courseName = sc.next();
-        System.out.println("Enter the description of the course");
-        String courseDesc = sc.next();
-        Course course = new Course(courseId,courseName, courseDesc);
-//        course.setCourseId(courseId);
-//        course.setCourseName(courseName);
-        AdminServiceOperation.getInstance().addCourse(course);
-        System.out.println("List of the Courses after adding this course : ");
-        this.viewCourseCatalogue();
-        return true;
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter the id of the course");
+            int courseId = sc.nextInt();
+            System.out.println("Enter the name of the course");
+            String courseName = sc.next();
+            System.out.println("Enter the description of the course");
+            String courseDesc = sc.next();
+            Course course = new Course(courseId, courseName, courseDesc);
+            AdminServiceOperation.getInstance().addCourse(course);
+            System.out.println("List of the Courses after adding this course : ");
+            this.viewCourseCatalogue();
+            return true;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+
+        }
+        return false;
     }
 
     private void viewCourseCatalogue() {
