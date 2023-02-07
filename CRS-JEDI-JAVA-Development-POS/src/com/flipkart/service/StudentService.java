@@ -3,6 +3,10 @@ package com.flipkart.service;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
+import com.flipkart.exception.CourseFoundException;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeNotAssignedException;
+import com.flipkart.exception.StudentNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,20 +23,20 @@ public interface StudentService {
      * @param courseId
      * @return
      */
-    public Boolean addCourse(int studentId, int courseId);
+    public Boolean addCourse(int studentId, int courseId)  throws StudentNotFoundException;
 
     /**
      * @param studentId
      * @param courseId
      * @return
      */
-    public Boolean dropCourse(int studentId, int courseId);
+    public Boolean dropCourse(int studentId, int courseId) throws StudentNotFoundException, CourseNotFoundException;
 
     /**
      * @param studentId
      * @return
      */
-    public List<RegisteredCourse> viewGrades(int studentId);
+    public List<RegisteredCourse> viewGrades(int studentId) throws StudentNotFoundException, GradeNotAssignedException;
 
 //    public boolean signUp(Student student) ;
 

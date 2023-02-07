@@ -15,9 +15,9 @@ import java.sql.SQLException;
 public class ProfessorDAOImpl implements ProfessorDAO{
     Connection conn = null;
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/crs_database";
+    static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "Fk!_186841";
     PreparedStatement statement = null;
 
     private static volatile ProfessorDAOImpl instance = null;
@@ -166,28 +166,29 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             String sql = SQLQueries.GET_COURSES;
             //GET_COURSES = "select * from Course where idProfessor=?";
             statement = conn.prepareStatement(sql);
-            statement.setObject(1, profId);
-            ResultSet resultSet = statement.executeQuery(sql);
+            statement.setInt(1, profId);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 courseList.add(new Course(resultSet.getInt("idCourse"),resultSet.getString("courseName")));
             }
-        } catch (Exception e){
-
-        }finally {
-                try {
-                    conn.close();
-                }
-                catch(SQLException ex){
-                    System.out.println(ex.getMessage());
-                    try {
-                        throw new SQLException
-                                ();
-                    } catch (SQLException
-                            e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
+            return courseList;
+        } catch (Exception e) {
             }
+//        }finally {
+//                try {
+//                    conn.close();
+//                }
+//                catch(SQLException ex){
+//                    System.out.println(ex.getMessage());
+//                    try {
+//                        throw new SQLException
+//                                ();
+//                    } catch (SQLException
+//                            e) {
+//                        System.out.println(e.getMessage());
+//                    }
+//                }
+//            }
         return courseList;
     }
 

@@ -1,15 +1,11 @@
 package com.flipkart.client;
 
 import com.flipkart.bean.Course;
-import com.flipkart.bean.GradeCard;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
-import com.flipkart.data.TempData;
 import com.flipkart.service.AdminServiceOperation;
-
-import java.security.spec.ECField;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class AdminCRSMenu {
@@ -156,24 +152,24 @@ public class AdminCRSMenu {
             int profId = sc.nextInt();
             System.out.println("Enter the name of the professor");
             String profName = sc.next();
-            Professor prof = new Professor();
-            prof.setId(profId);
-            prof.setName(profName);
-            prof.setPassword("default");
+            System.out.println("Enter the gender of the professor");
+            String profGender = sc.next();
+            System.out.println("Enter the add of the professor");
+            String profAddress = sc.next();
+            System.out.println("Enter the username of the professor");
+            String profUsername = sc.next();
+            System.out.println("Enter the pw of the professor");
+            String profPassword = sc.next();
+
+            List courseList = new ArrayList<>();
+            Professor prof = new Professor(profName, profGender, profAddress, profUsername, profPassword, profId, 1, "161100", "CS", courseList);
             AdminServiceOperation.getInstance().addProfessor(prof);
-            System.out.println("List of the Professors after adding this prof : ");
-            int cur = 0;
-            for (var pro : AdminServiceOperation.getInstance().viewProfessor()) {
-                cur++;
-                System.out.print(cur + ".   -->       ");
-                System.out.println("id:- " + pro.getId() + "     ||   name:-  " + pro.getName());
-            }
             return true;
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return false;
+        return  false;
     }
 
     private Boolean removeCourse(int courseId) {
@@ -218,7 +214,6 @@ public class AdminCRSMenu {
         for (var crs : AdminServiceOperation.getInstance().viewCourse()) {
             cur++;
             System.out.format("%15d %15d %32s\n",cur, crs.getCourseId(), crs.getCourseName());
-//            System.out.println();
         }
     }
 }

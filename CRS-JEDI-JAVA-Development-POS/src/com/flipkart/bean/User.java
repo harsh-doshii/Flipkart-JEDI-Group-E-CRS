@@ -23,14 +23,14 @@ public abstract class User {
     public User() {
     }
 
-    public User(String name, String gender, String address, String username, String password, int id, String role, String dob) {
+    public User(String name, String gender, String address, String username, String password, int id, int roleId, String dob) {
         this.name = name;
         this.gender = gender;
         this.address = address;
         this.username = username;
         this.password = password;
         this.id = id;
-        this.role = role;
+        this.roleId = roleId;
         this.dob = dob;
     }
 
