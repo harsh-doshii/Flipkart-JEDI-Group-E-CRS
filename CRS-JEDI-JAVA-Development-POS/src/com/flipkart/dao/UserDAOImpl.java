@@ -72,9 +72,19 @@ public class UserDAOImpl implements UserDAO {
                 }
 
                 String role = rs.getString("roleName");
+                if (!role.equals("student")) {
+                    return role;
+                }
 
-                return role;
-
+                statement = connection.prepareStatement(SQLQueries.GET_STUDENT_APPROVAL_STATUS);
+                statement.setInt(1, userId);
+                rs = statement.executeQuery();
+                rs.next();
+                if (rs.getString("isApproved").equals("true")) {
+                    return role;
+                }
+                System.out.println("Not approved by Admin, contact administrator");
+                return "INVALID USER";
             } else {
                 System.out.println("USer with  " + userId + " NOT found");
                 return "INVALID USER";

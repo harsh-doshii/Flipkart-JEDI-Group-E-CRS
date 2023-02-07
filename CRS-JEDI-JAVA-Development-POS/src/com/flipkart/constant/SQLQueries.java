@@ -28,12 +28,12 @@ public class SQLQueries {
     public static final String DELETE_USER_QUERY = "delete from User where userId = ?";
     public static final String DELETE_REGISTERED_COURSE_QUERY = "delete from RegisteredCourse where idCourse = ?";
     public static final String GET_STUDENT_GRADES = "select * from RegisteredCourse where idStudent = ?";
-    public static final String APPROVE_STUDENT_QUERY = "update Student set isApproved = 1 where idStudent = ?";
+    public static final String APPROVE_STUDENT_QUERY = "update Student set isApproved = ? where idStudent = ?";
     public static final String IS_APPROVED_STUDENT_QUERY = "select isApproved from Student where idStudent = ?";
     public static final String VIEW_PROFESSOR_QUERY = "select idProfessor from Professor";
 
 
-    public static final String VIEW_PENDING_STUDENTS = "select idStudent from Student where isApproved = false";
+    public static final String VIEW_PENDING_STUDENTS = "select idStudent from Student where isApproved = ?";
 
     public static final String GET_STUDENT_NAME = "select name from User where userId = ?";
     // StudentDao Queries
@@ -112,6 +112,8 @@ public class SQLQueries {
     public static final String ADD_NOTIFICATION = "insert into Notification values(?, ?, ?)";
 
     public static final String VIEW_NOTIFICATIONS = "select * from Notification where idStudent = ?";
+
+    public static final String GET_STUDENT_APPROVAL_STATUS = "select isApproved from Student where idStudent = ?";
 }
 
 

@@ -580,7 +580,8 @@ public class AdminDAOImpl implements AdminDAO {
             String sql = SQLQueries.APPROVE_STUDENT_QUERY;
             statement = conn.prepareStatement(sql);
 
-            statement.setInt(1,studentId);
+            statement.setString(1,"true");
+            statement.setInt(2,studentId);
             int row = statement.executeUpdate();
 
             System.out.println(row + " student approved.");
@@ -656,6 +657,7 @@ public class AdminDAOImpl implements AdminDAO {
             Class.forName(JDBC_DRIVER);
             String sql = SQLQueries.VIEW_PENDING_STUDENTS;
             statement = connection.prepareStatement(sql);
+            statement.setString(1, "false");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int idStudent = resultSet.getInt("idStudent");

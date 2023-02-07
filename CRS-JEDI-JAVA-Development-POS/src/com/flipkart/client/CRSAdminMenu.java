@@ -76,9 +76,14 @@ public class CRSAdminMenu {
                     System.out.println("##########################");
                     System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
                     List<Student> student = AdminServiceOperation.getInstance().viewPending();
+                    int cur = 0;
                     for(var data : student){
-                        System.out.println(data.getName());
+                        cur++;
+                        System.out.format("%15d %15d %32s\n", cur, data.getStudentId(), data.getName());
                     }
+                    System.out.println("Enter the studentId to be approved: ");
+                    int studentId = scanner.nextInt();
+                   approveStudentRegistration(studentId);
 //                    int count = 0;
 //                    int cur = 0;
 //                    for(Map.Entry<Integer, Boolean> entry : TempData.isStudentApproved.entrySet()) {
