@@ -65,9 +65,14 @@ public class ProfessorCRSMenu {
 
     private void viewCourse(int professorID){
         int cur = 0;
+        System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
         for (Course crs : professorServiceOperation.viewCourses(professorID)) {
             cur++;
-            System.out.println("" + cur + " " + crs.getCourseId() + " " + crs.getCourseName());
+            System.out.format("%15d %15d %32s\n",
+                    cur,
+                    crs.getCourseId(),
+                    crs.getCourseName()
+            );
         }
     }
 
