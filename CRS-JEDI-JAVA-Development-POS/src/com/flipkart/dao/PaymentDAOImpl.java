@@ -97,7 +97,7 @@ public class PaymentDAOImpl implements PaymentDAO{
                     System.out.println("Payment not finished, try again later!");
                     return -1;
                 } else {
-                    System.out.println("you have successfully paid -:" + amount + "you have to pay:" + updatedAmount);
+                    System.out.println("you have successfully paid -:" + amount + "\nyou have to pay: ----- " + updatedAmount);
                 }
 
 

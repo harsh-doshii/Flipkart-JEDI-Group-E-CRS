@@ -110,6 +110,8 @@ public class SQLQueries {
     public static final String ADD_PAYMENT_TRANSACTION = "insert into Payment(transactionId, amount, studentId) values(?, ?, ?)";
 
     public static final String ADD_NOTIFICATION = "insert into Notification values(?, ?, ?)";
+
+    public static final String VIEW_NOTIFICATIONS = "select * from Notification where idStudent = ?";
 }
 
 

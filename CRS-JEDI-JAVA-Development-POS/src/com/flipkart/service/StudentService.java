@@ -1,6 +1,7 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
 import com.flipkart.exception.CourseFoundException;
@@ -68,5 +69,8 @@ public interface StudentService {
      * @param amount
      */
     public void payFee(int studentID, float amount);
+
+    public List<PaymentNotification> viewNotifications(int studentId);
+
 
 }

@@ -32,7 +32,7 @@ public class PaymentServiceOperation implements PaymentService{
     public void payFee(int studentID, float amount) {
         try {
             int id = PaymentDAOImpl.getInstance().makePayment(studentID, amount);
-            NotificationServiceOperation.getInstance().addNotification(studentID,"you have made the payment of amount " + amount + " your transaction id is " + id);
+            NotificationServiceOperation.getInstance().addNotification(studentID,"you have made the payment of amount:--  " + amount + " ------------your transaction id is " + id + ".");
         }
         catch (Exception e){
             System.out.println(e.getMessage());

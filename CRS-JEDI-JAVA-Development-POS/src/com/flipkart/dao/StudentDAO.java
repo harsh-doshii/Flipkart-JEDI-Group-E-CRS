@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.RegisteredCourse;
 
 import java.sql.SQLException;
@@ -63,4 +64,6 @@ public interface StudentDAO {
      * @throws SQLException
      */
     public boolean makePayment(int studentId, float amount) throws SQLException;
+
+    public List<PaymentNotification> viewNotifications(int studentId) throws SQLException;
  }

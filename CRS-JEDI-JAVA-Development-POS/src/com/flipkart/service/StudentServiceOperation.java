@@ -1,6 +1,7 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
 import com.flipkart.dao.StudentDAO;
@@ -166,21 +167,24 @@ public class StudentServiceOperation implements StudentService {
 
     @Override
     public void payFee(int studentID, float amount) {
-//        float amountRemaining = TempData.remainingPayment.get(studentID);
-//        if (amountRemaining < amount) {
-//            System.out.println("You reaming pay is :" + amountRemaining);
-//            return;
-//        }
-//        TempData.remainingPayment.put(studentID, amountRemaining - amount);
-//        System.out.println("You have successfully paid " + amount);
-//        float remainingFee = TempData.remainingPayment.get(studentID);
-//        System.out.println("Remaining Fee " + remainingFee);
         try {
             StudentDAOImpl.getInstance().makePayment(studentID, amount);
         }
         catch (Exception e){
-
+            System.out.println(e.getMessage());
         }
     }
+
+    public List<PaymentNotification> viewNotifications(int studentId) {
+        List<PaymentNotification> notifications = new ArrayList<>();
+        try {
+            notifications = StudentDAOImpl.getInstance().viewNotifications(studentId);
+            return notifications;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return notifications;
+    }
+
 
 }
