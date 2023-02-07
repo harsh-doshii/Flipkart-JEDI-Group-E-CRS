@@ -27,7 +27,7 @@ public class AdminDAOImpl implements AdminDAO {
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Fk!_186836";
+    static final String PASS = "Root@123";
 
 
     private static volatile AdminDAOImpl instance = null;

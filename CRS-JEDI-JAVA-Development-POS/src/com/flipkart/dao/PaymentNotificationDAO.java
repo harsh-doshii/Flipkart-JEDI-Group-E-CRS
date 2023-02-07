@@ -5,9 +5,9 @@ import java.sql.SQLException;
 public interface PaymentNotificationDAO {
 
     /**
-     * @param timestamp
+     * @param timeStamp
      * @param studentId
-     * @param amount
+     * @param message
      * @return
      * @throws SQLException
      */

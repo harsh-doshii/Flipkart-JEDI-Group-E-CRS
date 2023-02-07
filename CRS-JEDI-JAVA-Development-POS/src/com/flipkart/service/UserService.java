@@ -1,22 +1,27 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.User;
+import com.flipkart.exception.*;
 
 public interface UserService {
     /**
      * @param userId
      * @param Password
-     * @return
+     * @return role of the user who has logged in
+     * @throws UserNotFoundException
+     * @throws PasswordMismatchException
      */
-    public String login(int userId, String Password);
+    public String login(int userId, String Password) throws UserNotFoundException, PasswordMismatchException;
 
-    /**
-     * @param userId
-     * @param oldPass
-     * @param newPass
-     * @return
-     */
-    public boolean setPassword(int userId, String oldPass, String newPass);
+//    /**
+//     * @param userId
+//     * @param newPass
+//     * @return true if successfully set password
+//     * @throws UserNotFoundException
+//     * @throws PasswordMatchedOldException
+//     * @throws PasswordIsWeakException
+//     */
+//    public boolean setPassword(int userId, String oldPass, String newPass);
 
     /**
      * @param username
@@ -26,9 +31,11 @@ public interface UserService {
 
     /**
      * @param userId
-     * @param oldPass
      * @param newPass
-     * @return
+     * @return true if successfully set password
+     * @throws UserNotFoundException
+     * @throws PasswordMatchedOldException
+     * @throws PasswordIsWeakException
      */
-    public boolean updatePassword(int userId, String oldPass, String newPass);
+    public boolean updatePassword(int userId, String oldPass, String newPass) throws UserNotFoundException, PasswordMatchedOldException, PasswordIsWeakException;
 }

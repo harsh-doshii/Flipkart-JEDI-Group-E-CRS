@@ -1,5 +1,7 @@
 package com.flipkart.dao;
 
+import com.flipkart.exception.*;
+
 import java.sql.SQLException;
 
 public interface UserDAO {
@@ -10,7 +12,7 @@ public interface UserDAO {
      * @return
      * @throws SQLException
      */
-    public String login(int userId, String pass) throws SQLException;
+    public String login(int userId, String pass) throws PasswordMismatchException, UserNotFoundException;
 
     /**
      * @param userId
@@ -19,5 +21,5 @@ public interface UserDAO {
      * @return
      * @throws SQLException
      */
-    public boolean updatePassword(int userId, String oldPass, String newPass) throws SQLException;
+    public boolean updatePassword(int userId, String oldPass, String newPass) throws PasswordMismatchException, UserNotFoundException;
 }

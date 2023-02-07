@@ -8,19 +8,19 @@ package com.flipkart.exception;
  *
  */
 public class PaymentAlreadyDoneException extends Exception{
-	private String studentId;
+	private int studentId;
 
 	/**
 	 * @param studentId -> ID of student
 	 */
-	public PaymentAlreadyDoneException(String studentId) {
+	public PaymentAlreadyDoneException(int studentId) {
 		this.studentId = studentId;
 	}
 	
 	/**
 	 * @return the name
 	 */
-	public String getId() {
+	public int getId() {
 		return studentId;
 	}
 	

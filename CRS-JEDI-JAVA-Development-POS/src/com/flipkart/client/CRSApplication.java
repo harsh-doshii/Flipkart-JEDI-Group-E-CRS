@@ -47,46 +47,50 @@ public class CRSApplication {
     }
 
     private static void login() {
-        System.out.println("Login :-->");
-        System.out.println("UserId: ");
-        int userId = scanner.nextInt();
+        try {
+            System.out.println("Login :-->");
+            System.out.println("UserId: ");
+            int userId = scanner.nextInt();
 
-        System.out.println("Password: ");
-        String password = scanner.next();
-        String role = UserServiceOperation.getInstance().login(userId, password);
-        if(!role.equals("INVALID USER")){
-            switch(role) {
-                case "student" :
-                case "Student" :
-                case "STUDENT" :
-                    System.out.println("Welcome to the Student menu!");
-                    //assuming username to be the student id as we don't have the student id yet
-                    CRSStudentMenu studentMenu = new CRSStudentMenu(userId);
-                    studentMenu.displayMenu();
-                    break;
+            System.out.println("Password: ");
+            String password = scanner.next();
+            String role = UserServiceOperation.getInstance().login(userId, password);
+            if (!role.equals("INVALID USER")) {
+                switch (role) {
+                    case "student":
+                    case "Student":
+                    case "STUDENT":
+                        System.out.println("Welcome to the Student menu!");
+                        //assuming username to be the student id as we don't have the student id yet
+                        CRSStudentMenu studentMenu = new CRSStudentMenu(userId);
+                        studentMenu.displayMenu();
+                        break;
 
-                case "Professor" :
-                case "professor" :
-                case "PROFESSOR" :
-                case "prof":
-                    CRSProfessorMenu professorMenu = new CRSProfessorMenu(userId);
-                    professorMenu.displayMenu();
-                    break;
+                    case "Professor":
+                    case "professor":
+                    case "PROFESSOR":
+                    case "prof":
+                        CRSProfessorMenu professorMenu = new CRSProfessorMenu(userId);
+                        professorMenu.displayMenu();
+                        break;
 
-                case "Admin":
-                case "admin":
-                case "ADMIN":
-                    System.out.println("Welcome to the Admin menu!");
-                    CRSAdminMenu cRSAdminMenu = new CRSAdminMenu(userId);
-                    cRSAdminMenu.displayAdminMenu();
-                    break;
-                default:
-                    System.err.println("Invalid Option.");
+                    case "Admin":
+                    case "admin":
+                    case "ADMIN":
+                        System.out.println("Welcome to the Admin menu!");
+                        CRSAdminMenu cRSAdminMenu = new CRSAdminMenu(userId);
+                        cRSAdminMenu.displayAdminMenu();
+                        break;
+                    default:
+                        System.err.println("Invalid Option.");
+                }
+            } else {
+                System.out.println("No user found!");
+
             }
         }
-        else{
-            System.out.println("No user found!");
-
+        catch (Exception e){
+            System.out.println(e.getMessage());
         }
 
     }
@@ -120,17 +124,21 @@ public class CRSApplication {
     }
 
     private static void updatePassword(){
-        System.out.println("UserId: ");
-        int userId = scanner.nextInt();
-        System.out.println("Enter old Password: ");
-        String oldPassword = scanner.next();
-        System.out.println("Enter new Password: ");
-        String newPassword = scanner.next();
-        if(UserServiceOperation.getInstance().updatePassword(userId, oldPassword,newPassword)){
-            System.out.println("Password Updated Successfully");
+        try {
+            System.out.println("UserId: ");
+            int userId = scanner.nextInt();
+            System.out.println("Enter old Password: ");
+            String oldPassword = scanner.next();
+            System.out.println("Enter new Password: ");
+            String newPassword = scanner.next();
+            if (UserServiceOperation.getInstance().updatePassword(userId, oldPassword, newPassword)) {
+                System.out.println("Password Updated Successfully");
+            } else {
+                System.out.println("Invalid Old Password");
+            }
         }
-        else{
-            System.out.println("Invalid Old Password");
+        catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 

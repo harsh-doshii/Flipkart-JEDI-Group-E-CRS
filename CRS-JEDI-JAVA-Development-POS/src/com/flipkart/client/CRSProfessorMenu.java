@@ -60,79 +60,98 @@ public class CRSProfessorMenu {
 
 
     private void viewCourse(int professorID){
-        int cur = 0;
-        System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
-        for (Course crs : professorServiceOperation.viewCourses(professorID)) {
-            cur++;
-            System.out.format("%15d %15d %32s\n",
-                    cur,
-                    crs.getCourseId(),
-                    crs.getCourseName()
-            );
+        try {
+            int cur = 0;
+            System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
+            for (Course crs : professorServiceOperation.viewCourses(professorID)) {
+                cur++;
+                System.out.format("%15d %15d %32s\n",
+                        cur,
+                        crs.getCourseId(),
+                        crs.getCourseName()
+                );
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 
     private void viewStudents(){
-        System.out.println("Enter course id");
-        int courseId = scanner.nextInt();
-        System.out.println("##########################");
+        try {
+            System.out.println("Enter course id");
+            int courseId = scanner.nextInt();
+            System.out.println("##########################");
 
-        System.out.println("List of registered students:");
+            System.out.println("List of registered students:");
 
-        System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
-        int cur = 0;
-        List<Student> students = professorServiceOperation.viewStudents(courseId);
-        for(var student : students) {
-            cur++;
-            System.out.format("%15d %15d %32s\n",
-                    cur,
-                    student.getStudentId(),
-                    student.getName()
-            );
+            System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
+            int cur = 0;
+            List<Student> students = professorServiceOperation.viewStudents(courseId);
+            for (var student : students) {
+                cur++;
+                System.out.format("%15d %15d %32s\n",
+                        cur,
+                        student.getStudentId(),
+                        student.getName()
+                );
+            }
+            System.out.println("##########################");
         }
-        System.out.println("##########################");
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private void assignGrades(){
-        System.out.println("Enter course id");
-        int courseId = scanner.nextInt();
-        System.out.println("##########################");
+        try {
+            System.out.println("Enter course id");
+            int courseId = scanner.nextInt();
+            System.out.println("##########################");
 
-        System.out.println("List of registered students:");
+            System.out.println("List of registered students:");
 
-        System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
-        int cur = 0;
-        for(var student : professorServiceOperation.viewStudents(courseId)) {
-            cur++;
-            System.out.println("works till here");
-            System.out.format("%15d %15d %32s\n",
-                    cur,
-                    student.getStudentId(),
-                    student.getName()
-            );
+            System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
+            int cur = 0;
+            for (var student : professorServiceOperation.viewStudents(courseId)) {
+                cur++;
+                System.out.println("works till here");
+                System.out.format("%15d %15d %32s\n",
+                        cur,
+                        student.getStudentId(),
+                        student.getName()
+                );
+            }
+            System.out.println("##########################");
+            System.out.println("Enter student id");
+            int studentId = scanner.nextInt();
+
+            System.out.println("Enter grade in number");
+            int gradeValue = scanner.nextInt();
+            Grade grade = new Grade(gradeValue);
+
+            System.out.println("Enter Semester");
+            int sem = scanner.nextInt();
+
+            professorServiceOperation.assignGrade(studentId, courseId, grade, sem);
         }
-        System.out.println("##########################");
-        System.out.println("Enter student id");
-        int studentId = scanner.nextInt();
-
-        System.out.println("Enter grade in number");
-        int gradeValue = scanner.nextInt();
-        Grade grade = new Grade(gradeValue);
-
-        System.out.println("Enter Semester");
-        int sem = scanner.nextInt();
-
-        professorServiceOperation.assignGrade(studentId, courseId, grade,sem);
-
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private void signUpForCourse() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the id of the course you want to teach");
-        int courseId = sc.nextInt();
-        professorServiceOperation.signUpForCourse(courseId, professorID);
-        System.out.println("List of the Courses after adding this course : ");
-        this.viewCourse(professorID);
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter the id of the course you want to teach");
+            int courseId = sc.nextInt();
+            professorServiceOperation.signUpForCourse(courseId, professorID);
+            System.out.println("List of the Courses after adding this course : ");
+            this.viewCourse(professorID);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private void logout() {

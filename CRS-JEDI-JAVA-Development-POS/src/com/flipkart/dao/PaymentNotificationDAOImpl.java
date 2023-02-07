@@ -11,7 +11,7 @@ public class PaymentNotificationDAOImpl implements PaymentNotificationDAO {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     static final String USER = "root";
-    static final String PASS = "Fk!_186836";
+    static final String PASS = "Root@123";
     PreparedStatement statement = null;
 
     private static volatile PaymentNotificationDAOImpl instance = null;

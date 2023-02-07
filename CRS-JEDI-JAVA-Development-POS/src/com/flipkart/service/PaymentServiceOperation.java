@@ -2,6 +2,7 @@ package com.flipkart.service;
 
 import com.flipkart.dao.PaymentDAOImpl;
 import com.flipkart.dao.PaymentNotificationDAOImpl;
+import com.flipkart.exception.PaymentAlreadyDoneException;
 
 public class PaymentServiceOperation implements PaymentService{
 
@@ -29,13 +30,13 @@ public class PaymentServiceOperation implements PaymentService{
         }
     }
     @Override
-    public void payFee(int studentID, float amount) {
+    public void payFee(int studentID, float amount) throws PaymentAlreadyDoneException {
         try {
             int id = PaymentDAOImpl.getInstance().makePayment(studentID, amount);
             NotificationServiceOperation.getInstance().addNotification(studentID,"you have made the payment of amount:--  " + amount + " ------------your transaction id is " + id + ".");
         }
         catch (Exception e){
-            System.out.println(e.getMessage());
+            throw new PaymentAlreadyDoneException(studentID);
         }
     }
 }

@@ -3,16 +3,17 @@ package com.flipkart.dao;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.RegisteredCourse;
+import com.flipkart.exception.DatabaseException;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface StudentDAO {
     /**
-     * @return
-     * @throws SQLException
+     * Get course catalogue
+     * @return Course Catalogue displaying all courses offered
      */
-    public List<Course> getCourseCatalogue() throws SQLException;
+    public List<Course> getCourseCatalogue() throws DatabaseException;
 
     /**
      * @param studentId

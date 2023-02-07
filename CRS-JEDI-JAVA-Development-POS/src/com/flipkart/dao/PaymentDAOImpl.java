@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.constant.SQLQueries;
+import com.flipkart.exception.PaymentAlreadyDoneException;
 
 import java.sql.*;
 
@@ -10,7 +11,7 @@ public class PaymentDAOImpl implements PaymentDAO{
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     static final String USER = "root";
-    static final String PASS = "Fk!_186836";
+    static final String PASS = "Root@123";
     PreparedStatement statement = null;
 
     private static volatile PaymentDAOImpl instance = null;
@@ -64,7 +65,7 @@ public class PaymentDAOImpl implements PaymentDAO{
     }
 
     @Override
-    public int makePayment(int studentId, float amount) throws SQLException {
+    public int makePayment(int studentId, float amount) throws PaymentAlreadyDoneException {
 
         try {
             try {
@@ -117,23 +118,12 @@ public class PaymentDAOImpl implements PaymentDAO{
                 }
             }
         } catch (SQLException se) {
-            se.printStackTrace();
-            throw new SQLException();
+            throw new PaymentAlreadyDoneException(studentId);
         } finally {
-            //finally block used to close resources
             try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException se2) {
-                throw new SQLException();
-            }// nothing we can do
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
+                conn.close();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
         }
         

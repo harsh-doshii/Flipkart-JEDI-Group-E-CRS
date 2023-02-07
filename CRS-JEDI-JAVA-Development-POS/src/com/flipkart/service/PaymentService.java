@@ -1,5 +1,7 @@
 package com.flipkart.service;
 
+import com.flipkart.exception.PaymentAlreadyDoneException;
+
 public interface PaymentService {
     /**
      * @param studentID
@@ -11,5 +13,5 @@ public interface PaymentService {
      * @param studentID
      * @param amount
      */
-    public void payFee(int studentID, float amount);
+    public void payFee(int studentID, float amount) throws PaymentAlreadyDoneException;
 }

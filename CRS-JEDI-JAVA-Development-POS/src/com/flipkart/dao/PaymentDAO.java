@@ -1,5 +1,7 @@
 package com.flipkart.dao;
 
+import com.flipkart.exception.PaymentAlreadyDoneException;
+
 import java.sql.SQLException;
 
 public interface PaymentDAO {
@@ -16,6 +18,6 @@ public interface PaymentDAO {
      * @return
      * @throws SQLException
      */
-    public int makePayment(int studentId, float amount) throws SQLException;
+    public int makePayment(int studentId, float amount) throws PaymentAlreadyDoneException;
 
 }

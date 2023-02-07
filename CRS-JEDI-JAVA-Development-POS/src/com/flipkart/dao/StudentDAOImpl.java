@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import com.flipkart.bean.*;
-
+import com.flipkart.exception.*;
 import java.sql.SQLException;
 import com.flipkart.client.CRSApplication;
 import com.flipkart.constant.SQLQueries;
@@ -26,7 +26,7 @@ public class StudentDAOImpl implements StudentDAO {
     static final String USER = "root";
 
     // Enter your passwords here.
-    static final String PASS = "Fk!_186836";
+    static final String PASS = "Root@123";
     public static StudentDAOImpl getInstance() {
         if (instance == null) {
             instance = new StudentDAOImpl();
@@ -34,7 +34,7 @@ public class StudentDAOImpl implements StudentDAO {
         return instance;
     }
 
-    public List<Course> getCourseCatalogue() throws SQLException {
+    public List<Course> getCourseCatalogue() throws DatabaseException {
         //Connection conn = DBUtil.getConnection();
         List<Course> courseCatalogue = new ArrayList<Course>();
         Connection connection = null;
@@ -53,23 +53,12 @@ public class StudentDAOImpl implements StudentDAO {
                 courseCatalogue.add(new Course(catalogueCourses.getInt("idCourse"), catalogueCourses.getString("courseName"), catalogueCourses.getString("courseDescription")));
             }
         } catch (SQLException se) {
-            se.printStackTrace();
-            throw new SQLException();
+            throw new DatabaseException();
         } finally {
-            //finally block used to close resources
             try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException se2) {
-                throw new SQLException();
-            }// nothing we can do
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
+                connection.close();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
         }
         return courseCatalogue;

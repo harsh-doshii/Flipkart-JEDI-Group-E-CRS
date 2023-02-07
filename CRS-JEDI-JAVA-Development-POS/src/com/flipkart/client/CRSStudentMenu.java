@@ -182,8 +182,13 @@ public class CRSStudentMenu {
     }
 
     private void payFee(float amount) {
-        System.out.printf("Initiating Fee payment : ------>>\n");
-        PaymentServiceOperation.getInstance().payFee(studentID, amount);
+        try {
+            System.out.printf("Initiating Fee payment : ------>>\n");
+            PaymentServiceOperation.getInstance().payFee(studentID, amount);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void viewNotifications() {

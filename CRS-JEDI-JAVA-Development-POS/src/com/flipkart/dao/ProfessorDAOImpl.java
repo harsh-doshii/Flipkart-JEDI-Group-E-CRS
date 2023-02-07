@@ -7,6 +7,8 @@ import com.flipkart.bean.Student;
 import java.util.ArrayList;
 import java.util.List;
 import com.flipkart.constant.SQLQueries;
+import com.flipkart.exception.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,7 +19,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     static final String USER = "root";
-    static final String PASS = "Fk!_186836";
+    static final String PASS = "Root@123";
     PreparedStatement statement = null;
 
     private static volatile ProfessorDAOImpl instance = null;
@@ -33,7 +35,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
         return instance;
     }
 
-    public List<Student> viewStudents(int courseId) throws Exception {
+    public List<Student> viewStudents(int courseId) throws SQLException {
         List<Integer> sidlist = new ArrayList<>();
         List<Student> listofStudents = new ArrayList<>();
         Connection conn = null;
@@ -67,28 +69,17 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             }
             return listofStudents;
         } catch (Exception e) {
+            throw new SQLException();
         }finally {
-            //finally block used to close resources
             try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException se2) {
-                throw new SQLException();
-            }// nothing we can do
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
+                conn.close();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
         }
-//
-        return listofStudents;
     }
 
-    public boolean assignGrade(int studentId, int courseId, Grade grade, int sem) throws Exception{
+    public boolean assignGrade(int studentId, int courseId, Grade grade, int sem) throws StudentNotFoundException, GradeNotAssignedException{
         Connection conn = null;
         try{
                 //Changing ResgisteredCourse table
@@ -104,30 +95,21 @@ public class ProfessorDAOImpl implements ProfessorDAO{
                 statement.setInt(4, sem);
                 int r = statement.executeUpdate();
                 if(r!=1){
-                    throw new Exception();
+                    throw new GradeNotAssignedException(studentId);
                 }
+                return true;
             } catch (Exception e) {
+            throw new StudentNotFoundException(studentId);
             }finally {
-            //finally block used to close resources
             try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException se2) {
-                throw new SQLException();
-            }// nothing we can do
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
+                conn.close();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
         }
-            return false;
     }
 
-    public void signUpForCourse(int courseId,  int profId) throws Exception{
+    public void signUpForCourse(int courseId,  int profId)  throws CourseNotFoundException {
         Connection conn = null;
         try{
             //Changing Course table
@@ -144,63 +126,44 @@ public class ProfessorDAOImpl implements ProfessorDAO{
                 throw new Exception();
             }
         } catch (Exception e){
-
-        }finally {
-            //finally block used to close resources
+throw  new CourseNotFoundException(courseId);
+        }
+        finally {
             try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException se2) {
-                throw new SQLException();
-            }// nothing we can do
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
+                conn.close();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
         }
     }
 
-    public List<Course> viewCourses(int profId) throws Exception{
+    public List<Course> viewCourses(int profId) throws ProfNotFoundException{
         Connection conn = null;
         List<Course> courseList= new ArrayList<>();
-            try{
-            //Changing Course table
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            statement = null;
-             conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            String sql = SQLQueries.GET_COURSES;
-            //GET_COURSES = "select * from Course where idProfessor=?";
-            statement = conn.prepareStatement(sql);
-            statement.setInt(1, profId);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
-                courseList.add(new Course(resultSet.getInt("idCourse"),resultSet.getString("courseName")));
-            }
-            return courseList;
-        } catch (Exception e) {
-            }
-        finally {
-            //finally block used to close resources
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException se2) {
-                throw new SQLException();
-            }// nothing we can do
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+        try{
+        //Changing Course table
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        statement = null;
+         conn = DriverManager.getConnection(DB_URL,USER,PASS);
+        String sql = SQLQueries.GET_COURSES;
+        //GET_COURSES = "select * from Course where idProfessor=?";
+        statement = conn.prepareStatement(sql);
+        statement.setInt(1, profId);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()){
+            courseList.add(new Course(resultSet.getInt("idCourse"),resultSet.getString("courseName")));
         }
         return courseList;
+    } catch (Exception e) {
+            throw new ProfNotFoundException(profId);
+        }
+        finally {
+            try {
+                conn.close();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
 }

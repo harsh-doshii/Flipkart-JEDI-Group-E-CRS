@@ -10,6 +10,8 @@ import com.flipkart.bean.Student;
 import java.sql.SQLException;
 import com.flipkart.client.CRSApplication;
 import com.flipkart.constant.SQLQueries;
+import com.flipkart.exception.PasswordMismatchException;
+import com.flipkart.exception.UserNotFoundException;
 
 public class UserDAOImpl implements UserDAO {
     static final String DB_URL = "jdbc:mysql://localhost/crs_db";
@@ -18,7 +20,7 @@ public class UserDAOImpl implements UserDAO {
     private PreparedStatement statement = null;
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Fk!_186836";
+    static final String PASS = "Root@123";
 
     private UserDAOImpl() {
 
@@ -37,8 +39,8 @@ public class UserDAOImpl implements UserDAO {
     *
     * */
 
-    public String login(int userId, String pass) throws SQLException {
-        //TODO:
+    public String login(int userId, String pass) throws PasswordMismatchException, UserNotFoundException {
+
         Connection connection = null;
         try {
             try {
@@ -92,7 +94,7 @@ public class UserDAOImpl implements UserDAO {
 
         } catch (SQLException se) {
             se.printStackTrace();
-            throw new SQLException();
+            throw new PasswordMismatchException(pass);
         } finally {
             //finally block used to close resources
             try {
@@ -100,20 +102,20 @@ public class UserDAOImpl implements UserDAO {
                     statement.close();
                 }
             } catch (SQLException se2) {
-                throw new SQLException();
+                throw new UserNotFoundException(userId);
             }// nothing we can do
             try {
                 if (connection != null) {
                     connection.close();
                 }
             } catch (SQLException se) {
-                se.printStackTrace();
+                System.out.println(se.getMessage());
             }
         }
     }
 
 
-    public boolean updatePassword(int userId, String oldPass, String newPass) throws SQLException {
+    public boolean updatePassword(int userId, String oldPass, String newPass) throws PasswordMismatchException, UserNotFoundException {
         Connection connection = null;
         try {
             try {
@@ -145,8 +147,7 @@ public class UserDAOImpl implements UserDAO {
             System.out.println("Updated password successfully, Enjoy:)");
             return true;
         } catch (SQLException se) {
-            se.printStackTrace();
-            throw new SQLException();
+            throw new PasswordMismatchException(oldPass);
         } finally {
             //finally block used to close resources
             try {
@@ -154,14 +155,14 @@ public class UserDAOImpl implements UserDAO {
                     statement.close();
                 }
             } catch (SQLException se2) {
-                throw new SQLException();
+                throw new UserNotFoundException(userId);
             }// nothing we can do
             try {
                 if (connection != null) {
                     connection.close();
                 }
             } catch (SQLException se) {
-                se.printStackTrace();
+                System.out.println(se.getMessage());
             }
         }
     }

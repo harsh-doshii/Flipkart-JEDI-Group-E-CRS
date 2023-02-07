@@ -4,13 +4,13 @@ package com.flipkart.exception;
  * Exception class for when grade is not assigned to student.
  */
 public class GradeNotAssignedException extends Exception{
-    private String studentID;
+    private int studentID;
 
     /**
      * Constructor
      * @param studentID -> ID of student whose grade is not assigned
      */
-    public GradeNotAssignedException(String studentID){
+    public GradeNotAssignedException(int studentID){
         this.studentID = studentID;
     }
 
@@ -27,7 +27,7 @@ public class GradeNotAssignedException extends Exception{
      * Getter method for student ID.
      * @return -> StudentID
      */
-    public String getStudentID(){
+    public int getStudentID(){
         return this.studentID;
     }
 

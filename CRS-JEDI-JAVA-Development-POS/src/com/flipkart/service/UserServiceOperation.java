@@ -1,6 +1,7 @@
 package com.flipkart.service;
 import com.flipkart.bean.User;
 import com.flipkart.dao.UserDAOImpl;
+import com.flipkart.exception.*;
 
 public class UserServiceOperation implements UserService{
 
@@ -18,27 +19,16 @@ public class UserServiceOperation implements UserService{
         return  instance;
     }
     @Override
-    public String login(int userId, String Password)  {
-        try {
+    public String login(int userId, String Password) throws UserNotFoundException, PasswordMismatchException {
            return UserDAOImpl.getInstance().login(userId, Password);
-
-        }
-        catch (Exception e){
-            return "INVALID USER";
-        }
-//       return
     }
 
-    @Override
-    public boolean setPassword(int userId, String oldPass, String newPass) {
-        try {
-            UserDAOImpl.getInstance().updatePassword(userId, oldPass, newPass);
-            return true;
-        }
-        catch (Exception e){
-            return  false;
-        }
-    }
+//    @Override
+//    public boolean setPassword(int userId, String oldPass, String newPass) {
+//
+//            UserDAOImpl.getInstance().updatePassword(userId, oldPass, newPass);
+//
+//    }
 
     @Override
     public User getUser(String username) {
@@ -46,13 +36,13 @@ public class UserServiceOperation implements UserService{
     }
 
     @Override
-    public boolean updatePassword(int userId, String oldPass, String newPass) {
+    public boolean updatePassword(int userId, String oldPass, String newPass) throws  PasswordMatchedOldException {
         try {
             UserDAOImpl.getInstance().updatePassword(userId, oldPass, newPass);
             return true;
         }
         catch (Exception e){
-            return  false;
+           throw new PasswordMatchedOldException(newPass);
         }
     }
 }
