@@ -12,7 +12,7 @@ import java.util.List;
 public class ProfessorServiceOperation implements ProfessorService{
 
     ProfessorDAOImpl professorDaoImpl = ProfessorDAOImpl.getInstance();
-
+//private static StudentServiceOperation instance = null;
 
     private static ProfessorServiceOperation instance=null;
 
