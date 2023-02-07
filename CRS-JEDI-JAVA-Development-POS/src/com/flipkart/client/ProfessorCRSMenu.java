@@ -82,12 +82,11 @@ public class ProfessorCRSMenu {
         System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
         int cur = 0;
         List<Student> students = professorServiceOperation.viewStudents(courseId);
-//        System.out.println("student.size = " + students.size());
         for(var student : students) {
             cur++;
             System.out.format("%15d %15d %32s\n",
                     cur,
-                    student.getId(),
+                    student.getStudentId(),
                     student.getName()
             );
         }
@@ -108,7 +107,7 @@ public class ProfessorCRSMenu {
             System.out.println("works till here");
             System.out.format("%15d %15d %32s\n",
                     cur,
-                    student.getId(),
+                    student.getStudentId(),
                     student.getName()
             );
         }

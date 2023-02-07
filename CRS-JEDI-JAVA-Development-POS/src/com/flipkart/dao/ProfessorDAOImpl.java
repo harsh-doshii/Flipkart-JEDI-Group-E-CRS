@@ -45,43 +45,43 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             //GET_ENROLLED_STUDENTS = "select * from RegisteredCourse where idCourse=?";
             statement = conn.prepareStatement(sql);
             statement.setInt(1, courseId);
-            ResultSet rs = statement.executeQuery(sql);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 int studentId = rs.getInt("idStudent");
                 sidlist.add(studentId);
             }
-            //add code to convert li<t<Integer> to list<Student>
-            for (var cur: sidlist) {
+            //add code to convert list<Integer> to list<Student>
+            for (int cur: sidlist) {
                 statement = conn.prepareStatement(SQLQueries.GET_STUDENT_FROM_ID);
+                //"select * from Student where idStudent = ?"
                 statement.setInt(1, cur);
                 rs = statement.executeQuery();
-
                 statement = conn.prepareStatement(SQLQueries.GET_USER_FROM_USER_ID);
+                // "select * from User where userId = ?"
                 statement.setInt(1, cur);
                 ResultSet rs2 = statement.executeQuery();
-
-                // see this if needed.
                 rs.next();
                 rs2.next();
                 Student student = new Student(rs.getInt("idStudent"), rs2.getString("name"));
                 listofStudents.add(student);
             }
+            return listofStudents;
         } catch (Exception e) {
-
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                try {
-                    throw new SQLException
-                            ();
-                } catch (SQLException
-                        e) {
-                    System.out.println(e.getMessage());
-                }
-            }
         }
+//        } finally {
+//            try {
+//                conn.close();
+//            } catch (SQLException ex) {
+//                System.out.println(ex.getMessage());
+//                try {
+//                    throw new SQLException
+//                            ();
+//                } catch (SQLException
+//                        e) {
+//                    System.out.println(e.getMessage());
+//                }
+//            }
+//        }
         return listofStudents;
     }
 

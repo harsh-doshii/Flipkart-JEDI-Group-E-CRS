@@ -91,9 +91,9 @@ public class SQLQueries {
 
     public static final String REG_COURSE_FOR_A_STUDENT = "insert into RegisteredCourse (idStudent, idCourse, grade, semester) values (?, ?, ?, ?)";
 
-    public static final String GET_STUDENT_FROM_ID = "select * from Student where isStudent = ?";
+    public static final String GET_STUDENT_FROM_ID = "select * from Student where idStudent = ?";
 
-    public static final String GET_COURSE_FROM_ID = "select * from Course where isCourse = ?";
+    public static final String GET_COURSE_FROM_ID = "select * from Course where idCourse = ?";
 
     //public static final String GET_REMAINING_PAY_FOR_A_STUDENT = "select * fro Student where idStudent = ?";
 
