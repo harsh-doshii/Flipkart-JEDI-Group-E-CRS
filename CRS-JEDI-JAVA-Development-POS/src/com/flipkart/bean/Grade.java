@@ -14,9 +14,12 @@ public class Grade {
         this.grade = grade;
         this.gradeValue = gradeValue;
     }
-
     public Grade(int gradeValue) {
         this.gradeValue = gradeValue;
+    }
+
+    public int getGradeValue() {
+        return this.gradeValue;
     }
 
     public String getGrade() {

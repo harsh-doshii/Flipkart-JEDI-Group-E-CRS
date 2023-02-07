@@ -10,7 +10,7 @@ public class SQLQueries {
 
 
     //ProfessorDao queries
-    public static final String ADD_GRADE = "update RegisteredCourse set grade=? where idCourse=? and idStudent=? and sem=?";
+    public static final String ADD_GRADE = "update RegisteredCourse set grade=? where idCourse=? and idStudent=? and semester=?";
     public static final String GET_ENROLLED_STUDENTS = "select * from RegisteredCourse where idCourse=?";
     public static final String GET_COURSES = "select * from Course where idProfessor=?";
     public static final String SIGN_UP_PROF = "update Course set idProfessor=? where idCourse=?";

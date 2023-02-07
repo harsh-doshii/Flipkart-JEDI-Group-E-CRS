@@ -117,7 +117,7 @@ public class ProfessorCRSMenu {
 
         System.out.println("Enter grade in number");
         int gradeValue = scanner.nextInt();
-        Grade grade = TempData.integerToGrade.get(gradeValue);
+        Grade grade = new Grade(gradeValue);
 
         System.out.println("Enter Semester");
         int sem = scanner.nextInt();

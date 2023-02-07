@@ -94,31 +94,31 @@ public class ProfessorDAOImpl implements ProfessorDAO{
                 String sql = SQLQueries.ADD_GRADE;
                 //ADD_GRADE = "update RegisteredCourse set grade=? where idCourse=? and idStudent=? and sem=?";
                 statement = conn.prepareStatement(sql);
-                statement.setObject(1, grade);
+                statement.setInt(1, 8);
                 statement.setInt(2, courseId);
                 statement.setInt(3, studentId);
-                statement.setInt(3, sem);
+                statement.setInt(4, sem);
                 int r = statement.executeUpdate();
                 if(r!=1){
                     throw new Exception();
                 }
-            } catch (Exception e){
-
-            }finally {
-                try {
-                    conn.close();
-                }
-                catch(SQLException ex){
-                    System.out.println(ex.getMessage());
-                    try {
-                        throw new SQLException
-                                ();
-                    } catch (SQLException
-                            e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
+            } catch (Exception e) {
             }
+//            }finally {
+//                try {
+//                    conn.close();
+//                }
+//                catch(SQLException ex){
+//                    System.out.println(ex.getMessage());
+//                    try {
+//                        throw new SQLException
+//                                ();
+//                    } catch (SQLException
+//                            e) {
+//                        System.out.println(e.getMessage());
+//                    }
+//                }
+//            }
             return false;
     }
 
