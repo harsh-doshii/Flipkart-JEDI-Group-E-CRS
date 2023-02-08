@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
+
 public class CRSApplication {
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
@@ -118,8 +120,18 @@ public class CRSApplication {
             System.out.println("Enter new password");
             String password = scanner.next();
             String role = "student";
-            System.out.println("Enter dob");
+            System.out.println("Enter dob in dd/mm/yyyy format");
             String dob = scanner.next();
+
+            String regex = "^([0-2][0-9]||3[0-1])/(0[0-9]||1[0-2])/[0-9][0-9][0-9][0-9]$";
+            Pattern p = Pattern.compile(regex);
+
+            while(!p.matcher(dob).matches()) {
+                System.out.println("please enter dob in correct format");
+                System.out.println("Enter dob in dd/mm/yyyy format");
+                dob = scanner.next();
+            }
+
             System.out.println("Enter student branch Name");
             String branchName = scanner.next();
 
