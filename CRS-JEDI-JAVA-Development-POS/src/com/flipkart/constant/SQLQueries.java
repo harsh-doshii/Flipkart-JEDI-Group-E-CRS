@@ -3,6 +3,12 @@ package com.flipkart.constant;
 public class SQLQueries {
 
 
+
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    // Declaring the color
+    // Custom declaration
+    public static final String ANSI_YELLOW = "\u001B[33m";
     //UserDao queries
     public static final String GET_USER_DETAILS_QUERY = "select * from User where id = ?";
     public static final String GET_USER_NAME = "select name from User where id = ?";

@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * Exception class for when course cannot be removed because it doesn't exist in the course catalogue
  */
@@ -28,6 +30,6 @@ public class CourseNotFoundException extends Exception{
      */
     @Override
     public String getMessage() {
-        return "Course : " + courseCode + " not found in the course catalogue";
+        return SQLQueries.ANSI_YELLOW  + "Course : " + courseCode + " not found in the course catalogue" + SQLQueries.ANSI_RESET;
     }
 }

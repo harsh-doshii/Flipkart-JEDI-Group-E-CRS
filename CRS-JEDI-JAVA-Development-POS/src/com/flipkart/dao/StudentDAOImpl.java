@@ -56,7 +56,7 @@ public class StudentDAOImpl implements StudentDAO {
     public Boolean addCourse(int studentId, int courseId, boolean isPrimary) throws CourseNotFoundException {
         Connection connection = null;
         try {
-<<<<<<< Updated upstream
+
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_COURSE_FROM_ID);
             statement.setInt(1, courseId);
@@ -74,10 +74,9 @@ public class StudentDAOImpl implements StudentDAO {
                 throw new CourseNotFoundException(courseId);
             }
 
-=======
+
             
             connection = DBUtil.getConnection();
->>>>>>> Stashed changes
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet totalCourses = statement.executeQuery();
@@ -425,9 +424,6 @@ public class StudentDAOImpl implements StudentDAO {
         }
         return registeredCourses;
     }
-
-<<<<<<< Updated upstream
-=======
     public boolean makePayment(int studentId, float amount) throws SQLException {
         Connection connection = null;
         try {
@@ -482,8 +478,6 @@ public class StudentDAOImpl implements StudentDAO {
         }
     }
 
-
->>>>>>> Stashed changes
     public List<PaymentNotification> viewNotifications(int studentId) throws SQLException {
         Connection connection = null;
         List <PaymentNotification> notifications = new ArrayList<>();
