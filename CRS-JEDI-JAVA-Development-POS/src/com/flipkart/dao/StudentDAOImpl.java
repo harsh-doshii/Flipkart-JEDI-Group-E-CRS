@@ -75,7 +75,6 @@ public class StudentDAOImpl implements StudentDAO {
             }
 
 
-            
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
@@ -424,6 +423,7 @@ public class StudentDAOImpl implements StudentDAO {
         }
         return registeredCourses;
     }
+
     public boolean makePayment(int studentId, float amount) throws SQLException {
         Connection connection = null;
         try {
@@ -477,6 +477,7 @@ public class StudentDAOImpl implements StudentDAO {
             }
         }
     }
+
 
     public List<PaymentNotification> viewNotifications(int studentId) throws SQLException {
         Connection connection = null;

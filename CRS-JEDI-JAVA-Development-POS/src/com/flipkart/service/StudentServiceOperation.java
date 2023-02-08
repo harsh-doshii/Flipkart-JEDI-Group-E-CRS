@@ -88,27 +88,6 @@ public class StudentServiceOperation implements StudentService {
         }
     }
 
-//    @Override
-//    public float calculateFee(int studentID) {
-//        try {
-//            return StudentDAOImpl.getInstance().calculateRemainingFee(studentID);
-//        }
-//        catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//        return -1;
-//    }
-
-    //@Override
-//    public void payFee(int studentID, float amount) {
-//        try {
-//            StudentDAOImpl.getInstance().makePayment(studentID, amount);
-//        }
-//        catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
     public List<PaymentNotification> viewNotifications(int studentId) {
         List<PaymentNotification> notifications = new ArrayList<>();
         try {
