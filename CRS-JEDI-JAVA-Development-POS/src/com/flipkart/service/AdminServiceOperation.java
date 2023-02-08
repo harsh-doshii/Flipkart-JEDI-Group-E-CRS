@@ -121,13 +121,22 @@ public class AdminServiceOperation implements AdminService {
     }
 
     @Override
-    public List<Student> viewPending() {
-        List<Student> unapprovedStudents = new ArrayList<Student>();
+    public List<Student> viewPending() throws StudentsNotFoundException {
 
         try {
             return adminDAOImpl.viewUnapprovedStudents();
         } catch (Exception e) {
-            return  unapprovedStudents;
+            throw new StudentsNotFoundException();
         }
     }
+@Override
+    public List<Student> viewApprovedStudents() throws StudentsNotFoundException{
+
+    try {
+        return adminDAOImpl.viewApprovedStudents();
+    } catch (Exception e) {
+        throw new StudentsNotFoundException();
+    }
+}
+
 }

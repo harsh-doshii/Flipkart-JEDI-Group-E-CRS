@@ -42,6 +42,8 @@ public class SQLQueries {
 
 
     public static final String VIEW_PENDING_STUDENTS = "select idStudent from Student where isApproved = ?";
+    public static final String VIEW_APPROVED_STUDENTS = "select idStudent from Student where isApproved = 'true'";
+
 
     public static final String GET_STUDENT_NAME = "select name from User where userId = ?";
     // StudentDao Queries

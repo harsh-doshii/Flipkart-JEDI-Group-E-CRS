@@ -15,6 +15,7 @@ public class CRSApplication {
         mainMenu();
     }
 
+
     public static void mainMenu() {
         while(true){
             System.out.println("");
@@ -61,14 +62,15 @@ public class CRSApplication {
             String password = scanner.next();
             String role = UserServiceOperation.getInstance().login(userId, password);
             if (!role.equals("INVALID USER")) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+                String formattedDate = myDateObj.format(myFormatObj);
                 switch (role) {
                     case "student":
                     case "Student":
                     case "STUDENT":
-                        LocalDateTime myDateObj = LocalDateTime.now();
-                        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-                        String formattedDate = myDateObj.format(myFormatObj);
                         System.out.println(SQLQueries.ANSI_GREEn +"\n\nWelcome "+UserServiceOperation.getInstance().getName(userId)+" to the Student menu!"+ SQLQueries.ANSI_RESET);
                         System.out.println(SQLQueries.ANSI_YELLOW +"Logged In At: "+formattedDate + SQLQueries.ANSI_RESET);
 
@@ -81,6 +83,9 @@ public class CRSApplication {
                     case "professor":
                     case "PROFESSOR":
                     case "prof":
+
+                        System.out.println(SQLQueries.ANSI_GREEn +"\n\nWelcome "+UserServiceOperation.getInstance().getName(userId)+" to the Professor menu!"+ SQLQueries.ANSI_RESET);
+                        System.out.println(SQLQueries.ANSI_YELLOW +"Logged In At: "+formattedDate + SQLQueries.ANSI_RESET);
                         CRSProfessorMenu professorMenu = new CRSProfessorMenu(userId);
                         professorMenu.displayMenu();
                         break;
@@ -88,7 +93,8 @@ public class CRSApplication {
                     case "Admin":
                     case "admin":
                     case "ADMIN":
-                        System.out.println("Welcome to the Admin menu!");
+                        System.out.println(SQLQueries.ANSI_GREEn +"\n\nWelcome "+UserServiceOperation.getInstance().getName(userId)+" to the Admin menu!"+ SQLQueries.ANSI_RESET);
+                        System.out.println(SQLQueries.ANSI_YELLOW +"Logged In At: "+formattedDate + SQLQueries.ANSI_RESET);
                         CRSAdminMenu cRSAdminMenu = new CRSAdminMenu(userId);
                         cRSAdminMenu.displayAdminMenu();
                         break;

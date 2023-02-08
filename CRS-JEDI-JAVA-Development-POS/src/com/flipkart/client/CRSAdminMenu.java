@@ -37,7 +37,9 @@ public class CRSAdminMenu {
 
             System.out.println(" 7. Generate report card");
 
-            System.out.println(" 8. Logout");
+            System.out.println(" 8. View Approved Students");
+
+            System.out.println(" 9. Logout");
 
             System.out.println("\n***********************************************************************\n");
 
@@ -76,38 +78,21 @@ public class CRSAdminMenu {
                     System.out.println("Students to be approved : ");
                     System.out.println("##########################");
                     System.out.format( SQLQueries.ANSI_YELLOW + "%-15s %-15s %-32s\n", "Sr. No", "Student ID", "Student Name" + SQLQueries.ANSI_RESET);
-                    List<Student> student = AdminServiceOperation.getInstance().viewPending();
-                    int cur = 0;
-                    for(var data : student){
-                        cur++;
-                        System.out.format("%-15d %-15d %-32s\n", cur, data.getStudentId(), data.getName());
+                    try {
+                        List<Student> student = AdminServiceOperation.getInstance().viewPending();
+
+                        int cur = 0;
+                        for (var data : student) {
+                            cur++;
+                            System.out.format("%-15d %-15d %-32s\n", cur, data.getStudentId(), data.getName());
+                        }
                     }
+                    catch (Exception e){
+                    System.out.println("Something Went Wrong");
+                }
                     System.out.println("Enter the studentId to be approved: ");
                     int studentId = scanner.nextInt();
                    approveStudentRegistration(studentId);
-//                    int count = 0;
-//                    int cur = 0;
-//                    for(Map.Entry<Integer, Boolean> entry : TempData.isStudentApproved.entrySet()) {
-//                        cur++;
-//                        if(!entry.getValue()) {
-//                            count++;
-//                            System.out.format("%15d %15d %32s\n",
-//                                    cur,
-//                                    TempData.idToStudent.get(entry.getKey()).getId(),
-//                                    TempData.idToStudent.get(entry.getKey()).getName()
-//                            );
-//                        }
-//
-//                    }
-//                    System.out.println("##########################");
-//                    if(count!=0) {
-//                        System.out.println("Enter the id of student to approve");
-//                        int studentId = scanner.nextInt();
-//                        approveStudentRegistration(studentId);
-//                    }
-//                    else {
-//                        System.out.println("No students to approve");
-//                    }
                     break;
 
                 case 7:
@@ -115,8 +100,27 @@ public class CRSAdminMenu {
                     break;
 
                 case 8:
+                    System.out.println("Approved Students: ");
+                    System.out.println("##########################");
+                    System.out.format( SQLQueries.ANSI_YELLOW + "%-15s %-15s %-32s\n", "Sr. No", "Student ID", "Student Name" + SQLQueries.ANSI_RESET);
+                    try {
+                        List<Student> student = AdminServiceOperation.getInstance().viewApprovedStudents();
+
+                        int cur = 0;
+                        for (var data : student) {
+                            cur++;
+                            System.out.format("%-15d %-15d %-32s\n", cur, data.getStudentId(), data.getName());
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println("Something Went Wrong");
+                    }
+                    break;
+
+                case 9:
                     logout();
                     return;
+
             }
         }
     }

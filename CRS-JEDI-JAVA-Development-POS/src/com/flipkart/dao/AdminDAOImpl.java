@@ -600,7 +600,7 @@ public class AdminDAOImpl implements AdminDAO {
      * Method to view unapproved students
      */
     @Override
-    public List<Student> viewUnapprovedStudents() throws SQLException {
+    public List<Student> viewUnapprovedStudents() throws StudentsNotFoundException {
         Connection connection = DBUtil.getConnection();
         statement = null;
         List<Student> studentList  = new ArrayList<Student>();
@@ -621,7 +621,7 @@ public class AdminDAOImpl implements AdminDAO {
                 studentList.add(student);
             }
         }catch (SQLException se){
-            System.out.println(se.getMessage());
+          throw new  StudentsNotFoundException();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -641,6 +641,52 @@ public class AdminDAOImpl implements AdminDAO {
         }
         return studentList;
     }
+
+
+    @Override
+    public List<Student> viewApprovedStudents() throws StudentsNotFoundException {
+        Connection connection = DBUtil.getConnection();
+        statement = null;
+        List<Student> studentList  = new ArrayList<Student>();
+        try{
+            String sql = SQLQueries.VIEW_APPROVED_STUDENTS;
+            statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int idStudent = resultSet.getInt("idStudent");
+                String sql2 = SQLQueries.GET_STUDENT_NAME;
+                statement = connection.prepareStatement(sql2);
+                statement.setInt(1,idStudent);
+                ResultSet resultSet2 = statement.executeQuery();
+                resultSet2.next();
+//                System.out.println(resultSet2.getString("name"));
+                Student student = new Student(idStudent,resultSet2.getString("name"));
+                studentList.add(student);
+            }
+        }catch (SQLException se){
+            throw new StudentsNotFoundException();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                connection.close();
+            }
+            catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                try {
+                    throw new SQLException
+                            ();
+                } catch (SQLException
+                        e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        return studentList;
+    }
+
+
+
 
     /**
      * @return new userID to insert into db.

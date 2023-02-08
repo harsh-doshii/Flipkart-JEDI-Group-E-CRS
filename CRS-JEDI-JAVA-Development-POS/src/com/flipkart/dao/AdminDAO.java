@@ -85,7 +85,7 @@ public interface AdminDAO {
      * @return
      * @throws SQLException
      */
-    public List<Student> viewUnapprovedStudents() throws SQLException;
+    public List<Student> viewUnapprovedStudents() throws StudentsNotFoundException;
 
 
     /**
@@ -93,4 +93,10 @@ public interface AdminDAO {
      * @throws SQLException
      */
     public int getNewUserID() throws SQLException;
+
+    /**
+     * @return
+     * @throws SQLException
+     */
+    public List<Student> viewApprovedStudents() throws StudentsNotFoundException;
 }

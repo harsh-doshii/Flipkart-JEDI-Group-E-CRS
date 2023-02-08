@@ -66,6 +66,14 @@ public interface AdminService {
     /**
      * Method view pending approvals of students
      */
-    public List<Student> viewPending();
+    public List<Student> viewPending() throws StudentsNotFoundException;
+
+    /**
+     * View Approved Students
+     * @return
+     * @throws StudentsNotFoundException
+     */
+    public List<Student> viewApprovedStudents() throws StudentsNotFoundException;
+
 
 }
