@@ -75,10 +75,6 @@ public class StudentServiceOperation implements StudentService {
 
     public List<Integer> viewRegisteredCourse(int studentId) {
         List<Integer> registeredCourseList = new ArrayList<>();
-//        for (var cur : TempData.studentToRegisteredCourseList.get(studentID)) {
-//            registeredCourseList.add(cur);
-//        }
-//        return registeredCourseList;
         try {
             return StudentDAOImpl.getInstance().viewRegisteredCourses(studentId);
         }

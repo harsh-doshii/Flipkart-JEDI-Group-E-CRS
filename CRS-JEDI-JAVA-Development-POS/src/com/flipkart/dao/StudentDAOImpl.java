@@ -62,19 +62,6 @@ public class StudentDAOImpl implements StudentDAO {
             statement.setInt(1, courseId);
 
 
-            //ResultSet res2;
-
-//            try {
-//                res2 = statement.executeQuery();
-//                if (res2.wasNull()) {
-//                    return false;
-//                    //throw new CourseNotFoundException(courseId);
-//                }
-//            } catch (Exception e) {
-//                throw new CourseNotFoundException(courseId);
-//            }
-
-
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
@@ -90,18 +77,7 @@ public class StudentDAOImpl implements StudentDAO {
                 } else {
                     secondaryCourses.add(totalCourses.getInt("idStudent"));
                 }
-                //addedCourses.add(new Course(totalCourses.getInt("idCourse")));
             }
-//            if (addedCourses != null && addedCourses.size() > 0) {
-//                if (addedCourses.contains(courseId)) {
-//                    System.out.println("Course is already present in preference List");
-//                    return false;
-//                }
-//            }
-//            if (addedCourses.size() == 6) {
-//                System.out.println("There are already 6 courses in the preference List");
-//                return false;
-//            }
 
             if (primaryCourses != null && primaryCourses.size() > 0) {
                 if (primaryCourses.contains(courseId)) {
@@ -116,8 +92,6 @@ public class StudentDAOImpl implements StudentDAO {
                     return false;
                 }
             }
-
-            System.out.println("Here !!!");
 
             if (isPrimary) {
                 if (primaryCourses.size() == 4) {

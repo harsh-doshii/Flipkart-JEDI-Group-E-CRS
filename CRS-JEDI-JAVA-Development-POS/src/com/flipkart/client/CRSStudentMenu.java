@@ -220,21 +220,22 @@ public class CRSStudentMenu {
     public void viewCoursesInPreferenceList() {
         PreferenceList preferenceList = StudentServiceOperation.getInstance().viewCoursesInPreferenceList(studentID);
         System.out.println("These are the courses which you already added in the preference List");
-//        for (Course c : addedCourses) {
-//            System.out.println(c.getCourseId() + "     ---------     " + c.getCourseName());
-//        }
         System.out.println("Following are primary courses you added till now:");
-
-        for (Course c : preferenceList.getPrimaryCourses()) {
-            System.out.println(c.getCourseId() + "     ---------     " + c.getCourseName());
+        System.out.format(SQLQueries.ANSI_YELLOW + "%-15s %-15s %-15s\n", "Sr. No", "Course ID", "Course Name"  + SQLQueries.ANSI_RESET);
+        int marker = 0;
+        for (Course c :preferenceList.getPrimaryCourses()) {
+            marker++;
+            System.out.format("%-15d %-15d %-32s\n",marker, c.getCourseId(), c.getCourseName());
         }
-
+        System.out.println();
         System.out.println("Following are Secondary courses you added till now:");
-
-        for (Course c : preferenceList.getSecondaryCourses()) {
-            System.out.println(c.getCourseId() + "     ---------     " + c.getCourseName());
+        System.out.format(SQLQueries.ANSI_YELLOW + "%-15s %-15s %-15s\n", "Sr. No", "Course ID", "Course Name" + SQLQueries.ANSI_RESET);
+        marker = 0;
+        for (Course c :preferenceList.getSecondaryCourses()) {
+            marker++;
+            System.out.format("%-15d %-15d %-32s\n",marker, c.getCourseId(), c.getCourseName());
         }
-
+        System.out.println();
     }
 
 }
