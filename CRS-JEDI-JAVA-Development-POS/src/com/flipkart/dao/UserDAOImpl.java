@@ -40,11 +40,7 @@ public class UserDAOImpl implements UserDAO {
 
         Connection connection = null;
         try {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (Exception e) {
-                throw new SQLException();
-            }
+            
 
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_USER_FROM_USER_ID);
@@ -115,11 +111,7 @@ public class UserDAOImpl implements UserDAO {
     public boolean updatePassword(int userId, String oldPass, String newPass) throws PasswordMismatchException, UserNotFoundException {
         Connection connection = null;
         try {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (Exception e) {
-                throw new SQLException();
-            }
+            
 
             String role = login(userId, oldPass);
 

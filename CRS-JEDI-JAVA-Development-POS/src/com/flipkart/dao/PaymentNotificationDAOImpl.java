@@ -30,11 +30,7 @@ public class PaymentNotificationDAOImpl implements PaymentNotificationDAO {
     public boolean addNotification(String timeStamp, int studentId, String message) throws SQLException {
 
         try {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (Exception e) {
-                throw new SQLException();
-            }
+            
 
             conn = DBUtil.getConnection();
 

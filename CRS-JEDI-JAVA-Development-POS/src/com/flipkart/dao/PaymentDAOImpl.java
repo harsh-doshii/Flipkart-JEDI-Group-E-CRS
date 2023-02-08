@@ -62,11 +62,7 @@ public class PaymentDAOImpl implements PaymentDAO{
     public int makePayment(int studentId, float amount) throws PaymentAlreadyDoneException {
 
         try {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (Exception e) {
-                throw new SQLException();
-            }
+            
 
             conn = DBUtil.getConnection();
             statement = conn.prepareStatement(SQLQueries.GET_REMAINING_PAY_FOR_A_STUDENT);
