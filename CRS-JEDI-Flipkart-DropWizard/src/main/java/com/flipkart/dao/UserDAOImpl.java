@@ -79,7 +79,7 @@ public class UserDAOImpl implements UserDAO {
                     return role;
                 }
                 System.out.println("Not approved by Admin, contact administrator");
-                return "INVALID USER";
+                return "UNAPPROVED STUDENT";
             } else {
                 System.out.println("User with  " + userId + " NOT found");
                 return "INVALID USER";
