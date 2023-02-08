@@ -94,12 +94,12 @@ public class StudentDAOImpl implements StudentDAO {
             }
 
             if (isPrimary) {
-                if (primaryCourses.size() == 4) {
+                if (primaryCourses.size() >= 4) {
                     System.out.println("Primary courses list is full");
                     return false;
                 }
             } else {
-                if (secondaryCourses.size() == 2) {
+                if (secondaryCourses.size() >= 2) {
                     System.out.println("Secondary courses list is full");
                     return false;
                 }
