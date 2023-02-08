@@ -4,14 +4,13 @@ import com.flipkart.constant.SQLQueries;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import com.flipkart.utils.DBUtil;
+
 
 public class PaymentNotificationDAOImpl implements PaymentNotificationDAO {
 
     Connection conn = null;
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/crs_db";
-    static final String USER = "root";
-    static final String PASS = "Root@123";
+
     PreparedStatement statement = null;
 
     private static volatile PaymentNotificationDAOImpl instance = null;
@@ -37,7 +36,7 @@ public class PaymentNotificationDAOImpl implements PaymentNotificationDAO {
                 throw new SQLException();
             }
 
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            conn = DBUtil.getConnection();
 
             statement = conn.prepareStatement(SQLQueries.ADD_NOTIFICATION);
             statement.setString(1,timeStamp);

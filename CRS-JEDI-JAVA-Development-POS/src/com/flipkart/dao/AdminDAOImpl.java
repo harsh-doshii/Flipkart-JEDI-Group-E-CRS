@@ -5,29 +5,18 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
-
-import java.rmi.StubNotFoundException;
-import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import com.flipkart.constant.SQLQueries;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import com.flipkart.exception.*;
-
-import javax.xml.crypto.Data;
-import java.sql.Date;
+import com.flipkart.utils.DBUtil;
 import java.util.*;
 
 
 public class AdminDAOImpl implements AdminDAO {
 
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/crs_db";
-
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "Root@123";
 
 
     private static volatile AdminDAOImpl instance = null;
@@ -55,8 +44,7 @@ public class AdminDAOImpl implements AdminDAO {
         Connection conn = null;
 
         try {
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
-//            Class.forName(JDBC_DRIVER);
+            conn = DBUtil.getConnection();
             String sql = "insert into Course(idCourse, courseName, courseDescription) values (?, ?, ?)";
             statement = conn.prepareStatement(sql);
             statement.setInt(1, course.getCourseId());
@@ -105,13 +93,8 @@ public class AdminDAOImpl implements AdminDAO {
         Connection conn = null;
 
         try{
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            try {
-                Class.forName(JDBC_DRIVER);
-            }
-            catch (Exception e){
-                throw  new SQLException();
-            }
+            conn = DBUtil.getConnection();
+            
             String sql = SQLQueries.DELETE_COURSE_QUERY;
             statement = conn.prepareStatement(sql);
             statement.setInt(1, courseID);
@@ -167,13 +150,8 @@ public class AdminDAOImpl implements AdminDAO {
         statement = null;
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            try {
-                Class.forName(JDBC_DRIVER);
-            }
-            catch (Exception e){
-                throw  new SQLException();
-            }
+            conn = DBUtil.getConnection();
+            
             String sql = SQLQueries.ADD_PROFESSOR_QUERY;
             statement = conn.prepareStatement(sql);
 
@@ -233,14 +211,9 @@ public class AdminDAOImpl implements AdminDAO {
         statement = null;
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            conn = DBUtil.getConnection();
 
-            try {
-                Class.forName(JDBC_DRIVER);
-            }
-            catch (Exception e){
-                throw  new SQLException();
-            }
+            
             String sql = SQLQueries.ADD_STUDENT;
             statement = conn.prepareStatement(sql);
 
@@ -292,14 +265,9 @@ public class AdminDAOImpl implements AdminDAO {
         try {
             id = this.getNewUserID();
 
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            conn = DBUtil.getConnection();
 
-            try {
-                Class.forName(JDBC_DRIVER);
-            }
-            catch (Exception e){
-                throw new SQLException();
-            }
+            
             String sql = SQLQueries.ADD_USER_QUERY;
             statement = conn.prepareStatement(sql);
 
@@ -354,14 +322,9 @@ public class AdminDAOImpl implements AdminDAO {
         Connection conn = null;
 
         try {
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            conn = DBUtil.getConnection();
 
-            try {
-                Class.forName(JDBC_DRIVER);
-            }
-            catch (Exception e){
-                throw new SQLException();
-            }
+            
             String sql = SQLQueries.DELETE_PROFESSOR_QUERY;
             statement = conn.prepareStatement(sql);
 
@@ -425,14 +388,9 @@ public class AdminDAOImpl implements AdminDAO {
         statement = null;
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            conn = DBUtil.getConnection();
 
-            try {
-                Class.forName(JDBC_DRIVER);
-            }
-            catch (Exception e){
-                throw new SQLException();
-            }
+            
             String sql = SQLQueries.ASSIGN_COURSE_QUERY;
             statement = conn.prepareStatement(sql);
 
@@ -478,9 +436,8 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public void generateReportCard() throws SQLException{
         statement = null;
-        Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
+        Connection conn = DBUtil.getConnection();
         try {
-            Class.forName(JDBC_DRIVER);
             String sql = SQLQueries.RELEASE_GRADE_CARD;
             statement = conn.prepareStatement(sql);
             int row = statement.executeUpdate();
@@ -523,9 +480,8 @@ public class AdminDAOImpl implements AdminDAO {
     public List<Course> viewCourses() throws SQLException {
         statement = null;
         List<Course> coursesList = new ArrayList<>();
-        Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
+        Connection conn = DBUtil.getConnection();
         try{
-            Class.forName(JDBC_DRIVER);
             String sql = SQLQueries.GET_COURSE_CATALOGUE;
             statement = conn.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -569,14 +525,9 @@ public class AdminDAOImpl implements AdminDAO {
         Connection conn = null;
         statement = null;
         try {
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            conn = DBUtil.getConnection();
 
-            try {
-                Class.forName(JDBC_DRIVER);
-            }
-            catch (Exception e){
-                throw new SQLException();
-            }
+            
             String sql = SQLQueries.APPROVE_STUDENT_QUERY;
             statement = conn.prepareStatement(sql);
 
@@ -605,11 +556,10 @@ public class AdminDAOImpl implements AdminDAO {
      */
     @Override
     public List<Professor> viewProfessors() throws SQLException {
-        Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+        Connection connection = DBUtil.getConnection();
         statement = null;
         List<Professor> professorList = new ArrayList<Professor>();
         try {
-            Class.forName(JDBC_DRIVER);
             String sql = SQLQueries.VIEW_PROFESSOR_QUERY;
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -650,11 +600,10 @@ public class AdminDAOImpl implements AdminDAO {
      */
     @Override
     public List<Student> viewUnapprovedStudents() throws SQLException {
-        Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+        Connection connection = DBUtil.getConnection();
         statement = null;
         List<Student> studentList  = new ArrayList<Student>();
         try{
-            Class.forName(JDBC_DRIVER);
             String sql = SQLQueries.VIEW_PENDING_STUDENTS;
             statement = connection.prepareStatement(sql);
             statement.setString(1, "false");
@@ -697,10 +646,9 @@ public class AdminDAOImpl implements AdminDAO {
      * @throws SQLException
      */
     public int getNewUserID() throws SQLException {
-        Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+        Connection connection = DBUtil.getConnection();
         statement = null;
         try {
-            Class.forName(JDBC_DRIVER);
             String sql = SQLQueries.GET_CURRENT_ID_VALUE;
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();

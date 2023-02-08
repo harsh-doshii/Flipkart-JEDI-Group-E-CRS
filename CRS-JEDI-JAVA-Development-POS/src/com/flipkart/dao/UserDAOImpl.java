@@ -12,15 +12,12 @@ import com.flipkart.client.CRSApplication;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.exception.PasswordMismatchException;
 import com.flipkart.exception.UserNotFoundException;
+import com.flipkart.utils.DBUtil;
 
 public class UserDAOImpl implements UserDAO {
-    static final String DB_URL = "jdbc:mysql://localhost/crs_db";
     private static UserDAOImpl instance = null;
 
     private PreparedStatement statement = null;
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "Fk!_186836";
 
     private UserDAOImpl() {
 
@@ -49,14 +46,14 @@ public class UserDAOImpl implements UserDAO {
                 throw new SQLException();
             }
 
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_USER_FROM_USER_ID);
             statement.setInt(1, userId);
 
             ResultSet rs = statement.executeQuery();
 
             if (!rs.next()) {
-                System.out.println("USer with  " + userId + " NOT found");
+                System.out.println("User with  " + userId + " NOT found");
                 return "INVALID USER";
             }
 
@@ -131,7 +128,7 @@ public class UserDAOImpl implements UserDAO {
                 return false;
             }
 
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.UPDATE_USER_PASSWORD);
 
             statement.setString(1, newPass);

@@ -4,14 +4,12 @@ import com.flipkart.constant.SQLQueries;
 import com.flipkart.exception.PaymentAlreadyDoneException;
 
 import java.sql.*;
+import com.flipkart.utils.DBUtil;
+
 
 public class PaymentDAOImpl implements PaymentDAO{
 
     Connection conn = null;
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/crs_db";
-    static final String USER = "root";
-    static final String PASS = "Root@123";
     PreparedStatement statement = null;
 
     private static volatile PaymentDAOImpl instance = null;
@@ -30,12 +28,8 @@ public class PaymentDAOImpl implements PaymentDAO{
     @Override
     public float calculateRemainingFee(int studentID) throws SQLException {
         try {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (Exception e) {
-                throw new SQLException();
-            }
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            conn = DBUtil.getConnection();
             statement = conn.prepareStatement(SQLQueries.GET_REMAINING_PAY_FOR_A_STUDENT);
             statement.setInt(1, studentID);
             ResultSet rs = statement.executeQuery();
@@ -74,7 +68,7 @@ public class PaymentDAOImpl implements PaymentDAO{
                 throw new SQLException();
             }
 
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            conn = DBUtil.getConnection();
             statement = conn.prepareStatement(SQLQueries.GET_REMAINING_PAY_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet rs = statement.executeQuery();
@@ -130,10 +124,9 @@ public class PaymentDAOImpl implements PaymentDAO{
     }
 
     public int getNewTransactionID() throws SQLException {
-        Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+        Connection connection = DBUtil.getConnection();
         statement = null;
         try {
-            Class.forName(JDBC_DRIVER);
             String sql = SQLQueries.GET_CURRENT_TRANSACTION_ID_VALUE;
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();

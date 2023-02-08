@@ -14,12 +14,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import com.flipkart.utils.DBUtil;
+
 public class ProfessorDAOImpl implements ProfessorDAO{
     Connection conn = null;
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/crs_db";
-    static final String USER = "root";
-    static final String PASS = "Root@123";
     PreparedStatement statement = null;
 
     private static volatile ProfessorDAOImpl instance = null;
@@ -42,7 +40,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             statement = null;
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DBUtil.getConnection();
             String sql = SQLQueries.GET_ENROLLED_STUDENTS;
             //GET_ENROLLED_STUDENTS = "select * from RegisteredCourse where idCourse=?";
             statement = conn.prepareStatement(sql);
@@ -85,7 +83,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
                 //Changing ResgisteredCourse table
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 statement = null;
-                conn = DriverManager.getConnection(DB_URL,USER,PASS);
+                conn = DBUtil.getConnection();
                 String sql = SQLQueries.ADD_GRADE;
                 //ADD_GRADE = "update RegisteredCourse set grade=? where idCourse=? and idStudent=? and sem=?";
                 statement = conn.prepareStatement(sql);
@@ -115,7 +113,7 @@ public class ProfessorDAOImpl implements ProfessorDAO{
             //Changing Course table
             Class.forName("com.mysql.cj.jdbc.Driver");
             statement = null;
-             conn = DriverManager.getConnection(DB_URL,USER,PASS);
+             conn = DBUtil.getConnection();
             String sql = SQLQueries.SIGN_UP_PROF;
             //SIGN_UP_PROF = "update Course set idProfessor=? where idCourse=?";
             statement = conn.prepareStatement(sql);
@@ -144,7 +142,7 @@ throw  new CourseNotFoundException(courseId);
         //Changing Course table
         Class.forName("com.mysql.cj.jdbc.Driver");
         statement = null;
-         conn = DriverManager.getConnection(DB_URL,USER,PASS);
+         conn = DBUtil.getConnection();
         String sql = SQLQueries.GET_COURSES;
         //GET_COURSES = "select * from Course where idProfessor=?";
         statement = conn.prepareStatement(sql);

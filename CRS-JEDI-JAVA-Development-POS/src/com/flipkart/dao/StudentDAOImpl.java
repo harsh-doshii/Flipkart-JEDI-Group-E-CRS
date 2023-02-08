@@ -8,6 +8,7 @@ import com.flipkart.exception.*;
 import java.sql.SQLException;
 import com.flipkart.client.CRSApplication;
 import com.flipkart.constant.SQLQueries;
+import com.flipkart.utils.DBUtil;
 
 /**
 * @author Aman Jham
@@ -19,14 +20,6 @@ public class StudentDAOImpl implements StudentDAO {
     private PreparedStatement statement = null;
     private StudentDAOImpl(){}
 
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/crs_db";
-
-    //  Database credentials
-    static final String USER = "root";
-
-    // Enter your passwords here.
-    static final String PASS = "Fk!_186836";
     public static StudentDAOImpl getInstance() {
         if (instance == null) {
             instance = new StudentDAOImpl();
@@ -46,7 +39,7 @@ public class StudentDAOImpl implements StudentDAO {
                 throw new SQLException();
             }
 
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_COURSE_CATALOGUE);
             ResultSet catalogueCourses = statement.executeQuery();
             while (catalogueCourses.next()) {
@@ -72,7 +65,7 @@ public class StudentDAOImpl implements StudentDAO {
             } catch (Exception e) {
                 throw new SQLException();
             }
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet totalCourses = statement.executeQuery();
@@ -192,7 +185,7 @@ public class StudentDAOImpl implements StudentDAO {
             } catch (Exception e) {
                 throw new SQLException();
             }
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet totalCourses = statement.executeQuery();
@@ -243,7 +236,7 @@ public class StudentDAOImpl implements StudentDAO {
             } catch (Exception e) {
                 throw new SQLException();
             }
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_REMAINING_PAY_FOR_A_STUDENT);
             statement.setInt(1, studentID);
             ResultSet rs = statement.executeQuery();
@@ -282,7 +275,7 @@ public class StudentDAOImpl implements StudentDAO {
             } catch (Exception e) {
                 throw new SQLException();
             }
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet totalCourses = statement.executeQuery();
@@ -352,7 +345,7 @@ public class StudentDAOImpl implements StudentDAO {
                 throw new SQLException();
             }
 
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_REG_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet regCourses = statement.executeQuery();
@@ -393,7 +386,7 @@ public class StudentDAOImpl implements StudentDAO {
                 throw new SQLException();
             }
 
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_REG_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet regCourses = statement.executeQuery();
@@ -453,7 +446,7 @@ public class StudentDAOImpl implements StudentDAO {
                 throw new SQLException();
             }
 
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_REMAINING_PAY_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet rs = statement.executeQuery();
@@ -513,7 +506,7 @@ public class StudentDAOImpl implements StudentDAO {
                 throw new SQLException();
             }
 
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.VIEW_NOTIFICATIONS);
 
             statement.setInt(1, studentId);
@@ -556,7 +549,7 @@ public class StudentDAOImpl implements StudentDAO {
                 throw new SQLException();
             }
 
-            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_ALL_ADDED_COURSES_FOR_STUDENT);
             statement.setInt(1, studentId);
             ResultSet courses = statement.executeQuery();
