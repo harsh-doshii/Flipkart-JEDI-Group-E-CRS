@@ -32,9 +32,7 @@ public class AdminRESTAPI {
     @Path("/viewCourseCatalogue")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Course> viewCourseCatalogue() {
-
         return AdminServiceOperation.getInstance().viewCourse();
-
     }
 
 
@@ -47,9 +45,7 @@ public class AdminRESTAPI {
     @Path("/viewProfessors")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Professor> viewProfessors() {
-
         return AdminServiceOperation.getInstance().viewProfessor();
-
     }
 
     /**
@@ -105,14 +101,10 @@ public class AdminRESTAPI {
     public Response addCourse(@Valid Course course) throws ValidationException{
 
         try {
-
             AdminServiceOperation.getInstance().addCourse(course);
             return Response.status(201).entity("Course with courseCode: " + course.getCourseId() + " added to catalog").build();
-
         } catch (Exception e) {
-
             return Response.status(409).entity(e.getMessage()).build();
-
         }
 
     }
@@ -128,16 +120,11 @@ public class AdminRESTAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response removeCourse(  @NotNull
             @QueryParam("courseId") Integer courseId) throws ValidationException{
-
         try {
-
             AdminServiceOperation.getInstance().removeCourse(courseId);
             return Response.status(201).entity("Course with courseCode: " + courseId + " deleted from catalog").build();
-
         } catch (Exception e) {
-
             return Response.status(409).entity(e.getMessage()).build();
-
         }
     }
     /**
@@ -151,16 +138,11 @@ public class AdminRESTAPI {
     @Consumes("application/json")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addProf(@Valid Professor professor) throws ValidationException{
-
         try {
-
             AdminServiceOperation.getInstance().addProfessor(professor);
             return Response.status(201).entity("Professor with professorId: " + professor.getId() + " added").build();
-
         } catch (Exception e) {
-
             return Response.status(409).entity(e.getMessage()).build();
-
         }
 
     }
@@ -176,18 +158,12 @@ public class AdminRESTAPI {
     @Consumes("application/json")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addStudent(@Valid Student student) throws ValidationException{
-
         try {
-
             AdminServiceOperation.getInstance().addStudent(student);
             return Response.status(201).entity("Student with StudentID: " + student.getId() + " added").build();
-
         } catch (Exception e) {
-
             return Response.status(409).entity(e.getMessage()).build();
-
         }
-
     }
 
     @DELETE
@@ -196,15 +172,11 @@ public class AdminRESTAPI {
     public Response removeProf(
             @NotNull
             @QueryParam("profId") int profId) throws ValidationException{
-
         try {
             AdminServiceOperation.getInstance().removeProfessor(profId);
             return Response.status(201).entity("Prof with profId: " + profId + " has been removed").build();
-
         } catch (Exception e) {
-
             return Response.status(409).entity(e.getMessage()).build();
-
         }
     }
 
@@ -223,16 +195,11 @@ public class AdminRESTAPI {
             // @Max(value = 9999, message = "Student ID should be less than 10000")
             @NotNull
             @QueryParam("studentId") int studentId) throws ValidationException{
-
         try {
-
             AdminServiceOperation.getInstance().approveStudent(studentId);
             return Response.status(201).entity("Student with studentId: " + studentId + " approved").build();
-
         } catch (Exception e) {
-
             return Response.status(409).entity(e.getMessage()).build();
-
         }
 
     }
@@ -247,16 +214,11 @@ public class AdminRESTAPI {
             // @Email(message = "Invalid Professor ID: Not in email format") //TODO: idk what this is
             @NotNull
             @QueryParam("profId") int profId) throws ValidationException {
-
         try {
-
             AdminServiceOperation.getInstance().assignProfessor(profId, courseId);
             return Response.status(201).entity("courseCode: " + courseId + " assigned to professor: " + profId).build();
-
         } catch (Exception e) {
-
             return Response.status(409).entity(e.getMessage()).build();
-
         }
     }
 
@@ -278,7 +240,5 @@ public class AdminRESTAPI {
             return Response.status(409).entity(e.getMessage()).build();
         }
     }
-
-
 
 }

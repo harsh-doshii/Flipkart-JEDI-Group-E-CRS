@@ -30,20 +30,21 @@ public class CRSApplicationRESTAPI {
         }
         finally
         {
-            if (role == "student")
+//            System.out.println(role);
+            if (role.equals("student"))
             {
                     return Response.status(200).entity("Login successful! student id = "+userId ).build();
 
             }
-            else if (role == "professor")
+            else if (role.equals("professor"))
             {
                 return Response.status(200).entity("Login successful! professor id = "+userId ).build();
             }
-            else if (role == "admin")
+            else if (role.equals("admin"))
             {
                 return Response.status(200).entity("Login successful! admin id = "+userId ).build();
             }
-            else if(role == "UNAPPROVED STUDENT")
+            else if(role.equals("UNAPPROVED STUDENT"))
             {
                 return Response.status(400).entity("Login unsuccessful! user id = "+userId +
                         " Student not approved. Please contact admin for Approval" ).build();
