@@ -55,17 +55,17 @@ public interface StudentService {
 //
 //    public boolean isPaymentDone(int studentID);
 
-    /**
-     * @param studentID
-     * @return
-     */
-    public float calculateFee(int studentID);
+//    /**
+//     * @param studentID
+//     * @return
+//     */
+//    public float calculateFee(int studentID);
 
-    /**
-     * @param studentID
-     * @param amount
-     */
-    public void payFee(int studentID, float amount);
+//    /**
+//     * @param studentID
+//     * @param amount
+//     */
+//    public void payFee(int studentID, float amount);
 
     /**
      * @param studentId
