@@ -62,17 +62,17 @@ public class StudentDAOImpl implements StudentDAO {
             statement.setInt(1, courseId);
 
 
-            ResultSet res2;
+            //ResultSet res2;
 
-            try {
-                res2 = statement.executeQuery();
-                if (res2.wasNull()) {
-                    return false;
-                    //throw new CourseNotFoundException(courseId);
-                }
-            } catch (Exception e) {
-                throw new CourseNotFoundException(courseId);
-            }
+//            try {
+//                res2 = statement.executeQuery();
+//                if (res2.wasNull()) {
+//                    return false;
+//                    //throw new CourseNotFoundException(courseId);
+//                }
+//            } catch (Exception e) {
+//                throw new CourseNotFoundException(courseId);
+//            }
 
 
             connection = DBUtil.getConnection();
@@ -283,6 +283,7 @@ public class StudentDAOImpl implements StudentDAO {
             * */
 
             List<Course> registeredCourses = new ArrayList<>();
+            float amount = 0;
             for (Course cur : preferenceList) {
                 int courseId = cur.getCourseId();
                 statement = connection.prepareStatement(SQLQueries.SELECT_ALL_REG_STUDENTS_FOR_A_COURSE);
@@ -290,6 +291,7 @@ public class StudentDAOImpl implements StudentDAO {
                 ResultSet studentsRegistered = statement.executeQuery();
                 if (studentsRegistered.getRow() < 10) {
                     registeredCourses.add(cur);
+                    amount += SQLQueries.feesPerCourse;
                     // add courses in the registeredCourse table
                     //TODO : if we should remove this course from preference List.
                     statement = connection.prepareStatement(SQLQueries.REG_COURSE_FOR_A_STUDENT);
@@ -304,6 +306,14 @@ public class StudentDAOImpl implements StudentDAO {
                 } else {
                     System.out.println("Course: " + cur.getCourseName() + " can't be added, already filled");
                 }
+            }
+            statement = connection.prepareStatement(SQLQueries.UPDATE_PAYMENT_FOR_STUDENT);
+            statement.setFloat(1, amount);
+            statement.setInt(2, studentId);
+            int row = statement.executeUpdate();
+            if (row == 0) {
+                System.out.println("Fees Not updated!");
+                return;
             }
             // TODO : see if we should return list of added courses.
         } catch (SQLException se) {

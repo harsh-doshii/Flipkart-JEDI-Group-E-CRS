@@ -178,13 +178,18 @@ public class CRSStudentMenu {
 
     private void viewRegisterCourses(){
         int cur = 0;
-//        System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
-        for(var regCourse : studentServiceOperation.viewRegisteredCourse(studentID)) {
+       System.out.format("%15s %15s\n", "Sr. No", "Course ID");
+        for (var crs : studentServiceOperation.viewRegisteredCourse(studentID)) {
             cur++;
-//            System.out.format("%15d %15d %32s\n",cur, regCourse.getCourse().getCourseId(), regCourse.getCourse().getCourseName());
-            System.out.println(regCourse);
-//          System.out.println();
+            System.out.format("%15d %15d\n", cur, crs);
         }
+
+//        for(var regCourse : studentServiceOperation.viewRegisteredCourse(studentID)) {
+//            cur++;
+////            System.out.format("%15d %15d %32s\n",cur, regCourse.getCourse().getCourseId(), regCourse.getCourse().getCourseName());
+//            System.out.println(regCourse);
+////          System.out.println();
+//        }
 //      System.out.printf("view registered courses");
     }
 

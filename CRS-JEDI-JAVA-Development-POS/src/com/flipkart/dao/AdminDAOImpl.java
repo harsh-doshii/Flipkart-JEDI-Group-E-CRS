@@ -100,9 +100,9 @@ public class AdminDAOImpl implements AdminDAO {
             statement.setInt(1, courseID);
             int row = statement.executeUpdate();
 
-            System.out.println(row + " entries deleted");
+            //System.out.println(row + " entries deleted");
             if (row == 0) {
-                System.out.println(courseID + " not in catalogue");
+                //System.out.println(courseID + " not in catalogue");
                 throw new CourseNotFoundException(courseID);
             }
             else {
@@ -442,7 +442,7 @@ public class AdminDAOImpl implements AdminDAO {
             statement = conn.prepareStatement(sql);
             int row = statement.executeUpdate();
 
-            System.out.println(row + " entries updated.");
+            //System.out.println(row + " entries updated.");
             if(row == 0) {
                 System.out.println("grades not released");
                 return;

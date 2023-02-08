@@ -124,6 +124,8 @@ public class SQLQueries {
     public static final String GET_ALL_ADDED_COURSES_FOR_STUDENT = "select * from PreferenceList where idStudent = ?";
 
     public static final String GET_PROF_ID_FOR_A_COURSE = "select idProfessor from Course where idCourse = ?";
+
+    public static final String UPDATE_PAYMENT_FOR_STUDENT = "update Student set remainingPayment = ? where idStudent = ?";
 }
 
 
