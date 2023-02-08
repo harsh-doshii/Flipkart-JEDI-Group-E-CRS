@@ -30,9 +30,9 @@ public class PaymentServiceOperation implements PaymentService{
         }
     }
     @Override
-    public void payFee(int studentID, float amount) throws PaymentAlreadyDoneException {
+    public void payFee(int studentID, float amount, String modeOfPayment) throws PaymentAlreadyDoneException {
         try {
-            int id = PaymentDAOImpl.getInstance().makePayment(studentID, amount);
+            int id = PaymentDAOImpl.getInstance().makePayment(studentID, amount, modeOfPayment);
             NotificationServiceOperation.getInstance().addNotification(studentID,"you have made the payment of amount:--  " + amount + " ------------your transaction id is " + id + ".");
         }
         catch (Exception e){

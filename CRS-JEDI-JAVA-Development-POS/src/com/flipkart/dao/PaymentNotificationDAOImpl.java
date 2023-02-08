@@ -30,8 +30,6 @@ public class PaymentNotificationDAOImpl implements PaymentNotificationDAO {
     public boolean addNotification(String timeStamp, int studentId, String message) throws SQLException {
 
         try {
-            
-
             conn = DBUtil.getConnection();
 
             statement = conn.prepareStatement(SQLQueries.ADD_NOTIFICATION);
