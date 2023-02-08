@@ -70,7 +70,9 @@ public class CRSStudentMenu {
                 System.out.println("Total amount to pay" + getTotalFeeToPay());
                 System.out.println("Enter the amount you hav to pay for now");
                 float amount = sc.nextFloat();
-                payFee(amount);
+                System.out.println("Enter the mode of Payment: ");
+                String modeOfPayment = sc.next();
+                payFee(amount, modeOfPayment);
             }
             else if (input==8) {
                 getTotalFeeToPay();
@@ -200,10 +202,10 @@ public class CRSStudentMenu {
         return totalFee;
     }
 
-    private void payFee(float amount) {
+    private void payFee(float amount, String modeOfPayment) {
         try {
             System.out.printf("Initiating Fee payment : ------>>\n");
-            PaymentServiceOperation.getInstance().payFee(studentID, amount);
+            PaymentServiceOperation.getInstance().payFee(studentID, amount, modeOfPayment);
         }
         catch (Exception e){
             System.out.println(e.getMessage());

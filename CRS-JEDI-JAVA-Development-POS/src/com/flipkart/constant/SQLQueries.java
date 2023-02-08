@@ -115,7 +115,7 @@ public class SQLQueries {
 
     public static final String UPDATE_USER_PASSWORD = "update User set password = ? where userId = ? ";
 
-    public static final String ADD_PAYMENT_TRANSACTION = "insert into Payment(transactionId, amount, studentId) values(?, ?, ?)";
+    public static final String ADD_PAYMENT_TRANSACTION = "insert into Payment(transactionId, amount, studentId, modeOfPayment) values(?, ?, ?, ?)";
 
     public static final String ADD_NOTIFICATION = "insert into Notification values(?, ?, ?)";
 

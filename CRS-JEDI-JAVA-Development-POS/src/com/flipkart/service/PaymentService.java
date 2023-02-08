@@ -13,5 +13,5 @@ public interface PaymentService {
      * @param studentID
      * @param amount
      */
-    public void payFee(int studentID, float amount) throws PaymentAlreadyDoneException;
+    public void payFee(int studentID, float amount, String modeOfPayment) throws PaymentAlreadyDoneException;
 }

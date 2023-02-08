@@ -59,7 +59,7 @@ public class PaymentDAOImpl implements PaymentDAO{
     }
 
     @Override
-    public int makePayment(int studentId, float amount) throws PaymentAlreadyDoneException {
+    public int makePayment(int studentId, float amount, String modeOfPayment) throws PaymentAlreadyDoneException {
 
         try {
             
@@ -97,6 +97,7 @@ public class PaymentDAOImpl implements PaymentDAO{
                 statement.setInt(1,id);
                 statement.setFloat(2, amount);
                 statement.setInt(3, studentId);
+                statement.setString(4, modeOfPayment);
                 int row = statement.executeUpdate();
                 if (row == 0) {
                     System.out.println("Payment transaction not added, try again later!");

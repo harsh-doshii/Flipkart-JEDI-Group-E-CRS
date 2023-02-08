@@ -18,6 +18,6 @@ public interface PaymentDAO {
      * @return
      * @throws SQLException
      */
-    public int makePayment(int studentId, float amount) throws PaymentAlreadyDoneException;
+    public int makePayment(int studentId, float amount, String modeOfPayment) throws PaymentAlreadyDoneException;
 
 }
