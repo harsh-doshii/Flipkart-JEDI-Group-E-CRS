@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * Exception class for when adding a course which already exists in the course catalogue
  */
@@ -28,6 +30,6 @@ public class CourseFoundException extends Exception{
      */
     @Override
     public String getMessage() {
-        return "Course : " + courseCode + " already exists in the catalogue";
+        return SQLQueries.ANSI_YELLOW +  "Course : " + courseCode + " already exists in the catalogue" + SQLQueries.ANSI_RESET;
     }
 }

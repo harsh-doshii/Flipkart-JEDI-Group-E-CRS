@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * am
  *
@@ -30,6 +32,6 @@ public class StudentAlreadyExistsException extends Exception {
 	 * @return -> Message to be displayed
 	 */
 	public String getMessage() {
-		return "User with id: "+ this.studentID +" already exists!";
+		return SQLQueries.ANSI_YELLOW + "User with id: "+ this.studentID +" already exists!" + SQLQueries.ANSI_RESET ;
 	}
 }

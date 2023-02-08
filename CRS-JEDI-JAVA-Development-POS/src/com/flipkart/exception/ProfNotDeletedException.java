@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * am
  *
@@ -32,6 +34,6 @@ public class ProfNotDeletedException extends Exception {
      */
     @Override
     public String getMessage() {
-        return "Prof : " + ProfID + " cannot be deleted from the database because he/she is assigned to a course";
+        return  SQLQueries.ANSI_YELLOW +  "Prof : " + ProfID + " cannot be deleted from the database because he/she is assigned to a course" + SQLQueries.ANSI_RESET;
     }
 }

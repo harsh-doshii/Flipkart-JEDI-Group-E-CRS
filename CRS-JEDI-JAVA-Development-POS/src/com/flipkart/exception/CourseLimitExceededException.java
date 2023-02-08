@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * Exception for when registered courses for a student becomes > 4
  * 
@@ -22,6 +24,6 @@ public class CourseLimitExceededException extends Exception {
 	 */
 	@Override
 	public String getMessage() {
-		return "Cannot register for more courses, already registered for " + num + " courses";
+		return SQLQueries.ANSI_YELLOW + "Cannot register for more courses, already registered for " + num + " courses" + SQLQueries.ANSI_RESET;
 	}
 }

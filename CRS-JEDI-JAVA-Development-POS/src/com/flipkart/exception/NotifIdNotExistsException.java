@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  *
  *
@@ -24,7 +26,7 @@ public class NotifIdNotExistsException extends Exception{
      */
     @Override
     public String getMessage() {
-        return "Notification with notification Id" + notifId + "does not exist";
+        return SQLQueries.ANSI_YELLOW +  "Notification with notification Id" + notifId + "does not exist" + SQLQueries.ANSI_RESET;
     }
 
     /**

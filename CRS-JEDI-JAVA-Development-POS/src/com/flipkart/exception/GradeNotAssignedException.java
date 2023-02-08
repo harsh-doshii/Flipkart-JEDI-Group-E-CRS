@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * Exception class for when grade is not assigned to student.
  */
@@ -20,7 +22,7 @@ public class GradeNotAssignedException extends Exception{
      */
     @Override
     public String getMessage() {
-        return "Grade not assigned to student with ID " + studentID;
+        return SQLQueries.ANSI_YELLOW + "Grade not assigned to student with ID " + studentID + SQLQueries.ANSI_RESET;
     }
 
     /**

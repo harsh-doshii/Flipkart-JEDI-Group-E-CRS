@@ -1,4 +1,7 @@
 package com.flipkart.exception;
+
+import com.flipkart.constant.SQLQueries;
+
 /**
  * Exception class for when adding a prof that already exists in the database
  */
@@ -30,7 +33,7 @@ public class StudentFoundException extends Exception {
          */
         @Override
         public String getMessage() {
-            return "Student : " + getStudentName() + " already exists in the database";
+            return  SQLQueries.ANSI_YELLOW +  "Student : " + getStudentName() + " already exists in the database" + SQLQueries.ANSI_RESET ;
         }
 
 

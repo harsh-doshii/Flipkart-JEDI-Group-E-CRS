@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * Exception Class for when a prof cannot be added to the database
  */
@@ -27,6 +29,6 @@ public class ProfNotAddedException extends Exception {
      */
     @Override
     public String getMessage() {
-        return "Prof : " + profName + " cannot be added to the database";
+        return SQLQueries.ANSI_YELLOW +  "Prof : " + profName + " cannot be added to the database" + SQLQueries.ANSI_YELLOW ;
     }
 }

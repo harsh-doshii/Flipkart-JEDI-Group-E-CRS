@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * 
  *
@@ -14,7 +16,7 @@ public class DatabaseException extends Exception {
 	 */
 	@Override
 	public String getMessage() {
-		return "Connection Error with the database. Try again.";
+		return SQLQueries.ANSI_YELLOW + "Connection Error with the database. Try again." + SQLQueries.ANSI_RESET;
 	}
 	
 	

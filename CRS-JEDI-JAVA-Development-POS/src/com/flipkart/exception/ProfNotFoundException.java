@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * Exception class for when removing a prof that does not exist in the database
  */
@@ -28,6 +30,6 @@ public class ProfNotFoundException extends Exception {
      */
     @Override
     public String getMessage() {
-        return "Prof : " + ProfID + " not found in the database";
+        return  SQLQueries.ANSI_YELLOW +  "Prof : " + ProfID + " not found in the database" + SQLQueries.ANSI_RESET;
     }
 }

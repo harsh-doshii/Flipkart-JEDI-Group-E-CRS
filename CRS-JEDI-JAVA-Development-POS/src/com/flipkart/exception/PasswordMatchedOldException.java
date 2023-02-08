@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * to be called during password change
  *
@@ -21,7 +23,7 @@ public class PasswordMatchedOldException extends Exception{
 	@Override
 	public String getMessage() 
 	{
-		return "Entered password is same as old password";
+		return SQLQueries.ANSI_YELLOW +  "Entered password is same as old password" + SQLQueries.ANSI_RESET;
 	}
 
 

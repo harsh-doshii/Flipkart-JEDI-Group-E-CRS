@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * Exception class for when a course cannot be removed from the course catalogue
  */
@@ -28,6 +30,6 @@ public class CourseNotDeletedException extends Exception{
      */
     @Override
     public String getMessage() {
-        return "Course : " + courseCode + " not deleted";
+        return SQLQueries.ANSI_YELLOW + "Course : " + courseCode + " not deleted" + SQLQueries.ANSI_RESET ;
     }
 }

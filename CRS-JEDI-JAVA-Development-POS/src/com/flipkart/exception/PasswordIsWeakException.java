@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  *
  *
@@ -20,6 +22,6 @@ public class PasswordIsWeakException extends Exception {
 	@Override
 	public String getMessage() 
 	{
-		return "Entered password has less than 4 characters";
+		return SQLQueries.ANSI_YELLOW + "Entered password has less than 4 characters" + SQLQueries.ANSI_RESET;
 	}
 }

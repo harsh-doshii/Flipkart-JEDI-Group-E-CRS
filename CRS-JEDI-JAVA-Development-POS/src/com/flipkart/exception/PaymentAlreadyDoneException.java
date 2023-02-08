@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  *
  *
@@ -30,6 +32,6 @@ public class PaymentAlreadyDoneException extends Exception{
      */
 	@Override
 	public String getMessage() {
-		return "Student with id " + studentId+" has already deposited fees"; 
+		return SQLQueries.ANSI_YELLOW +  "Student with id " + studentId+" has already deposited fees" + SQLQueries.ANSI_RESET;
 	}
 }
