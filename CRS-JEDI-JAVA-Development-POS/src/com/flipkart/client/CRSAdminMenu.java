@@ -3,6 +3,7 @@ package com.flipkart.client;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
+import com.flipkart.constant.SQLQueries;
 import com.flipkart.service.AdminServiceOperation;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,12 +75,12 @@ public class CRSAdminMenu {
                 case 6:
                     System.out.println("Students to be approved : ");
                     System.out.println("##########################");
-                    System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
+                    System.out.format( SQLQueries.ANSI_YELLOW + "%-15s %-15s %-32s\n", "Sr. No", "Student ID", "Student Name" + SQLQueries.ANSI_RESET);
                     List<Student> student = AdminServiceOperation.getInstance().viewPending();
                     int cur = 0;
                     for(var data : student){
                         cur++;
-                        System.out.format("%15d %15d %32s\n", cur, data.getStudentId(), data.getName());
+                        System.out.format("%-15d %-15d %-32s\n", cur, data.getStudentId(), data.getName());
                     }
                     System.out.println("Enter the studentId to be approved: ");
                     int studentId = scanner.nextInt();
@@ -215,10 +216,10 @@ public class CRSAdminMenu {
 
     private void viewCourseCatalogue() {
         int cur = 0;
-        System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
+        System.out.format(SQLQueries.ANSI_YELLOW +"%-15s %-15s %-32s\n", "Sr. No", "Course ID", "Course Name" + SQLQueries.ANSI_RESET);
         for (var crs : AdminServiceOperation.getInstance().viewCourse()) {
             cur++;
-            System.out.format("%15d %15d %32s\n",cur, crs.getCourseId(), crs.getCourseName());
+            System.out.format("%-15d %-15d %-32s\n",cur, crs.getCourseId(), crs.getCourseName());
         }
     }
 }

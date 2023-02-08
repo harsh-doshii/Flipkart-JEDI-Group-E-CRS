@@ -2,6 +2,7 @@ package com.flipkart.client;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.bean.Student;
+import com.flipkart.constant.SQLQueries;
 import com.flipkart.service.ProfessorServiceOperation;
 
 import java.util.List;
@@ -62,10 +63,10 @@ public class CRSProfessorMenu {
     private void viewCourse(int professorID){
         try {
             int cur = 0;
-            System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
+            System.out.format(SQLQueries.ANSI_YELLOW + "%-15s %-15s %-32s\n", "Sr. No", "Course ID", "Course Name" + SQLQueries.ANSI_RESET);
             for (Course crs : professorServiceOperation.viewCourses(professorID)) {
                 cur++;
-                System.out.format("%15d %15d %32s\n",
+                System.out.format("%-15d %-15d %-32s\n",
                         cur,
                         crs.getCourseId(),
                         crs.getCourseName()
@@ -85,12 +86,12 @@ public class CRSProfessorMenu {
 
             System.out.println("List of registered students:");
 
-            System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
+            System.out.format(SQLQueries.ANSI_YELLOW + "%-15s %-15s %-32s\n", "Sr. No", "Student ID", "Student Name" + SQLQueries.ANSI_RESET);
             int cur = 0;
             List<Student> students = professorServiceOperation.viewStudents(courseId);
             for (var student : students) {
                 cur++;
-                System.out.format("%15d %15d %32s\n",
+                System.out.format("%-15d %-15d -%32s\n",
                         cur,
                         student.getStudentId(),
                         student.getName()
@@ -111,12 +112,11 @@ public class CRSProfessorMenu {
 
             System.out.println("List of registered students:");
 
-            System.out.format("%15s %15s %32s\n", "Sr. No", "Student ID", "Student Name");
+            System.out.format(SQLQueries.ANSI_YELLOW + "%-15s %-15s %-32s\n", "Sr. No", "Student ID", "Student Name" + SQLQueries.ANSI_RESET);
             int cur = 0;
             for (var student : professorServiceOperation.viewStudents(courseId)) {
                 cur++;
-                System.out.println("works till here");
-                System.out.format("%15d %15d %32s\n",
+                System.out.format("%-15d %-15d %-32s\n",
                         cur,
                         student.getStudentId(),
                         student.getName()

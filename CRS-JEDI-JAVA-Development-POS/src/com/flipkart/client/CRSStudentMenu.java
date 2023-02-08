@@ -4,6 +4,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.PreferenceList;
 import com.flipkart.bean.RegisteredCourse;
+import com.flipkart.constant.SQLQueries;
 import com.flipkart.service.PaymentServiceOperation;
 import com.flipkart.service.StudentService;
 import com.flipkart.service.StudentServiceOperation;
@@ -99,10 +100,10 @@ public class CRSStudentMenu {
         // have to add here number of available seats.
         try {
             int cur = 0;
-            System.out.format("%15s %15s %32s\n", "Sr. No", "Course ID", "Course Name");
+            System.out.format(SQLQueries.ANSI_YELLOW + "%-15s %-15s %-32s\n", "Sr. No", "Course ID", "Course Name" + SQLQueries.ANSI_RESET);
             for (var crs : studentServiceOperation.viewCourseCatalouge()) {
                 cur++;
-                System.out.format("%15d %15d %32s\n",cur, crs.getCourseId(), crs.getCourseName());
+                System.out.format("%-15d %-15d %-32s\n",cur, crs.getCourseId(), crs.getCourseName());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -115,7 +116,7 @@ public class CRSStudentMenu {
             System.out.println("Your grades for the registered courses : ");
 
             int cur = 0;
-            System.out.format("%15s %15s %32s %15s\n", "Sr. No", "Course ID", "Course Name", "Grade");
+            System.out.format(SQLQueries.ANSI_YELLOW + "%-15s %-15s %-32s %-15s\n", "Sr. No", "Course ID", "Course Name", "Grade" + SQLQueries.ANSI_RESET);
             if (studentServiceOperation.viewGrades(studentID) == null) {
                 return ;
             }
@@ -127,7 +128,7 @@ public class CRSStudentMenu {
                 String grade;
                 if (regCourse.getGrade() == null) grade = null;
                 else grade = regCourse.getGrade().getGrade();
-                System.out.format("%15d %15d %32s %15s\n",cur, regCourse.getCourse().getCourseId(), regCourse.getCourse().getCourseName(), grade);
+                System.out.format("%-15d %-15d %-32s %-15s\n",cur, regCourse.getCourse().getCourseId(), regCourse.getCourse().getCourseName(), grade);
 //            System.out.println();
                 //System.out.println("suck");
             }
@@ -178,10 +179,10 @@ public class CRSStudentMenu {
 
     private void viewRegisterCourses(){
         int cur = 0;
-       System.out.format("%15s %15s\n", "Sr. No", "Course ID");
+       System.out.format(SQLQueries.ANSI_YELLOW + "%-15s %-15s\n", "Sr. No", "Course ID" + SQLQueries.ANSI_RESET);
         for (var crs : studentServiceOperation.viewRegisteredCourse(studentID)) {
             cur++;
-            System.out.format("%15d %15d\n", cur, crs);
+            System.out.format("%-15d %-15d\n", cur, crs);
         }
 
 //        for(var regCourse : studentServiceOperation.viewRegisteredCourse(studentID)) {
