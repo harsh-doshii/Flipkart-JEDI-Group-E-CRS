@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * to be called during login
  *
@@ -27,7 +29,7 @@ public class StudentNotFoundException extends Exception {
 	@Override
 	public String getMessage() 
 	{
-		return "User with userId " + this.studentId + " does not exist";
+		return  SQLQueries.ANSI_YELLOW +  "User with userId " + this.studentId + " does not exist" + SQLQueries.ANSI_RESET;
 	}
 
 }

@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * am
  *
@@ -30,6 +32,6 @@ public class UserAlreadyExistsException extends Exception {
 	 * @return Message to be displayed
 	 */
 	public String getMessage() {
-		return "User with id: "+userId+" already exists!";
+		return SQLQueries.ANSI_YELLOW +  "User with id: "+userId+" already exists!" + SQLQueries.ANSI_RESET;
 	}
 }

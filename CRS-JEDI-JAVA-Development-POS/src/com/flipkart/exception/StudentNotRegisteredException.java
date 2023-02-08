@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.SQLQueries;
+
 /**
  * 
  *
@@ -30,7 +32,7 @@ public class StudentNotRegisteredException extends Exception{
      */
 	@Override
 	public String getMessage() {
-		return "Student with name "+name+" is not registered"; 
+		return SQLQueries.ANSI_YELLOW +   "Student with name "+name+" is not registered" + SQLQueries.ANSI_RESET ;
 	}
 	
 }
