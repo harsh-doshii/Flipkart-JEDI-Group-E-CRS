@@ -243,13 +243,17 @@ public class StudentDAOImpl implements StudentDAO {
         * */
         Connection connection = null;
         try {
-            
+            List <Integer> coursesAlreadyReg = viewRegisteredCourses(studentId);
+
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet totalCourses = statement.executeQuery();
             Set<Course> preferenceList = new HashSet<>();
+            Set<Course> primaryCourses = new HashSet<>();
+            Set<Course> SecondaryCourses = new HashSet<>();
             while (totalCourses.next()) {
+
                 preferenceList.add(new Course(totalCourses.getInt("idCourse")));
             }
             /*
@@ -407,61 +411,6 @@ public class StudentDAOImpl implements StudentDAO {
         }
         return registeredCourses;
     }
-
-    public boolean makePayment(int studentId, float amount) throws SQLException {
-        Connection connection = null;
-        try {
-            
-
-            connection = DBUtil.getConnection();
-            statement = connection.prepareStatement(SQLQueries.GET_REMAINING_PAY_FOR_A_STUDENT);
-            statement.setInt(1, studentId);
-            ResultSet rs = statement.executeQuery();
-            if (!rs.next()) {
-                System.out.println("Student not found with id:-   " + studentId);
-            }
-
-            float remainingAmount = rs.findColumn("remainingPayment");
-            if (remainingAmount < amount) {
-                System.out.println("You only have to pay :- " + remainingAmount);
-                System.out.println("Iniaoite the payment process again with right amount.");
-                return false;
-            } else {
-                float updatedAmount = remainingAmount - amount;
-                statement = connection.prepareStatement(SQLQueries.UPDATE_AMOUNT_FOR_A_STUDENT);
-                statement.setFloat(1, updatedAmount);
-                statement.setInt(2, studentId);
-                int row = statement.executeUpdate();
-                if (row == 0) {
-                    System.out.println("Payment not finished, try again later!");
-                    return false;
-                } else {
-                    System.out.println("you have successfully paid -:" + amount + "you have to pay:" + updatedAmount);
-                    return true;
-                }
-            }
-        } catch (SQLException se) {
-            se.printStackTrace();
-            throw new SQLException();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException se2) {
-                throw new SQLException();
-            }// nothing we can do
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-    }
-
 
     public List<PaymentNotification> viewNotifications(int studentId) throws SQLException {
         Connection connection = null;
