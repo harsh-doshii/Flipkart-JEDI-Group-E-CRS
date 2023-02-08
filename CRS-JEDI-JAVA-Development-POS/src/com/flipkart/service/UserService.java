@@ -38,4 +38,7 @@ public interface UserService {
      * @throws PasswordIsWeakException
      */
     public boolean updatePassword(int userId, String oldPass, String newPass) throws UserNotFoundException, PasswordMatchedOldException, PasswordIsWeakException;
+
+    public  String getName(int userId) throws UserNotFoundException;
+
 }

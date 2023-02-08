@@ -22,4 +22,7 @@ public interface UserDAO {
      * @throws SQLException
      */
     public boolean updatePassword(int userId, String oldPass, String newPass) throws PasswordMismatchException, UserNotFoundException;
+
+
+    public  String getName(int userId) throws UserNotFoundException;
 }

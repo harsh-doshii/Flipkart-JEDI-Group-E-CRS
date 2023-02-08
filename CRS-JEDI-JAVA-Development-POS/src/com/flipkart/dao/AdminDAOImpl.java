@@ -228,7 +228,8 @@ public class AdminDAOImpl implements AdminDAO {
               throw new StudentNotAddedException(student.getName());
             }
 
-            System.out.println("Student with StudentID: " + id + " added.");
+            System.out.println(SQLQueries.ANSI_GREEn +"Student Successfully Registered with StudentID: " + id+ SQLQueries.ANSI_RESET);
+            System.out.println(SQLQueries.ANSI_YELLOW+ "\nContact Admin For Approval"+SQLQueries.ANSI_RESET);
 
         }catch(Exception se) {
 
@@ -286,7 +287,7 @@ public class AdminDAOImpl implements AdminDAO {
                 throw new UserNotAddedException(id);
             }
 
-            System.out.println("User with userId: " + id + " added.");
+//            System.out.println("User with userId: " + id + " added.");
             return id;
 
         }catch(SQLException se) {

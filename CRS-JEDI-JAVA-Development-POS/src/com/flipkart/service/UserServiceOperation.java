@@ -45,4 +45,14 @@ public class UserServiceOperation implements UserService{
            throw new PasswordMatchedOldException(newPass);
         }
     }
+    @Override
+    public  String getName(int userId) throws UserNotFoundException{
+        try {
+            return UserDAOImpl.getInstance().getName(userId);
+        }
+        catch (Exception e){
+            throw new UserNotFoundException(userId);
+        }
+    }
+
 }

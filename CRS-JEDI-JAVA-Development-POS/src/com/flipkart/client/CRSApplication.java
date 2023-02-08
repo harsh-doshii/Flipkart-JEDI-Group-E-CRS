@@ -1,7 +1,10 @@
 package com.flipkart.client;
 import com.flipkart.bean.Student;
+import com.flipkart.constant.SQLQueries;
 import com.flipkart.service.AdminServiceOperation;
 import com.flipkart.service.UserServiceOperation;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import java.util.Scanner;
 public class CRSApplication {
@@ -60,7 +63,13 @@ public class CRSApplication {
                     case "student":
                     case "Student":
                     case "STUDENT":
-                        System.out.println("Welcome to the Student menu!");
+                        LocalDateTime myDateObj = LocalDateTime.now();
+                        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+                        String formattedDate = myDateObj.format(myFormatObj);
+                        System.out.println(SQLQueries.ANSI_GREEn +"\n\nWelcome "+UserServiceOperation.getInstance().getName(userId)+" to the Student menu!"+ SQLQueries.ANSI_RESET);
+                        System.out.println(SQLQueries.ANSI_YELLOW +"Logged In At: "+formattedDate + SQLQueries.ANSI_RESET);
+
                         //assuming username to be the student id as we don't have the student id yet
                         CRSStudentMenu studentMenu = new CRSStudentMenu(userId);
                         studentMenu.displayMenu();

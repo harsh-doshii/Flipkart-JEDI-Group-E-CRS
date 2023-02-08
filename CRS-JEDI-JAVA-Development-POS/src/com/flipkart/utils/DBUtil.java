@@ -28,7 +28,8 @@ public class DBUtil {
                 String driver = "com.mysql.cj.jdbc.Driver";
                 String url = "jdbc:mysql://localhost/crs_db";
                 String user = "root";
-                String password = "Fk!_186841";
+
+                String password = "Root@123";
                 Class.forName(driver);
                 connection = DriverManager.getConnection(url, user, password);
             }

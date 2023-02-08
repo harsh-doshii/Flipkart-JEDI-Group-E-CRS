@@ -81,7 +81,7 @@ public class UserDAOImpl implements UserDAO {
                 System.out.println("Not approved by Admin, contact administrator");
                 return "INVALID USER";
             } else {
-                System.out.println("USer with  " + userId + " NOT found");
+                System.out.println("User with  " + userId + " NOT found");
                 return "INVALID USER";
             }
 
@@ -155,6 +155,36 @@ public class UserDAOImpl implements UserDAO {
             }
         }
     }
+    public  String getName(int userId) throws UserNotFoundException{
+        Connection connection = null;
+        try {
+            connection = DBUtil.getConnection();
+            String sql2 = SQLQueries.GET_STUDENT_NAME;
+            statement = connection.prepareStatement(sql2);
+            statement.setInt(1,userId);
+            ResultSet resultSet2 = statement.executeQuery();
+            resultSet2.next();
+            return resultSet2.getString("name");
+        }
+        catch(Exception se) {
+           throw  new UserNotFoundException(userId);
+        } finally {
+            try {
+                connection.close();
+            }
+            catch(SQLException ex){
+                System.out.println(ex.getMessage());
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+
+                }
+            }
+        }
+    }
+
+
 
 
 }
