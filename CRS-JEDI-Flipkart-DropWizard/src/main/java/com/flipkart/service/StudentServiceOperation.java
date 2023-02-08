@@ -80,7 +80,6 @@ public class StudentServiceOperation implements StudentService {
         }
         catch (Exception e){
             return registeredCourseList;
-
         }
     }
 
