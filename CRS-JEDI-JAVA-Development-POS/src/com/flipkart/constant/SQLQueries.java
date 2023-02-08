@@ -81,7 +81,7 @@ public class SQLQueries {
 
     public static final String SELECT_ALL_COURSES_FOR_A_STUDENT = "select * from PreferenceList where idStudent = ?";
 
-    public static final String ADD_COURSE_FOR_A_STUDENT = "insert into PreferenceList (idStudent, idCourse) values (?, ?)";
+    public static final String ADD_COURSE_FOR_A_STUDENT = "insert into PreferenceList (idStudent, idCourse, isPrimary) values (?, ?, ?)";
 
     public static final String DROP_COURSE_FOR_A_STUDENT = "delete from PreferenceList where idStudent = ? AND idCourse = ?";
 
@@ -114,6 +114,10 @@ public class SQLQueries {
     public static final String VIEW_NOTIFICATIONS = "select * from Notification where idStudent = ?";
 
     public static final String GET_STUDENT_APPROVAL_STATUS = "select isApproved from Student where idStudent = ?";
+
+    public static final String GET_ALL_ADDED_COURSES_FOR_STUDENT = "select * from PreferenceList where idStudent = ?";
+
+    public static final String GET_PROF_ID_FOR_A_COURSE = "select idProfessor from Course where idCourse = ?";
 }
 
 

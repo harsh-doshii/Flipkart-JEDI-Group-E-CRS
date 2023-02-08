@@ -1,9 +1,6 @@
 package com.flipkart.service;
 
-import com.flipkart.bean.Course;
-import com.flipkart.bean.PaymentNotification;
-import com.flipkart.bean.RegisteredCourse;
-import com.flipkart.bean.Student;
+import com.flipkart.bean.*;
 import com.flipkart.exception.CourseFoundException;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.GradeNotAssignedException;
@@ -24,7 +21,7 @@ public interface StudentService {
      * @param courseId
      * @return
      */
-    public Boolean addCourse(int studentId, int courseId)  throws StudentNotFoundException;
+    public Boolean addCourse(int studentId, int courseId, boolean isPrimary)  throws StudentNotFoundException;
 
     /**
      * @param studentId
@@ -70,7 +67,16 @@ public interface StudentService {
      */
     public void payFee(int studentID, float amount);
 
+    /**
+     * @param studentId
+     * @return
+     */
     public List<PaymentNotification> viewNotifications(int studentId);
+
+    /**
+     * @param studentID
+     */
+    public PreferenceList viewCoursesInPreferenceList(int studentID);
 
 
 }

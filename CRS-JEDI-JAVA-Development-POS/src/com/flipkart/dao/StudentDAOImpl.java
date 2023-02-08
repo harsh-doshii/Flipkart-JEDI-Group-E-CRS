@@ -26,7 +26,7 @@ public class StudentDAOImpl implements StudentDAO {
     static final String USER = "root";
 
     // Enter your passwords here.
-    static final String PASS = "Root@123";
+    static final String PASS = "Fk!_186836";
     public static StudentDAOImpl getInstance() {
         if (instance == null) {
             instance = new StudentDAOImpl();
@@ -64,7 +64,7 @@ public class StudentDAOImpl implements StudentDAO {
         return courseCatalogue;
     }
 
-    public Boolean addCourse(int studentId, int courseId) throws SQLException {
+    public Boolean addCourse(int studentId, int courseId, boolean isPrimary) throws SQLException {
         Connection connection = null;
         try {
             try {
@@ -77,30 +77,87 @@ public class StudentDAOImpl implements StudentDAO {
             statement.setInt(1, studentId);
             ResultSet totalCourses = statement.executeQuery();
             Set<Course> addedCourses = new HashSet<>();
+
+            Set<Integer> primaryCourses = new HashSet<>();
+            Set<Integer> secondaryCourses = new HashSet<>();
+
             while (totalCourses.next()) {
-                addedCourses.add(new Course(totalCourses.getInt("idCourse")));
+                if (totalCourses.getBoolean("isPrimary") == true) {
+                    primaryCourses.add(totalCourses.getInt("idStudent"));
+                } else {
+                    secondaryCourses.add(totalCourses.getInt("idStudent"));
+                }
+                //addedCourses.add(new Course(totalCourses.getInt("idCourse")));
             }
-            if (addedCourses != null && addedCourses.size() > 0) {
-                if (addedCourses.contains(courseId)) {
-                    System.out.println("Course is already present in preference List");
+//            if (addedCourses != null && addedCourses.size() > 0) {
+//                if (addedCourses.contains(courseId)) {
+//                    System.out.println("Course is already present in preference List");
+//                    return false;
+//                }
+//            }
+//            if (addedCourses.size() == 6) {
+//                System.out.println("There are already 6 courses in the preference List");
+//                return false;
+//            }
+
+            if (primaryCourses != null && primaryCourses.size() > 0) {
+                if (primaryCourses.contains(courseId)) {
+                    System.out.println("Course is already present in primary Courses in preference List");
                     return false;
                 }
             }
-            if (addedCourses.size() == 6) {
-                System.out.println("There are already 6 courses in the preference List");
-                return false;
+
+            if (secondaryCourses != null && secondaryCourses.size() > 0) {
+                if (secondaryCourses.contains(courseId)) {
+                    System.out.println("Course is already present secondary courses in preference List");
+                    return false;
+                }
+            }
+
+            System.out.println("Here !!!");
+
+            if (isPrimary) {
+                if (primaryCourses.size() == 4) {
+                    System.out.println("Primary courses list is full");
+                    return false;
+                }
+            } else {
+                if (secondaryCourses.size() == 2) {
+                    System.out.println("Secondary courses list is full");
+                    return false;
+                }
             }
 
             // check if reg students is less than 10 in this course
             // but everyone can add, we will check this condition while registering
 
             // add course in db here
+
+            //TODO: one more check if courrse with this courseId is not alloted a professor than dont add this
+
+            statement = connection.prepareStatement(SQLQueries.GET_PROF_ID_FOR_A_COURSE);
+            statement.setInt(1, courseId);
+
+            ResultSet rs = statement.executeQuery();
+
+            //check this
+            rs.next();
+            int profId = rs.findColumn("idProfessor");
+
+            if (profId == 0) {
+                System.out.println("Course can't be added because NO Professor is alloted to this course, add another Course");
+                return false;
+            }
+
             statement = connection.prepareStatement(SQLQueries.ADD_COURSE_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             statement.setInt(2, courseId);
+            statement.setBoolean(3, isPrimary);
+
             int row = statement.executeUpdate();
+
             if (row == 0) {
-                System.out.println("Course not added, was already present");
+                System.out.println("Course not added!");
                 return false;
             }
             System.out.println("Course added");
@@ -285,6 +342,7 @@ public class StudentDAOImpl implements StudentDAO {
 
     public List<Integer> viewRegisteredCourses(int studentId) throws SQLException {
         //TODO : have to see if returning ids of reg courses is fine or should we return RegisteredCourse Object.
+        // TODO: represent the registered courses beautifully, return RegisteredCourses only instead of ids.
         List<Integer> registeredCourses = new ArrayList<>();
         Connection connection = null;
         try {
@@ -296,6 +354,7 @@ public class StudentDAOImpl implements StudentDAO {
 
             connection = DriverManager.getConnection(DB_URL,USER,PASS);
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_REG_COURSES_FOR_A_STUDENT);
+            statement.setInt(1, studentId);
             ResultSet regCourses = statement.executeQuery();
             while (regCourses.next()) {
                 registeredCourses.add(regCourses.getInt("idCourse"));
@@ -336,6 +395,7 @@ public class StudentDAOImpl implements StudentDAO {
 
             connection = DriverManager.getConnection(DB_URL,USER,PASS);
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_REG_COURSES_FOR_A_STUDENT);
+            statement.setInt(1, studentId);
             ResultSet regCourses = statement.executeQuery();
             while (regCourses.next()) {
                 int courseId = regCourses.getInt("idCourse");
@@ -485,7 +545,74 @@ public class StudentDAOImpl implements StudentDAO {
         }
     }
 
+    public PreferenceList viewCoursesInPreferenceList(int studentId) throws SQLException {
+        //TODO: add a boolean variable isPrimary in preferenceList
+        PreferenceList preferenceList = new PreferenceList();
+        Connection connection = null;
+        try {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                throw new SQLException();
+            }
 
+            connection = DriverManager.getConnection(DB_URL,USER,PASS);
+            statement = connection.prepareStatement(SQLQueries.GET_ALL_ADDED_COURSES_FOR_STUDENT);
+            statement.setInt(1, studentId);
+            ResultSet courses = statement.executeQuery();
+
+            while (courses.next()) {
+                int courseId = courses.getInt("idCourse");
+                //int sem = courses.getInt("semester");
+                //Grade grade = new Grade(regCourses.getInt("grade"));
+                boolean isPrimary = courses.getBoolean("isPrimary");
+//                statement = connection.prepareStatement(SQLQueries.GET_STUDENT_FROM_ID);
+//                statement.setInt(1, studentId);
+//                ResultSet rs = statement.executeQuery();
+//                if (!rs.next()) {
+//                    throw new SQLException();
+//                }
+//                Student student = new Student(rs.getInt("idStudent"), rs.getInt("semester"), rs.getFloat("remainingPayment"));
+
+                statement = connection.prepareStatement(SQLQueries.GET_COURSE_FROM_ID);
+                statement.setInt(1, courseId);
+                ResultSet rs = statement.executeQuery();
+                if (!rs.next()) {
+                    throw new SQLException();
+                }
+
+                Course course = new Course(rs.getInt("idCourse"), rs.getString("courseName"), rs.getString("courseDescription"));
+                if (isPrimary) {
+                    preferenceList.addInPrimary(course);
+                } else {
+                    preferenceList.addInSecondary(course);
+                }
+                //registeredCourses.add(new RegisteredCourse(regCourses.getInt("idStudent"), regCourses.getInt("idCourse"), regCourses.getInt("grade"), regCourses.getInt("semester")));
+            }
+            //System.out.println(addedCourses.size());
+            return preferenceList;
+        } catch (SQLException se) {
+            se.printStackTrace();
+            throw new SQLException();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException se2) {
+                throw new SQLException();
+            }// nothing we can do
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        //return preferenceList;
+    }
 
 
 }

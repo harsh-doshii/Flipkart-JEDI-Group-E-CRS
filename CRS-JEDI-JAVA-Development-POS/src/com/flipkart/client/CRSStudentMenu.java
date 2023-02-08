@@ -1,6 +1,8 @@
 package com.flipkart.client;
 
+import com.flipkart.bean.Course;
 import com.flipkart.bean.PaymentNotification;
+import com.flipkart.bean.PreferenceList;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.service.PaymentServiceOperation;
 import com.flipkart.service.StudentService;
@@ -38,7 +40,8 @@ public class CRSStudentMenu {
             System.out.println("7. Make Payment");
             System.out.println("8. Get Total Amount to Pay for the courses");
             System.out.println("9. View Notifications");
-            System.out.println("10. Logout");
+            System.out.println("10. View added courses in Preference List");
+            System.out.println("11. Logout");
             System.out.println("\n==========================================================================\n");
             System.out.println("Enter Option : ");
             int input = sc.nextInt();
@@ -74,7 +77,10 @@ public class CRSStudentMenu {
             else if (input == 9) {
                 viewNotifications();
             }
-            else if(input==10) {
+            else if (input == 10) {
+                viewCoursesInPreferenceList();
+            }
+            else if(input==11) {
                 logout();
                 break;
             }
@@ -143,9 +149,15 @@ public class CRSStudentMenu {
 
     private void addCourse(){
         try {
+            viewCoursesInPreferenceList();
             System.out.println("Enter course id to register");
             int courseId = sc.nextInt();
-            studentServiceOperation.addCourse(studentID, courseId);
+            System.out.println("In which list you want to add this course");
+            System.out.println("1. Primary Courses");
+            System.out.println("2. Secondary Courses");
+            int input = sc.nextInt();
+            boolean isPrimary = input == 1;
+            studentServiceOperation.addCourse(studentID, courseId, isPrimary);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -154,13 +166,14 @@ public class CRSStudentMenu {
 
     private void dropCourse() {
         try {
-            System.out.println("Enter course id to drop");
+            viewCoursesInPreferenceList();
+            System.out.println("Enter course id to drop form above added courses");
             int courseId = sc.nextInt();
             studentServiceOperation.dropCourse(studentID,courseId);
         }  catch (Exception e){
             System.out.println(e.getMessage());
         }
-//        System.out.printf("Drop Course");
+//       System.out.printf("Drop Course");
     }
 
     private void viewRegisterCourses(){
@@ -198,4 +211,25 @@ public class CRSStudentMenu {
         }
     }
 
+    public void viewCoursesInPreferenceList() {
+        PreferenceList preferenceList = StudentServiceOperation.getInstance().viewCoursesInPreferenceList(studentID);
+        System.out.println("These are the courses which you already added in the preference List");
+//        for (Course c : addedCourses) {
+//            System.out.println(c.getCourseId() + "     ---------     " + c.getCourseName());
+//        }
+        System.out.println("Following are primary courses you added till now:");
+
+        for (Course c : preferenceList.getPrimaryCourses()) {
+            System.out.println(c.getCourseId() + "     ---------     " + c.getCourseName());
+        }
+
+        System.out.println("Following are Secondary courses you added till now:");
+
+        for (Course c : preferenceList.getSecondaryCourses()) {
+            System.out.println(c.getCourseId() + "     ---------     " + c.getCourseName());
+        }
+
+    }
+
 }
+

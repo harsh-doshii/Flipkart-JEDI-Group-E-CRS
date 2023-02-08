@@ -1,9 +1,6 @@
 package com.flipkart.service;
 
-import com.flipkart.bean.Course;
-import com.flipkart.bean.PaymentNotification;
-import com.flipkart.bean.RegisteredCourse;
-import com.flipkart.bean.Student;
+import com.flipkart.bean.*;
 import com.flipkart.dao.StudentDAO;
 import com.flipkart.dao.StudentDAOImpl;
 import com.flipkart.data.TempData;
@@ -36,9 +33,9 @@ public class StudentServiceOperation implements StudentService {
         }
     }
 
-    public Boolean addCourse(int studentId, int courseId) throws StudentNotFoundException {
+    public Boolean addCourse(int studentId, int courseId, boolean isPrimary) throws StudentNotFoundException {
         try {
-            return StudentDAOImpl.getInstance().addCourse(studentId, courseId);
+            return StudentDAOImpl.getInstance().addCourse(studentId, courseId, isPrimary);
         }
         catch (Exception e){
             throw new StudentNotFoundException(studentId);
@@ -121,6 +118,17 @@ public class StudentServiceOperation implements StudentService {
             System.out.println(e.getMessage());
         }
         return notifications;
+    }
+
+
+    public PreferenceList viewCoursesInPreferenceList(int studentID) {
+        PreferenceList preferenceList = new PreferenceList();
+        try {
+            preferenceList = StudentDAOImpl.getInstance().viewCoursesInPreferenceList(studentID);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return preferenceList;
     }
 
 

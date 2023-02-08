@@ -2,6 +2,7 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.PaymentNotification;
+import com.flipkart.bean.PreferenceList;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.exception.DatabaseException;
 
@@ -21,7 +22,7 @@ public interface StudentDAO {
      * @return
      * @throws SQLException
      */
-    public Boolean addCourse(int studentId, int courseId) throws SQLException;
+    public Boolean addCourse(int studentId, int courseId, boolean isPrimary) throws SQLException;
 
     /**
      * @param studentId
@@ -67,4 +68,6 @@ public interface StudentDAO {
     public boolean makePayment(int studentId, float amount) throws SQLException;
 
     public List<PaymentNotification> viewNotifications(int studentId) throws SQLException;
+
+    public PreferenceList viewCoursesInPreferenceList(int studentID) throws SQLException;
  }
