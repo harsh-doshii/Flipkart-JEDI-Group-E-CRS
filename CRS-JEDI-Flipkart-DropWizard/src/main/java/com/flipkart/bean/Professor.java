@@ -6,9 +6,32 @@ public class Professor extends User{
 
     private String department;
     private List courseList;
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
 
     private String name;
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+    @Override
+    public void setId(int professorId) {
+        this.id = professorId;
+    }
+
     private int id;
+
+
+
+
 
     public Professor() {
     }

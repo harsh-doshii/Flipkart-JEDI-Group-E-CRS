@@ -400,7 +400,6 @@ public class AdminDAOImpl implements AdminDAO {
             statement.setInt(2, courseID);
             int row = statement.executeUpdate();
 
-            System.out.println(row + " entries updated.");
             if(row == 0) {
                 System.out.println("Prof with userId: " + profID + " cannot be assigned to course : " + courseID);
                 throw new CourseNotFoundException(courseID);
@@ -573,11 +572,11 @@ public class AdminDAOImpl implements AdminDAO {
                 statement.setInt(1,idProfessor);
                 ResultSet resultSet2 = statement.executeQuery();
                 resultSet2.next();
-                Professor professor = new Professor(idProfessor,resultSet2.getString("name") );
+                String profName = resultSet2.getString("name");
+                Professor professor = new Professor(idProfessor,profName );
                 professorList.add(professor);
             }
-
-            System.out.println("Professor list generated");
+            return  professorList;
 
         }catch(Exception se) {
             System.out.println(se.getMessage());

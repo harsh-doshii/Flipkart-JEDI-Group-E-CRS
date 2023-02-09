@@ -559,23 +559,23 @@ public class AdminDAOImpl implements AdminDAO {
     public List<Professor> viewProfessors() throws SQLException {
         Connection connection = DBUtil.getConnection();
         statement = null;
-        List<Professor> professorList = new ArrayList<Professor>();
+        List<Professor> professorList = new ArrayList<>();
         try {
             String sql = SQLQueries.VIEW_PROFESSOR_QUERY;
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-
             while(resultSet.next()) {
                 int idProfessor = resultSet.getInt("idProfessor");
                 String sql2 = SQLQueries.GET_STUDENT_NAME;
                 statement = connection.prepareStatement(sql2);
                 statement.setInt(1,idProfessor);
                 ResultSet resultSet2 = statement.executeQuery();
-                Professor professor = new Professor(idProfessor,resultSet2.getString("name") );
+                resultSet2.next();
+                String profName = resultSet2.getString("name");
+                Professor professor = new Professor(idProfessor,profName );
                 professorList.add(professor);
             }
-
-            System.out.println("Professor list generated");
+            return  professorList;
 
         }catch(Exception se) {
             System.out.println(se.getMessage());

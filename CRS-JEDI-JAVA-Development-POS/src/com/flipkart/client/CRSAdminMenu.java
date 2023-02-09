@@ -39,7 +39,9 @@ public class CRSAdminMenu {
 
             System.out.println(" 8. View Approved Students");
 
-            System.out.println(" 9. Logout");
+            System.out.println(" 9. View Professors");
+
+            System.out.println(" 10. Logout");
 
             System.out.println("\n***********************************************************************\n");
 
@@ -116,8 +118,24 @@ public class CRSAdminMenu {
                         System.out.println("Something Went Wrong");
                     }
                     break;
-
                 case 9:
+                    System.out.println("Professor List:");
+                    System.out.println("##########################");
+                    System.out.format( SQLQueries.ANSI_YELLOW + "%-15s %-15s %-32s\n", "Sr. No", "Professor ID", "Professor Name" + SQLQueries.ANSI_RESET);
+                    try {
+                        List<Professor> professor = AdminServiceOperation.getInstance().viewProfessor();
+
+                        int cur = 0;
+                        for (var data : professor) {
+                            cur++;
+                            System.out.format("%-15d %-15d %-32s\n", cur, data.getId(), data.getName());
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println("Something Went Wrong");
+                    }
+                    break;
+                case 10:
                     logout();
                     return;
 
@@ -163,11 +181,11 @@ public class CRSAdminMenu {
             String profName = sc.next();
             System.out.println("Enter the gender of the professor");
             String profGender = sc.next();
-            System.out.println("Enter the add of the professor");
+            System.out.println("Enter the address of the professor");
             String profAddress = sc.next();
             System.out.println("Enter the username of the professor");
             String profUsername = sc.next();
-            System.out.println("Enter the pw of the professor");
+            System.out.println("Enter the password of the professor");
             String profPassword = sc.next();
             System.out.println("Enter the Department of the professor");
             String department = sc.next();
