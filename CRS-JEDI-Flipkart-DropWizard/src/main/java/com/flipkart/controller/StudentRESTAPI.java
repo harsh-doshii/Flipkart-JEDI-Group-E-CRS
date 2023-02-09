@@ -127,9 +127,9 @@ public class StudentRESTAPI {
     }
 
     @GET
-    @Path("/getTotalPayToFee")
+    @Path("/getTotalFeeToPay/{studentID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public float getTotalPaytoFee(@PathParam("studentID") int studentID){
+    public float getTotalFeeToPay(@PathParam("studentID") int studentID){
         float amount = 999;
         try{
             amount = PaymentServiceOperation.getInstance().calculateFee(studentID);
