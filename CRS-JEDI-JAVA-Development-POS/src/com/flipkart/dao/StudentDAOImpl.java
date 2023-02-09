@@ -61,8 +61,6 @@ public class StudentDAOImpl implements StudentDAO {
             statement = connection.prepareStatement(SQLQueries.GET_COURSE_FROM_ID);
             statement.setInt(1, courseId);
 
-
-            connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet totalCourses = statement.executeQuery();
@@ -73,34 +71,37 @@ public class StudentDAOImpl implements StudentDAO {
 
             while (totalCourses.next()) {
                 if (totalCourses.getBoolean("isPrimary") == true) {
-                    primaryCourses.add(totalCourses.getInt("idStudent"));
+                    primaryCourses.add(totalCourses.getInt("idCourse"));
                 } else {
-                    secondaryCourses.add(totalCourses.getInt("idStudent"));
+                    secondaryCourses.add(totalCourses.getInt("idCourse"));
                 }
             }
 
+
             if (primaryCourses != null && primaryCourses.size() > 0) {
                 if (primaryCourses.contains(courseId)) {
-                    System.out.println("Course is already present in primary Courses in preference List");
+                    System.out.println(SQLQueries.ANSI_YELLOW  + "Course is already present in primary Courses in preference List" + SQLQueries.ANSI_RESET);
                     return false;
                 }
             }
 
             if (secondaryCourses != null && secondaryCourses.size() > 0) {
                 if (secondaryCourses.contains(courseId)) {
-                    System.out.println("Course is already present secondary courses in preference List");
+                    System.out.println(SQLQueries.ANSI_YELLOW  + "Course is already present secondary courses in preference List" + SQLQueries.ANSI_RESET);
                     return false;
                 }
             }
 
+
+
             if (isPrimary) {
-                if (primaryCourses.size() == 4) {
-                    System.out.println("Primary courses list is full");
+                if (primaryCourses.size() >= 4) {
+                    System.out.println(SQLQueries.ANSI_YELLOW + "Primary courses list is full" + SQLQueries.ANSI_RESET);
                     return false;
                 }
             } else {
-                if (secondaryCourses.size() == 2) {
-                    System.out.println("Secondary courses list is full");
+                if (secondaryCourses.size() >= 2) {
+                    System.out.println(SQLQueries.ANSI_YELLOW + "Secondary courses list is full" + SQLQueries.ANSI_RESET);
                     return false;
                 }
             }
@@ -119,9 +120,9 @@ public class StudentDAOImpl implements StudentDAO {
 
             //check this
             rs.next();
-            int profId = rs.findColumn("idProfessor");
+            Integer profId = rs.getInt("idProfessor");
 
-            if (profId == 0) {
+            if (profId == null) {
                 System.out.println("Course can't be added because NO Professor is alloted to this course, add another Course");
                 return false;
             }
@@ -249,25 +250,74 @@ public class StudentDAOImpl implements StudentDAO {
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
             ResultSet totalCourses = statement.executeQuery();
-            Set<Course> preferenceList = new HashSet<>();
+
+            List<Course> preferenceList = new ArrayList<>();
             Set<Course> primaryCourses = new HashSet<>();
-            Set<Course> SecondaryCourses = new HashSet<>();
+            Set<Course> secondaryCourses = new HashSet<>();
+
             while (totalCourses.next()) {
 
-                preferenceList.add(new Course(totalCourses.getInt("idCourse")));
+                //preferenceList.add(new Course(totalCourses.getInt("idCourse")));
+                if (totalCourses.getBoolean("isPrimary")) {
+                    primaryCourses.add(new Course(totalCourses.getInt("idCourse")));
+                } else {
+                    secondaryCourses.add(new Course(totalCourses.getInt("idCourse")));
+                }
             }
+
+            // added in List so that priority is given to primary courses; ( order is maintained )
+
+            for (Course cur : primaryCourses) {
+                preferenceList.add(cur);
+            }
+
+            for (Course cur :secondaryCourses) {
+                preferenceList.add(cur);
+            }
+
             /*
             *  Will think if we should print the courses registered.
             * */
 
+            int totalRegCourses = this.viewRegisteredCourses(studentId).size();
+
             List<Course> registeredCourses = new ArrayList<>();
-            float amount = 0;
+            float amount = PaymentDAOImpl.getInstance().calculateRemainingFee(studentId);
             for (Course cur : preferenceList) {
+
+                if (totalRegCourses >= 4) {
+                    break;
+                }
+
                 int courseId = cur.getCourseId();
                 statement = connection.prepareStatement(SQLQueries.SELECT_ALL_REG_STUDENTS_FOR_A_COURSE);
                 statement.setInt(1, courseId);
                 ResultSet studentsRegistered = statement.executeQuery();
-                if (studentsRegistered.getRow() < 10) {
+
+                int totalRegStudents = 0;
+                boolean alreadyReg = false;
+                while (studentsRegistered.next()) {
+                    totalRegStudents++;
+                    if (studentsRegistered.getInt("idStudent") == studentId) {
+                        alreadyReg = true;
+                    }
+                }
+
+                if (alreadyReg) {
+                    //TODO : yellow me isko
+                    System.out.println("Course with courseID - " + courseId + " is already registered!");
+                    System.out.println("Ignoring this course and continuing the process!");
+                    continue;
+                }
+
+                int rowcount = 0;
+                if (studentsRegistered.next()) {
+                    rowcount++;
+                }
+
+
+
+                if (rowcount < 10) {
                     registeredCourses.add(cur);
                     amount += SQLQueries.feesPerCourse;
                     // add courses in the registeredCourse table
@@ -280,6 +330,8 @@ public class StudentDAOImpl implements StudentDAO {
                     int row = statement.executeUpdate();
                     if (row == 0) {
                         System.out.println("Course can't be registered for some reason, try again!");
+                    } else {
+                        totalRegCourses++;
                     }
                 } else {
                     System.out.println("Course: " + cur.getCourseName() + " can't be added, already filled");
@@ -293,6 +345,16 @@ public class StudentDAOImpl implements StudentDAO {
                 System.out.println("Fees Not updated!");
                 return;
             }
+
+            /*
+            * let's remove all course from preference list
+            * as added to registered courses list.
+            * */
+
+            statement = connection.prepareStatement(SQLQueries.DELETE_COURSES_FROM_PREFERENCE_LIST);
+            statement.setInt(1, studentId);
+
+
             // TODO : see if we should return list of added courses.
         } catch (SQLException se) {
             se.printStackTrace();
@@ -332,6 +394,7 @@ public class StudentDAOImpl implements StudentDAO {
                 registeredCourses.add(regCourses.getInt("idCourse"));
                 //registeredCourses.add(new RegisteredCourse(regCourses.getInt("idStudent"), regCourses.getInt("idCourse"), regCourses.getInt("grade"), regCourses.getInt("semester")));
             }
+          return registeredCourses;
         } catch (SQLException se) {
             se.printStackTrace();
             throw new SQLException();
@@ -352,7 +415,7 @@ public class StudentDAOImpl implements StudentDAO {
                 se.printStackTrace();
             }
         }
-        return registeredCourses;
+        //return registeredCourses;
     }
 
     public List<RegisteredCourse> viewGrades(int studentId) throws SQLException {

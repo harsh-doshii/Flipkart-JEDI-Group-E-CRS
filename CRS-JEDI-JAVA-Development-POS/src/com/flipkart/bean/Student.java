@@ -61,6 +61,9 @@ public class Student extends User{
         this.name = name;
     }
 
+    public Student() {
+    }
+
     public int getStudentId() {
         return studentId;
     }

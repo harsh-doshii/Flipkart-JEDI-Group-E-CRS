@@ -130,6 +130,8 @@ public class SQLQueries {
     public static final String GET_PROF_ID_FOR_A_COURSE = "select idProfessor from Course where idCourse = ?";
 
     public static final String UPDATE_PAYMENT_FOR_STUDENT = "update Student set remainingPayment = ? where idStudent = ?";
+
+    public static final String DELETE_COURSES_FROM_PREFERENCE_LIST = "delete from PreferenceList where idStudent = ?";
 }
 
 

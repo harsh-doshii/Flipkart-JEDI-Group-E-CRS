@@ -230,6 +230,7 @@ public class CRSStudentMenu {
             System.out.format("%-15d %-15d %-32s\n",marker, c.getCourseId(), c.getCourseName());
         }
         System.out.println();
+        System.out.println("******************************************************************************");
         System.out.println("Following are Secondary courses you added till now:");
         System.out.format(SQLQueries.ANSI_YELLOW + "%-15s %-15s %-15s\n", "Sr. No", "Course ID", "Course Name" + SQLQueries.ANSI_RESET);
         marker = 0;
@@ -238,6 +239,7 @@ public class CRSStudentMenu {
             System.out.format("%-15d %-15d %-32s\n",marker, c.getCourseId(), c.getCourseName());
         }
         System.out.println();
+        System.out.println("******************************************************************************");
     }
 
 }

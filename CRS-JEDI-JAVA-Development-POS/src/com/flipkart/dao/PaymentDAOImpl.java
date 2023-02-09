@@ -92,6 +92,7 @@ public class PaymentDAOImpl implements PaymentDAO{
                 }
 
 
+
                 int id = this.getNewTransactionID();
                 statement = conn.prepareStatement(SQLQueries.ADD_PAYMENT_TRANSACTION);
                 statement.setInt(1,id);
