@@ -10,8 +10,8 @@ import com.flipkart.constant.SQLQueries;
 import com.flipkart.utils.DBUtil;
 
 /**
-* @author Aman Jham
-*/
+ * @author Aman Jham
+ */
 
 public class StudentDAOImpl implements StudentDAO {
     private static StudentDAOImpl instance = null;
@@ -32,7 +32,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection connection = null;
 
         try {
-            
+
 
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_COURSE_CATALOGUE);
@@ -121,8 +121,8 @@ public class StudentDAOImpl implements StudentDAO {
             rs.next();
             Integer profId = rs.getInt("idProfessor");
 
-            if (profId == null) {
-                System.out.println("Course can't be added because NO Professor is alloted to this course, add another Course");
+            if (profId == 0) {
+                System.out.println(SQLQueries.ANSI_YELLOW + "Course can't be added because NO Professor is alloted to this course, add another Course" + SQLQueries.ANSI_RESET);
                 return false;
             }
 
@@ -161,7 +161,7 @@ public class StudentDAOImpl implements StudentDAO {
     public Boolean dropCourse(int studentId, int courseId) throws SQLException {
         Connection connection = null;
         try {
-            
+
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_COURSES_FOR_A_STUDENT);
             statement.setInt(1, studentId);
@@ -208,7 +208,7 @@ public class StudentDAOImpl implements StudentDAO {
     public float calculateRemainingFee(int studentID) throws SQLException{
         Connection connection = null;
         try {
-            
+
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_REMAINING_PAY_FOR_A_STUDENT);
             statement.setInt(1, studentID);
@@ -239,8 +239,8 @@ public class StudentDAOImpl implements StudentDAO {
 
     public void registerCourses(int studentId) throws SQLException{
         /*
-        *   Think if we should empty preference List here.
-        * */
+         *   Think if we should empty preference List here.
+         * */
         Connection connection = null;
         try {
             List <Integer> coursesAlreadyReg = viewRegisteredCourses(studentId);
@@ -275,8 +275,8 @@ public class StudentDAOImpl implements StudentDAO {
             }
 
             /*
-            *  Will think if we should print the courses registered.
-            * */
+             *  Will think if we should print the courses registered.
+             * */
 
             int totalRegCourses = this.viewRegisteredCourses(studentId).size();
 
@@ -346,9 +346,9 @@ public class StudentDAOImpl implements StudentDAO {
             }
 
             /*
-            * let's remove all course from preference list
-            * as added to registered courses list.
-            * */
+             * let's remove all course from preference list
+             * as added to registered courses list.
+             * */
 
             statement = connection.prepareStatement(SQLQueries.DELETE_COURSES_FROM_PREFERENCE_LIST);
             statement.setInt(1, studentId);
@@ -383,7 +383,7 @@ public class StudentDAOImpl implements StudentDAO {
         List<Integer> registeredCourses = new ArrayList<>();
         Connection connection = null;
         try {
-            
+
 
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_REG_COURSES_FOR_A_STUDENT);
@@ -393,7 +393,7 @@ public class StudentDAOImpl implements StudentDAO {
                 registeredCourses.add(regCourses.getInt("idCourse"));
                 //registeredCourses.add(new RegisteredCourse(regCourses.getInt("idStudent"), regCourses.getInt("idCourse"), regCourses.getInt("grade"), regCourses.getInt("semester")));
             }
-          return registeredCourses;
+            return registeredCourses;
         } catch (SQLException se) {
             se.printStackTrace();
             throw new SQLException();
@@ -421,7 +421,7 @@ public class StudentDAOImpl implements StudentDAO {
         List<RegisteredCourse> registeredCourses = new ArrayList<>();
         Connection connection = null;
         try {
-            
+
 
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.SELECT_ALL_REG_COURSES_FOR_A_STUDENT);
@@ -478,7 +478,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection connection = null;
         List <PaymentNotification> notifications = new ArrayList<>();
         try {
-            
+
 
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.VIEW_NOTIFICATIONS);
@@ -517,7 +517,7 @@ public class StudentDAOImpl implements StudentDAO {
         PreferenceList preferenceList = new PreferenceList();
         Connection connection = null;
         try {
-            
+
 
             connection = DBUtil.getConnection();
             statement = connection.prepareStatement(SQLQueries.GET_ALL_ADDED_COURSES_FOR_STUDENT);

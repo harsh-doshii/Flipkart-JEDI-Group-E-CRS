@@ -122,8 +122,8 @@ public class StudentDAOImpl implements StudentDAO {
             rs.next();
             Integer profId = rs.getInt("idProfessor");
 
-            if (profId == null) {
-                System.out.println("Course can't be added because NO Professor is alloted to this course, add another Course");
+            if (profId == 0) {
+                System.out.println(SQLQueries.ANSI_YELLOW + "Course can't be added because NO Professor is alloted to this course, add another Course" + SQLQueries.ANSI_RESET);
                 return false;
             }
 
