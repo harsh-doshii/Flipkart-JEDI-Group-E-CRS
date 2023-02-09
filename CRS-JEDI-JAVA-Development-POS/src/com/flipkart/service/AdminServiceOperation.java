@@ -55,6 +55,7 @@ public class AdminServiceOperation implements AdminService {
     @Override
     public void addProfessor(Professor professor) throws ProfNotAddedException, ProfFoundException {
      try{
+         System.out.println("service me " + professor.getName());
             adminDAOImpl.addProf(professor);
         } catch (Exception e) {
             throw e;

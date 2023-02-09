@@ -268,10 +268,9 @@ public class AdminDAOImpl implements AdminDAO {
 
             conn = DBUtil.getConnection();
 
-            
+            System.out.println("add user me "+user.getName());
             String sql = SQLQueries.ADD_USER_QUERY;
             statement = conn.prepareStatement(sql);
-
             statement.setInt(1, id);
             statement.setInt(2, user.getRoleId());
             statement.setString(3, user.getName());

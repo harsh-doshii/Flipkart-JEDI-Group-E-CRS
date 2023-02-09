@@ -191,6 +191,7 @@ public class CRSAdminMenu {
             String department = sc.next();
             List courseList = new ArrayList<>();
             Professor prof = new Professor(profName, profGender, profAddress, profUsername, profPassword, 1, 1, "161100", department, courseList);
+//            System.out.println("");
             AdminServiceOperation.getInstance().addProfessor(prof);
             return true;
         }

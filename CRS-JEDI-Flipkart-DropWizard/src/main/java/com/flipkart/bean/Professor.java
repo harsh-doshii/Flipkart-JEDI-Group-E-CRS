@@ -6,17 +6,17 @@ public class Professor extends User{
 
     private String department;
     private List courseList;
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private String name;
+//    @Override
+//    public String getName() {
+//        return name;
+//    }
+//
+//    @Override
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    private String name;
 
     @Override
     public Integer getId() {
@@ -44,7 +44,7 @@ public class Professor extends User{
 
     public Professor(int id, String name){
         this.id = id;
-        this.name = name;
+        this.setName(name);
     }
 
     public String getDepartment() {
