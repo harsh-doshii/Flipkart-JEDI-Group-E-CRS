@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 
@@ -76,45 +77,46 @@ public class ProfessorRESTAPI {
     /**
      * Assign Grades to a student
      */
-//    @PUT
-//    @Path("/assignGrade")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response assignGrade(
-//            @NotNull
-//            @QueryParam("studentId") int studentId,
-//
-//            @NotNull
-//            @QueryParam("courseId") int courseId,
-//
-//            @NotNull
-//            @QueryParam("grade") Grade grade,
-//
-//            @NotNull
-//            @QueryParam("sem") int sem,
-//
-//            @NotNull
-//            @QueryParam("profId") int profId)  {
-//
-//        try {
-//            List<Course> courses = ProfessorServiceOperation.getInstance().viewCourses(profId);
-//            Boolean success=false;
-//            for(Course course:courses) {
-//                if(course.getCourseId()==courseId) {
-//                    success=true;
-//                    break;
-//                }
-//            }
-//            if(!success) {
-//                return Response.status(400).entity("Course does not match with professor.").build();
-//            }
-//
-//            ProfessorServiceOperation.getInstance().assignGrade(studentId, courseId, grade, sem);
-//        }
-//        catch(Exception e){
-//            return Response.status(500).entity(e.getMessage()).build();
-//        }
-//        return Response.status(200).entity("Grade added for student with studentId: "+studentId).build();
-//    }
+    @PUT
+    @Path("/assignGrade")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response assignGrade(
+            @NotNull
+            @QueryParam("studentId") int studentId,
+
+            @NotNull
+            @QueryParam("courseId") int courseId,
+
+            @NotNull
+            @Valid Grade grade,
+
+            @NotNull
+            @QueryParam("sem") int sem,
+
+            @NotNull
+            @QueryParam("profId") int profId)  {
+
+        try {
+            List<Course> courses = ProfessorServiceOperation.getInstance().viewCourses(profId);
+            Boolean success=false;
+            for(Course course:courses) {
+                if(course.getCourseId()==courseId) {
+                    success=true;
+                    break;
+                }
+            }
+            if(!success) {
+                return Response.status(400).entity("Course does not match with professor.").build();
+            }
+
+            ProfessorServiceOperation.getInstance().assignGrade(studentId, courseId, grade, sem);
+        }
+        catch(Exception e){
+            return Response.status(500).entity(e.getMessage()).build();
+        }
+        return Response.status(200).entity("Grade added for student with studentId: "+studentId).build();
+    }
 
 
     /**
@@ -123,6 +125,7 @@ public class ProfessorRESTAPI {
     @POST
     @Path("/signUpCourse")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response signUpCourse(
             @NotNull
             @QueryParam("courseId") int courseId,
