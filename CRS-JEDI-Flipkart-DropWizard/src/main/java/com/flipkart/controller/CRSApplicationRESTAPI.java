@@ -66,7 +66,7 @@ public class CRSApplicationRESTAPI {
         }catch (Exception e){
             return Response.status(500).entity(e.getMessage()).build();
         }
-        return Response.status(201).entity("Registration Successful for: " + student.getId()).build();
+        return Response.status(201).entity("Registration Successful " + student.getStudentId()).build();
     }
 
     @PUT

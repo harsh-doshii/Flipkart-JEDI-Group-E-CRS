@@ -35,6 +35,7 @@ public class Student extends User{
 
     private float remainingPayment;
 
+    public Student(){}
     public Student(int studentId, String name){
         this.studentId = studentId;
         this.name = name;

@@ -199,6 +199,7 @@ public class AdminDAOImpl implements AdminDAO {
         int id =-1;
         try {
             id = this.addUser(student);
+            student.setStudentId(id);
         }catch(UserNotAddedException e) {
             System.out.println(e.getMessage());
             throw new StudentNotAddedException(student.getName());
@@ -559,7 +560,7 @@ public class AdminDAOImpl implements AdminDAO {
     public List<Professor> viewProfessors() throws SQLException {
         Connection connection = DBUtil.getConnection();
         statement = null;
-        List<Professor> professorList = new ArrayList<Professor>();
+        List<Professor> professorList = new ArrayList<>();
         try {
             String sql = SQLQueries.VIEW_PROFESSOR_QUERY;
             statement = connection.prepareStatement(sql);
@@ -571,6 +572,7 @@ public class AdminDAOImpl implements AdminDAO {
                 statement = connection.prepareStatement(sql2);
                 statement.setInt(1,idProfessor);
                 ResultSet resultSet2 = statement.executeQuery();
+                resultSet2.next();
                 Professor professor = new Professor(idProfessor,resultSet2.getString("name") );
                 professorList.add(professor);
             }
