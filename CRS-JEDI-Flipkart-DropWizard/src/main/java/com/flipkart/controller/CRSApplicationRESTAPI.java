@@ -76,9 +76,9 @@ public class CRSApplicationRESTAPI {
     public Response updatePassword(@NotNull
                                    @QueryParam("userId") int userId,
                                    @NotNull
-                                   @QueryParam("password") String oldPassword,
+                                   @QueryParam("oldPassword") String oldPassword,
                                    @NotNull
-                                   @QueryParam("password") String newPassword) {
+                                   @QueryParam("newPassword") String newPassword) {
         try {
             if (UserServiceOperation.getInstance().updatePassword(userId, oldPassword, newPassword)) {
                 return Response.status(201).entity("Password updated successfully for userid: " + userId).build();
