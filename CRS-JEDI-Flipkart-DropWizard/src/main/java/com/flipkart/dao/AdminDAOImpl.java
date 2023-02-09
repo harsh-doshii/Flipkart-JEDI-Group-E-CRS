@@ -139,6 +139,7 @@ public class AdminDAOImpl implements AdminDAO {
         int id;
         try {
             id = this.addUser(professor);
+            professor.setId(id);
         }catch(UserNotAddedException e) {
             System.out.println(e.getMessage());
             throw new ProfNotAddedException(professor.getName());
